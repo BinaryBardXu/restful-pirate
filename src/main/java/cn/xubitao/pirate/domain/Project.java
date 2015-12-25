@@ -1,11 +1,10 @@
 package cn.xubitao.pirate.domain;
 
 import cn.xubitao.pirate.persistence.project.ProjectPersistence;
-import cn.xubitao.pirate.persistence.project.ProjectTable;
+import cn.xubitao.pirate.persistence.project.ProjectModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.sql.SQLException;
 
 /**
@@ -16,7 +15,7 @@ public class Project {
     @Autowired
     private ProjectPersistence projectPersistence;
 
-    public int create(ProjectTable projectTable) throws SQLException {
-        return projectPersistence.create(projectTable);
+    public int create(ProjectModel projectModel) throws SQLException {
+        return projectPersistence.create(projectModel);
     }
 }

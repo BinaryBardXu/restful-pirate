@@ -7,7 +7,7 @@ import com.j256.ormlite.table.DatabaseTable;
  * Created by xubitao on 12/25/15.
  */
 @DatabaseTable(tableName = "project")
-public class ProjectTable {
+public class ProjectModel {
     // 主键 id 自增长
     @DatabaseField(generatedId = true)
     private Integer id;
@@ -41,6 +41,4 @@ public class ProjectTable {
     public void setVersion(String version) {
         this.version = version;
     }
-
-
 }

@@ -1,15 +1,12 @@
 package cn.xubitao.pirate.domain;
 
 import cn.xubitao.pirate.persistence.project.ProjectPersistence;
-import cn.xubitao.pirate.persistence.project.ProjectTable;
-import org.junit.Before;
+import cn.xubitao.pirate.persistence.project.ProjectModel;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnit;
-import org.mockito.junit.MockitoJUnitRule;
 import org.mockito.junit.MockitoRule;
 
 import java.sql.SQLException;
@@ -35,15 +32,15 @@ public class ProjectTest {
     public void 添加一个新的项目() throws SQLException {
         String name = "foo";
         String version = "fee";
-        ProjectTable projectTable = new ProjectTable();
-        projectTable.setName(name);
-        projectTable.setVersion(version);
+        ProjectModel projectModel = new ProjectModel();
+        projectModel.setName(name);
+        projectModel.setVersion(version);
 
         Integer one = new Integer(1);
-        when(projectPersistence.create(projectTable)).thenReturn(one);
-        Integer actualResult = project.create(projectTable);
+        when(projectPersistence.create(projectModel)).thenReturn(one);
+        Integer actualResult = project.create(projectModel);
 
         assertEquals(actualResult, one);
-        verify(projectPersistence).create(projectTable);
+        verify(projectPersistence).create(projectModel);
     }
 }

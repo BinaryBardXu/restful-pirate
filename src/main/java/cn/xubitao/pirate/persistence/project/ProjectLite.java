@@ -15,8 +15,8 @@ public class ProjectLite implements ProjectPersistence {
     @Resource
     private Dolphin dolphin;
 
-    public int create(ProjectTable projectTable) throws SQLException {
-        Dao<ProjectTable, Integer> projectDAO = dolphin.lite(ProjectTable.class);
-        return projectDAO.create(projectTable);
+    public int create(ProjectModel projectModel) throws SQLException {
+        Dao<ProjectModel, Integer> projectDAO = dolphin.lite(ProjectModel.class);
+        return projectDAO.create(projectModel);
     }
 }

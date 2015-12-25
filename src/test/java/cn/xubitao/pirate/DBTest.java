@@ -1,6 +1,6 @@
 package cn.xubitao.pirate;
 
-import cn.xubitao.pirate.persistence.project.ProjectTable;
+import cn.xubitao.pirate.persistence.project.ProjectModel;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
@@ -40,10 +40,9 @@ public class DBTest {
         String fileName = "sqllite/pirate.db";
         ConnectionSource connectionSource =
                 new JdbcConnectionSource("jdbc:sqlite:" + fileName);
-        // instantiate the dao
-        Dao<ProjectTable, Integer> accountDao =
-                DaoManager.createDao(connectionSource, ProjectTable.class);
-        accountDao.create(new ProjectTable() {
+        Dao<ProjectModel, Integer> accountDao =
+                DaoManager.createDao(connectionSource, ProjectModel.class);
+        accountDao.create(new ProjectModel() {
             {
                 setVersion("2");
                 setName("Jim");
