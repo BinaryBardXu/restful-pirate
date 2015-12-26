@@ -1,4 +1,4 @@
-package cn.xubitao.pirate.persistence.project;
+package cn.xubitao.pirate.persistence.provider;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
@@ -6,8 +6,8 @@ import com.j256.ormlite.table.DatabaseTable;
 /**
  * Created by xubitao on 12/25/15.
  */
-@DatabaseTable(tableName = "project")
-public class ProjectModel {
+@DatabaseTable(tableName = "provider")
+public class ProviderModel {
     // 主键 id 自增长
     @DatabaseField(generatedId = true)
     private Integer id;

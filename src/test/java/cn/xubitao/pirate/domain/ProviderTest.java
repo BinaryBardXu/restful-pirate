@@ -1,7 +1,7 @@
 package cn.xubitao.pirate.domain;
 
-import cn.xubitao.pirate.persistence.project.ProjectPersistence;
-import cn.xubitao.pirate.persistence.project.ProjectModel;
+import cn.xubitao.pirate.persistence.provider.ProviderPersistence;
+import cn.xubitao.pirate.persistence.provider.ProviderModel;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -18,29 +18,29 @@ import static org.mockito.Mockito.when;
 /**
  * Created by xubitao on 12/25/15.
  */
-public class ProjectTest {
+public class ProviderTest {
 
     @Rule
     public MockitoRule rule=MockitoJUnit.rule();
     @Mock
-    private ProjectPersistence projectPersistence;
+    private ProviderPersistence providerPersistence;
 
     @InjectMocks
-    private Project project;
+    private Provider provider;
 
     @Test
-    public void 添加一个新的项目() throws SQLException {
+    public void 添加一个新的Provider() throws SQLException {
         String name = "foo";
         String version = "fee";
-        ProjectModel projectModel = new ProjectModel();
-        projectModel.setName(name);
-        projectModel.setVersion(version);
+        ProviderModel providerModel = new ProviderModel();
+        providerModel.setName(name);
+        providerModel.setVersion(version);
 
         Integer one = new Integer(1);
-        when(projectPersistence.create(projectModel)).thenReturn(one);
-        Integer actualResult = project.create(projectModel);
+        when(providerPersistence.create(providerModel)).thenReturn(one);
+        Integer actualResult = provider.create(providerModel);
 
         assertEquals(actualResult, one);
-        verify(projectPersistence).create(projectModel);
+        verify(providerPersistence).create(providerModel);
     }
 }
