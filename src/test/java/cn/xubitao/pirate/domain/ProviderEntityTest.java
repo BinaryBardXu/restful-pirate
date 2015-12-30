@@ -8,7 +8,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
-import sun.util.locale.InternalLocaleBuilder;
 
 import java.sql.SQLException;
 
@@ -19,7 +18,7 @@ import static org.mockito.Mockito.when;
 /**
  * Created by xubitao on 12/25/15.
  */
-public class ProviderTest {
+public class ProviderEntityTest {
 
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();
@@ -27,7 +26,7 @@ public class ProviderTest {
     private ProviderPersistence providerPersistence;
 
     @InjectMocks
-    private Provider provider;
+    private ProviderEntity providerEntity;
 
     private String name="foo";
     private String version="fee";
@@ -40,7 +39,7 @@ public class ProviderTest {
 
         Integer one = 1;
         when(providerPersistence.create(providerModel)).thenReturn(one);
-        Integer actualResult = provider.create(providerModel);
+        Integer actualResult = providerEntity.create(providerModel);
 
         assertEquals(actualResult, one);
         verify(providerPersistence).create(providerModel);
@@ -61,7 +60,7 @@ public class ProviderTest {
 
         when(providerPersistence.findById(id)).thenReturn(foundProviderModel);
 
-        ProviderModel actualResult = provider.findById(id);
+        ProviderModel actualResult = providerEntity.findById(id);
 
         verify(providerPersistence).findById(id);
         assertEquals(actualResult, foundProviderModel);

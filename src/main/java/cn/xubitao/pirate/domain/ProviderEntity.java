@@ -11,7 +11,7 @@ import java.sql.SQLException;
  * Created by xubitao on 12/25/15.
  */
 @Service
-public class Provider {
+public class ProviderEntity {
     @Autowired
     private ProviderPersistence providerPersistence;
 
