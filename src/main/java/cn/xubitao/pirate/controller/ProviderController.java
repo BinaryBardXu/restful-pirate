@@ -23,12 +23,7 @@ public class ProviderController {
     private ProviderResource providerResource;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public HttpEntity<ProviderResource> show(@PathVariable Integer id) {
-        try {
-            return new ResponseEntity<ProviderResource>(providerResource.findById(id), HttpStatus.OK);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
+    public HttpEntity<ProviderResource> show(@PathVariable Integer id) throws SQLException {
+        return new ResponseEntity<ProviderResource>(providerResource.findById(id), HttpStatus.OK);
     }
 }
