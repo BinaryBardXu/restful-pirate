@@ -19,4 +19,9 @@ public class ProviderLite implements ProviderPersistence {
         Dao<ProviderModel, Integer> projectDAO = dolphin.lite(ProviderModel.class);
         return projectDAO.create(providerModel);
     }
+
+    public ProviderModel findById(Integer id) throws SQLException {
+        Dao<ProviderModel, Integer> projectDAO = dolphin.lite(ProviderModel.class);
+        return projectDAO.queryForId(id);
+    }
 }

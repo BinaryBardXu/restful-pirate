@@ -18,4 +18,8 @@ public class Provider {
     public int create(ProviderModel providerModel) throws SQLException {
         return providerPersistence.create(providerModel);
     }
+
+    public ProviderModel findById(Integer id) throws SQLException {
+        return providerPersistence.findById(id);
+    }
 }

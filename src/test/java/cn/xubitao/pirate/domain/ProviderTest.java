@@ -8,6 +8,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
+import sun.util.locale.InternalLocaleBuilder;
 
 import java.sql.SQLException;
 
@@ -21,26 +22,48 @@ import static org.mockito.Mockito.when;
 public class ProviderTest {
 
     @Rule
-    public MockitoRule rule=MockitoJUnit.rule();
+    public MockitoRule rule = MockitoJUnit.rule();
     @Mock
     private ProviderPersistence providerPersistence;
 
     @InjectMocks
     private Provider provider;
 
+    private String name="foo";
+    private String version="fee";
+
     @Test
     public void 添加一个新的Provider() throws SQLException {
-        String name = "foo";
-        String version = "fee";
         ProviderModel providerModel = new ProviderModel();
         providerModel.setName(name);
         providerModel.setVersion(version);
 
-        Integer one = new Integer(1);
+        Integer one = 1;
         when(providerPersistence.create(providerModel)).thenReturn(one);
         Integer actualResult = provider.create(providerModel);
 
         assertEquals(actualResult, one);
         verify(providerPersistence).create(providerModel);
+    }
+
+    @Test
+    public void 根据ID获取一个Provider的信息() throws SQLException {
+        Integer id = 0;
+        ProviderModel expectedProviderModel=new ProviderModel();
+        expectedProviderModel.setName(name);
+        expectedProviderModel.setVersion(version);
+        expectedProviderModel.setId(id);
+
+        ProviderModel foundProviderModel=new ProviderModel();
+        foundProviderModel.setName(name);
+        foundProviderModel.setVersion(version);
+        foundProviderModel.setId(id);
+
+        when(providerPersistence.findById(id)).thenReturn(foundProviderModel);
+
+        ProviderModel actualResult = provider.findById(id);
+
+        verify(providerPersistence).findById(id);
+        assertEquals(actualResult, foundProviderModel);
     }
 }

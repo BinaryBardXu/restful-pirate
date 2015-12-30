@@ -1,19 +1,30 @@
 package cn.xubitao.pirate.resource;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import cn.xubitao.pirate.domain.Provider;
+import cn.xubitao.pirate.persistence.provider.ProviderModel;
+import org.springframework.hateoas.ResourceSupport;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.sql.SQLException;
 
 /**
  * Created by xubitao on 12/26/15.
  */
-@Controller
-public class ProviderResource {
-    @ResponseBody
-    @RequestMapping(value = "/p",method = RequestMethod.GET)
-    public String showAll() {
-        return "Hello";
+@Service
+public class ProviderResource extends ResourceSupport {
+    @Resource
+    private Provider provider;
+
+    private Integer id;
+    private String name;
+    private String version;
+
+    public ProviderResource findById(Integer id) throws SQLException {
+        ProviderModel providerModel = provider.findById(id);
+        this.id = providerModel.getId();
+        this.name = providerModel.getName();
+        this.version = providerModel.getVersion();
+        return this;
     }
 }

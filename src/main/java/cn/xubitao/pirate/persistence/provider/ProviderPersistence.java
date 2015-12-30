@@ -7,4 +7,6 @@ import java.sql.SQLException;
  */
 public interface ProviderPersistence {
     int create(ProviderModel providerModel) throws SQLException;
+
+    ProviderModel findById(Integer id) throws SQLException;
 }
