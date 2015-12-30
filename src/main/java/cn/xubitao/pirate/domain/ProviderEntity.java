@@ -1,6 +1,5 @@
 package cn.xubitao.pirate.domain;
 
-import cn.xubitao.pirate.persistence.provider.ProviderModel;
 import cn.xubitao.pirate.persistence.provider.ProviderPersistence;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
