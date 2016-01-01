@@ -1,12 +1,7 @@
 package cn.xubitao.pirate.resource;
 
-import cn.xubitao.pirate.domain.ProviderEntities;
-import cn.xubitao.pirate.domain.ProviderEntity;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
-import java.sql.SQLException;
 
 /**
  * Created by xubitao on 12/26/15.

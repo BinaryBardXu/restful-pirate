@@ -17,7 +17,7 @@ import static org.mockito.Mockito.when;
 /**
  * Created by xubitao on 12/25/15.
  */
-public class ProviderEntitiesTest {
+public class ProvidersTest {
 
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();
@@ -25,20 +25,20 @@ public class ProviderEntitiesTest {
     private ProviderPersistence providerPersistence;
 
     @InjectMocks
-    private ProviderEntities providerEntities;
+    private Providers providers;
 
     private String name="foo";
     private String version="fee";
 
     @Test
     public void 添加一个新的Provider() throws SQLException {
-        ProviderEntity providerModel = new ProviderEntity();
+        Provider providerModel = new Provider();
         providerModel.setName(name);
         providerModel.setVersion(version);
 
         Integer one = 1;
         when(providerPersistence.create(providerModel)).thenReturn(one);
-        Integer actualResult = providerEntities.create(providerModel);
+        Integer actualResult = providers.create(providerModel);
 
         assertEquals(actualResult, one);
         verify(providerPersistence).create(providerModel);
@@ -47,19 +47,19 @@ public class ProviderEntitiesTest {
     @Test
     public void 根据ID获取一个Provider的信息() throws SQLException {
         Integer id = 0;
-        ProviderEntity expectedProviderModel=new ProviderEntity();
+        Provider expectedProviderModel=new Provider();
         expectedProviderModel.setName(name);
         expectedProviderModel.setVersion(version);
         expectedProviderModel.setId(id);
 
-        ProviderEntity foundProviderModel=new ProviderEntity();
+        Provider foundProviderModel=new Provider();
         foundProviderModel.setName(name);
         foundProviderModel.setVersion(version);
         foundProviderModel.setId(id);
 
         when(providerPersistence.findById(id)).thenReturn(foundProviderModel);
 
-        ProviderEntity actualResult = providerEntities.findById(id);
+        Provider actualResult = providers.findById(id);
 
         verify(providerPersistence).findById(id);
         assertEquals(actualResult, foundProviderModel);

@@ -13,7 +13,7 @@ import java.sql.SQLException;
  */
 @DatabaseTable(tableName = "provider")
 @Service
-public class ProviderEntity {
+public class Provider {
     // 主键 id 自增长
     @DatabaseField(generatedId = true)
     private Integer id;
