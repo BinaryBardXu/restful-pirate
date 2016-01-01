@@ -1,6 +1,7 @@
 package cn.xubitao.pirate.resource;
 
 import cn.xubitao.pirate.domain.ProviderEntities;
+import cn.xubitao.pirate.domain.ProviderEntity;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.stereotype.Service;
 
@@ -12,18 +13,23 @@ import java.sql.SQLException;
  */
 @Service
 public class ProviderResource extends ResourceSupport {
-    @Resource
-    private ProviderEntities providerEntities;
 
-    private Integer id;
     private String name;
     private String version;
 
-    public ProviderResource findById(Integer id) throws SQLException {
-        ProviderModel providerModel = providerEntities.findById(id);
-        this.id = providerModel.getId();
-        this.name = providerModel.getName();
-        this.version = providerModel.getVersion();
-        return this;
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
