@@ -14,16 +14,15 @@ import java.sql.SQLException;
 @DatabaseTable(tableName = "provider")
 @Service
 public class Provider {
-    // 主键 id 自增长
     @DatabaseField(generatedId = true)
     private Integer id;
-    // 映射
+
     @DatabaseField(canBeNull = false)
     private String name;
-    // 不为空
-    @DatabaseField(canBeNull = false)
 
+    @DatabaseField(canBeNull = false)
     private String version;
+
     public Integer getId() {
         return id;
     }
