@@ -25,7 +25,7 @@ public class Providers {
 
     private List<Provider> providers;
 
-    public int create(Provider provider) throws SQLException {
+    public Provider create(Provider provider) throws SQLException {
         return providerPersistence.create(provider);
     }
 
