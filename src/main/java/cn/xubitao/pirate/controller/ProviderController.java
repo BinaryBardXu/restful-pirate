@@ -1,5 +1,8 @@
 package cn.xubitao.pirate.controller;
 
+import cn.xubitao.pirate.assmbler.ProviderResourceAssembler;
+import cn.xubitao.pirate.domain.ProviderEntities;
+import cn.xubitao.pirate.domain.ProviderEntity;
 import cn.xubitao.pirate.resource.ProviderResource;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.hateoas.config.EnableHypermediaSupport;
@@ -20,10 +23,13 @@ import java.sql.SQLException;
 @RequestMapping("/provider")
 public class ProviderController {
     @Resource
-    private ProviderResource providerResource;
+    ProviderEntities providerEntities;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public HttpEntity<ProviderResource> show(@PathVariable Integer id) throws SQLException {
-        return new ResponseEntity<ProviderResource>(providerResource.findById(id), HttpStatus.OK);
+    public HttpEntity<ProviderResource> findById(@PathVariable Integer id) throws SQLException {
+        ProviderEntity providerEntity = providerEntities.findById(id);
+        ProviderResourceAssembler providerResourceAssembler=new ProviderResourceAssembler();
+        ProviderResource providerResource=providerResourceAssembler.toResource(providerEntity);
+        return new ResponseEntity<ProviderResource>(providerResource, HttpStatus.OK);
     }
 }
