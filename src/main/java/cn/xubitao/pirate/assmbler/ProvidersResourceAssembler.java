@@ -3,7 +3,6 @@ package cn.xubitao.pirate.assmbler;
 import cn.xubitao.pirate.controller.ProvidersController;
 import cn.xubitao.pirate.domain.Provider;
 import cn.xubitao.pirate.domain.Providers;
-import cn.xubitao.pirate.resource.ProviderResource;
 import cn.xubitao.pirate.resource.ProvidersResource;
 import cn.xubitao.pirate.resource.RestResource;
 import org.springframework.hateoas.Link;
