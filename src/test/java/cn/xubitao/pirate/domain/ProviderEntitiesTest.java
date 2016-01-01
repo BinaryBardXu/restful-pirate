@@ -1,7 +1,6 @@
 package cn.xubitao.pirate.domain;
 
 import cn.xubitao.pirate.persistence.provider.ProviderPersistence;
-import cn.xubitao.pirate.persistence.provider.ProviderModel;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -18,7 +17,7 @@ import static org.mockito.Mockito.when;
 /**
  * Created by xubitao on 12/25/15.
  */
-public class ProviderEntityTest {
+public class ProviderEntitiesTest {
 
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();
@@ -26,20 +25,20 @@ public class ProviderEntityTest {
     private ProviderPersistence providerPersistence;
 
     @InjectMocks
-    private ProviderEntity providerEntity;
+    private ProviderEntities providerEntities;
 
     private String name="foo";
     private String version="fee";
 
     @Test
     public void 添加一个新的Provider() throws SQLException {
-        ProviderModel providerModel = new ProviderModel();
+        ProviderEntity providerModel = new ProviderEntity();
         providerModel.setName(name);
         providerModel.setVersion(version);
 
         Integer one = 1;
         when(providerPersistence.create(providerModel)).thenReturn(one);
-        Integer actualResult = providerEntity.create(providerModel);
+        Integer actualResult = providerEntities.create(providerModel);
 
         assertEquals(actualResult, one);
         verify(providerPersistence).create(providerModel);
@@ -48,19 +47,19 @@ public class ProviderEntityTest {
     @Test
     public void 根据ID获取一个Provider的信息() throws SQLException {
         Integer id = 0;
-        ProviderModel expectedProviderModel=new ProviderModel();
+        ProviderEntity expectedProviderModel=new ProviderEntity();
         expectedProviderModel.setName(name);
         expectedProviderModel.setVersion(version);
         expectedProviderModel.setId(id);
 
-        ProviderModel foundProviderModel=new ProviderModel();
+        ProviderEntity foundProviderModel=new ProviderEntity();
         foundProviderModel.setName(name);
         foundProviderModel.setVersion(version);
         foundProviderModel.setId(id);
 
         when(providerPersistence.findById(id)).thenReturn(foundProviderModel);
 
-        ProviderModel actualResult = providerEntity.findById(id);
+        ProviderEntity actualResult = providerEntities.findById(id);
 
         verify(providerPersistence).findById(id);
         assertEquals(actualResult, foundProviderModel);
