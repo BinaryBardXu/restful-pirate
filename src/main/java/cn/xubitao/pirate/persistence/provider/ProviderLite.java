@@ -18,8 +18,9 @@ public class ProviderLite implements ProviderPersistence {
     private Dolphin dolphin;
     private Dao<Provider, Integer> projectDAO;
 
-    public int create(Provider providerModel) throws SQLException {
-        return getProjectDAO().create(providerModel);
+    public Provider create(Provider provider) throws SQLException {
+        getProjectDAO().create(provider);
+        return provider;
     }
 
     public Provider findById(Integer id) throws SQLException {

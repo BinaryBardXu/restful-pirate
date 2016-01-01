@@ -9,7 +9,7 @@ import java.sql.SQLException;
  * Created by xubitao on 12/25/15.
  */
 public interface ProviderPersistence {
-    int create(Provider provider) throws SQLException;
+    Provider create(Provider provider) throws SQLException;
 
     Provider findById(Integer id) throws SQLException;
 
