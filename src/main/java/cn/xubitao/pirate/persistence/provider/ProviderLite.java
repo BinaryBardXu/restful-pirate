@@ -16,21 +16,35 @@ import java.sql.SQLException;
 public class ProviderLite implements ProviderPersistence {
     @Resource
     private Dolphin dolphin;
+    private Dao<Provider, Integer> projectDAO;
 
     public int create(Provider providerModel) throws SQLException {
-        Dao<Provider, Integer> projectDAO = dolphin.lite(Provider.class);
-        return projectDAO.create(providerModel);
+        return getProjectDAO().create(providerModel);
     }
 
     public Provider findById(Integer id) throws SQLException {
-        Dao<Provider, Integer> projectDAO = dolphin.lite(Provider.class);
-        return projectDAO.queryForId(id);
+        return getProjectDAO().queryForId(id);
     }
 
     public Providers loadAll() throws SQLException {
-        Dao<Provider, Integer> projectDAO = dolphin.lite(Provider.class);
         Providers providers = new Providers();
-        providers.setProviders(projectDAO.queryForAll());
+        providers.setProviders(getProjectDAO().queryForAll());
         return providers;
+    }
+
+    public int update(Provider provider, Integer id) throws SQLException {
+        provider.setId(id);
+        return getProjectDAO().update(provider);
+    }
+
+    public int deleteById(Integer id) throws SQLException {
+        return getProjectDAO().deleteById(id);
+    }
+
+    public Dao<Provider, Integer> getProjectDAO() {
+        if (projectDAO == null) {
+            projectDAO = dolphin.lite(Provider.class);
+        }
+        return projectDAO;
     }
 }

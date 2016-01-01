@@ -14,4 +14,8 @@ public interface ProviderPersistence {
     Provider findById(Integer id) throws SQLException;
 
     Providers loadAll() throws SQLException;
+
+    int update(Provider provider, Integer id) throws SQLException;
+
+    int deleteById(Integer id) throws SQLException;
 }
