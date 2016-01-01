@@ -8,6 +8,11 @@ import java.util.List;
 public class ProvidersResource extends RestResource {
     private List<RestResource> providers;
 
+    public List<RestResource> getProviders() {
+        return providers;
+    }
+
+
     public void setProviders(List<RestResource> providers) {
         this.providers = providers;
     }

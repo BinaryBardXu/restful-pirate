@@ -6,6 +6,8 @@ package cn.xubitao.pirate.resource;
 public class ProviderResource extends RestResource {
 
     private String name;
+
+
     private String version;
 
 
@@ -15,5 +17,13 @@ public class ProviderResource extends RestResource {
 
     public void setVersion(String version) {
         this.version = version;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public String getName() {
+        return name;
     }
 }
