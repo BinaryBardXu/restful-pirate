@@ -47,14 +47,4 @@ public class ProviderEntity {
     public void setVersion(String version) {
         this.version = version;
     }
-    @Autowired
-    private ProviderPersistence providerPersistence;
-
-    public int create(ProviderModel providerModel) throws SQLException {
-        return providerPersistence.create(providerModel);
-    }
-
-    public ProviderModel findById(Integer id) throws SQLException {
-        return providerPersistence.findById(id);
-    }
 }
