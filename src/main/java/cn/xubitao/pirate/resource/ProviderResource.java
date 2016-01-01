@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 /**
  * Created by xubitao on 12/26/15.
  */
-@Service
 public class ProviderResource extends ResourceSupport {
 
     private String name;
