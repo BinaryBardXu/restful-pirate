@@ -1,14 +1,11 @@
 package cn.xubitao.pirate.assmbler;
 
 import cn.xubitao.pirate.controller.ProvidersController;
-import cn.xubitao.pirate.domain.Provider;
 import cn.xubitao.pirate.domain.Providers;
-import cn.xubitao.pirate.resource.ProviderResource;
 import cn.xubitao.pirate.resource.ProvidersResource;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 
 import java.sql.SQLException;
-import java.util.List;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
