@@ -1,6 +1,7 @@
 package cn.xubitao.pirate.persistence.provider;
 
 import cn.xubitao.dolphin.sqllite.Dolphin;
+import cn.xubitao.pirate.domain.ProviderEntity;
 import com.j256.ormlite.dao.Dao;
 import org.springframework.stereotype.Service;
 
@@ -15,13 +16,13 @@ public class ProviderLite implements ProviderPersistence {
     @Resource
     private Dolphin dolphin;
 
-    public int create(ProviderModel providerModel) throws SQLException {
-        Dao<ProviderModel, Integer> projectDAO = dolphin.lite(ProviderModel.class);
+    public int create(ProviderEntity providerModel) throws SQLException {
+        Dao<ProviderEntity, Integer> projectDAO = dolphin.lite(ProviderEntity.class);
         return projectDAO.create(providerModel);
     }
 
-    public ProviderModel findById(Integer id) throws SQLException {
-        Dao<ProviderModel, Integer> projectDAO = dolphin.lite(ProviderModel.class);
+    public ProviderEntity findById(Integer id) throws SQLException {
+        Dao<ProviderEntity, Integer> projectDAO = dolphin.lite(ProviderEntity.class);
         return projectDAO.queryForId(id);
     }
 }
