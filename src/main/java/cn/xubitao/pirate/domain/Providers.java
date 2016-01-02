@@ -1,11 +1,14 @@
 package cn.xubitao.pirate.domain;
 
+import cn.xubitao.dolphin.foundation.exceptions.ClientException;
 import cn.xubitao.pirate.persistence.provider.ProviderPersistence;
+import com.google.common.collect.ImmutableMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by xubitao on 12/25/15.
@@ -25,7 +28,12 @@ public class Providers {
 
     private List<Provider> providers;
 
-    public Provider create(Provider provider) throws SQLException {
+    public Provider create(final Provider provider) throws Exception {
+        Map fieldValues = ImmutableMap.of("name", provider.getName(), "version", provider.getVersion());
+        List<Provider> providerList = providerPersistence.findByFieldValues(fieldValues);
+        if (providerList.size() > 0) {
+            throw new ClientException("Provider已经存在,请核实你的数据.");
+        }
         return providerPersistence.create(provider);
     }
 
