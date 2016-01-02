@@ -1,18 +1,16 @@
 package cn.xubitao.pirate.controller;
 
+import cn.xubitao.dolphin.foundation.resource.RestResource;
+import cn.xubitao.dolphin.foundation.response.Response;
 import cn.xubitao.pirate.assmbler.ProviderResourceAssembler;
 import cn.xubitao.pirate.assmbler.ProvidersResourceAssembler;
 import cn.xubitao.pirate.domain.Provider;
 import cn.xubitao.pirate.domain.Providers;
-import cn.xubitao.pirate.resource.RestResource;
-import cn.xubitao.pirate.resource.ProvidersResource;
 import org.springframework.hateoas.Link;
+import org.springframework.hateoas.ResourceSupport;
 import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.sql.SQLException;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
@@ -26,39 +24,35 @@ public class ProvidersController {
     Providers providers;
 
     @RequestMapping(method = RequestMethod.GET)
-    public HttpEntity<RestResource> loadAll() throws SQLException {
+    public HttpEntity<ResourceSupport> loadAll() throws Exception {
         Providers providerList = providers.loadAll();
-        ProvidersResourceAssembler providersResourceAssembler = new ProvidersResourceAssembler();
-        RestResource providersResource = providersResourceAssembler.toResource(providerList);
-        return new ResponseEntity<RestResource>(providersResource, HttpStatus.OK);
+        return Response.build(providerList, new ProvidersResourceAssembler());
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public HttpEntity<RestResource> findById(@PathVariable Integer id) throws SQLException {
+    public HttpEntity<ResourceSupport> findById(@PathVariable Integer id) throws Exception {
         Provider provider = providers.findById(id);
-        ProviderResourceAssembler providerResourceAssembler = new ProviderResourceAssembler();
-        RestResource providerResource = providerResourceAssembler.toResource(provider);
-        return new ResponseEntity<RestResource>(providerResource, provider == null ? HttpStatus.NOT_FOUND : HttpStatus.OK);
+        return Response.build(provider, new ProviderResourceAssembler());
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity update(@RequestBody Provider provider, @PathVariable Integer id) throws SQLException {
+    public ResponseEntity update(@RequestBody Provider provider, @PathVariable Integer id) throws Exception {
         providers.update(provider, id);
-        return new ResponseEntity(HttpStatus.OK);
+        return Response.ok();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity deleteById(@PathVariable Integer id) throws SQLException {
+    public ResponseEntity deleteById(@PathVariable Integer id) throws Exception {
         providers.deleteById(id);
         Link link = linkTo(ProvidersController.class).withRel("providers");
-        return new ResponseEntity(RestResource.link(link), HttpStatus.OK);
+        return Response.ok(RestResource.link(link));
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity create(@RequestBody Provider provider) throws SQLException {
+    public ResponseEntity create(@RequestBody Provider provider) throws Exception {
         Provider savedProvider = providers.create(provider);
         ProviderResourceAssembler providerResourceAssembler = new ProviderResourceAssembler();
         RestResource providerResource = providerResourceAssembler.toResource(savedProvider);
-        return new ResponseEntity<RestResource>(providerResource, HttpStatus.OK);
+        return Response.created(providerResource);
     }
 }
