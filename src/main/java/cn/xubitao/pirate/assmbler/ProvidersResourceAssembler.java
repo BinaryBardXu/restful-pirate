@@ -7,7 +7,6 @@ import cn.xubitao.pirate.domain.Providers;
 import cn.xubitao.pirate.resource.ProvidersResource;
 import org.springframework.hateoas.Link;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
