@@ -11,11 +11,9 @@
 
     <context:component-scan base-package="cn.xubitao"/>
     <context:property-placeholder location="classpath*:cn/xubitao/pirate/pirate.properties"/>
-    <mvc:annotation-driven>
-      <!--  <mvc:message-converters>
-            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-            </bean>
-        </mvc:message-converters>-->
-    </mvc:annotation-driven>
+    <mvc:annotation-driven/>
     <mvc:resources location="WEB-INF/pages/" mapping="/pages/**"/>
+
+    <bean id="exceptionResolver" class="cn.xubitao.dolphin.foundation.exceptions.DolphinExceptionResolver"/>
+
 </beans>
