@@ -1,0 +1,32 @@
+<html>
+<head>
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap-table.css">
+    <script src="../static/scripts/jquery.min.js"></script>
+    <script src="../static/bootstrap/js/bootstrap.js"></script>
+    <script src="../static/bootstrap/js/bootstrap-table.js"></script>
+</head>
+<script>
+    $(function () {
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8080/providers",
+            dataType: "json",
+            success: function (data) {
+                var providers = data.providers;
+                $('#table').bootstrapTable('load', providers);
+            }
+        });
+    });
+</script>
+<body>
+<table id="table" data-toggle="table" data-height="246">
+    <thead>
+    <tr>
+        <th data-field="name">Name</th>
+        <th data-field="version" data-align="right">Version</th>
+    </tr>
+    </thead>
+</table>
+</body>
+</html>
