@@ -1,5 +1,7 @@
 package cn.xubitao.pirate.resource;
 
+import cn.xubitao.dolphin.foundation.resource.RestResource;
+
 import java.util.List;
 
 /**

@@ -1,5 +1,7 @@
 package cn.xubitao.pirate.resource;
 
+import cn.xubitao.dolphin.foundation.resource.RestResource;
+
 /**
  * Created by xubitao on 12/26/15.
  */
