@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by xubitao on 12/25/15.
@@ -25,6 +27,10 @@ public class ProviderLite implements ProviderPersistence {
 
     public Provider findById(Integer id) throws SQLException {
         return getProjectDAO().queryForId(id);
+    }
+
+    public List<Provider> findByFieldValues(Map fieldValues) throws SQLException {
+        return getProjectDAO().queryForFieldValues(fieldValues);
     }
 
     public Providers loadAll() throws SQLException {
