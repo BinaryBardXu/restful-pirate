@@ -3,20 +3,19 @@
     <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="../static/bootstrap/css/bootstrap-table.css">
     <script src="../static/scripts/jquery.min.js"></script>
+    <script src="../static/scripts/racoon.js"></script>
     <script src="../static/bootstrap/js/bootstrap.js"></script>
     <script src="../static/bootstrap/js/bootstrap-table.js"></script>
 </head>
 <script>
     $(function () {
-        $.ajax({
-            type: "GET",
-            url: "http://localhost:8080/providers",
-            dataType: "json",
-            success: function (data) {
-                var providers = data.providers;
+        Racoon.restful({
+            url: 'http://localhost:8080/providers',
+            success: function (_data) {
+                var providers = _data.providers;
                 $('#table').bootstrapTable('load', providers);
             }
-        });
+        })
     });
 </script>
 <body>
