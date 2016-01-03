@@ -1,11 +1,17 @@
 <html>
 <head>
-    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.css">
+    <title>Pirate Contract Testing</title>
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../static/bootstrap/css/bootstrap-table.css">
+    <link rel="stylesheet" href="../static/bootstrap/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/css/pirate.css">
+    <link rel="stylesheet" href="../static/css/buttons.css">
     <script src="../static/scripts/jquery.min.js"></script>
     <script src="../static/scripts/racoon.js"></script>
     <script src="../static/bootstrap/js/bootstrap.js"></script>
     <script src="../static/bootstrap/js/bootstrap-table.js"></script>
+    <script src="../static/bootstrap/js/buttons.js"></script>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 </head>
 <script>
     $(function () {
@@ -17,15 +23,44 @@
             }
         })
     });
+    function optionsFormatter(value) {
+        return "<span class='button-dropdown' data-buttons='dropdown'><button class='button button-rounded'><i class='fa fa-bars'></i> Select Me </button> <ul class='button-dropdown-list'> <li><a href='http://www.bootcss.com/'>Option Link 1</a></li> <li><a href='http://www.bootcss.com/'>Option Link 2</a></li> <li class='button-dropdown-divider'> <a href='#'>Option Link 3</a> </li> </ul> </span>";
+    }
 </script>
 <body>
-<table id="table" data-toggle="table" data-height="246">
-    <thead>
-    <tr>
-        <th data-field="name">Name</th>
-        <th data-field="version" data-align="right">Version</th>
-    </tr>
-    </thead>
-</table>
+<header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="index.html">
+                Pirate Contract Testing
+            </a>
+        </div>
+    </div>
+</header>
+
+<div class="container pirate-container">
+    <div id="toolbar">
+        <div id="pirate-button">
+            <a class="button button-pirate button-royal button-rounded">创建 </a>
+        </div>
+
+        <div id="pirate-refresh" class="pull-right">
+            <button class="btn btn-default pirate-refresh-button" type="button" name="refresh" title="Refresh"><i
+                    class="glyphicon glyphicon-refresh icon-refresh"></i></button>
+        </div>
+
+        <div id="pirate-search" class="pull-right search"><input class="form-control" placeholder="Search" type="text">
+        </div>
+    </div>
+    <table id="table" data-toggle="table" data-height="246">
+        <thead>
+        <tr>
+            <th data-field="name" data-align="center">系统名称</th>
+            <th data-field="version" data-align="center">版本号</th>
+            <th data-field="links" data-formatter="optionsFormatter">操作</th>
+        </tr>
+        </thead>
+    </table>
+</div>
 </body>
 </html>
