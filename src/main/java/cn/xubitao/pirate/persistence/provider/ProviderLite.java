@@ -3,6 +3,7 @@ package cn.xubitao.pirate.persistence.provider;
 import cn.xubitao.dolphin.sqllite.Dolphin;
 import cn.xubitao.pirate.domain.Provider;
 import cn.xubitao.pirate.domain.Providers;
+import com.google.common.collect.ImmutableMap;
 import com.j256.ormlite.dao.Dao;
 import org.springframework.stereotype.Service;
 
@@ -26,16 +27,19 @@ public class ProviderLite implements ProviderPersistence {
     }
 
     public Provider findById(Integer id) throws SQLException {
-        return getProjectDAO().queryForId(id);
+        Map conditions = ImmutableMap.of("id", id, "deleteStatus", 0);
+        List<Provider> result = getProjectDAO().queryForFieldValues(conditions);
+        return result.size() > 0 ? result.get(0) : null;
     }
 
-    public List<Provider> findByFieldValues(Map fieldValues) throws SQLException {
-        return getProjectDAO().queryForFieldValues(fieldValues);
+    public List<Provider> findByConditions(Map conditions) throws SQLException {
+        return getProjectDAO().queryForFieldValues(conditions);
     }
 
     public Providers loadAll() throws SQLException {
+        Map conditions = ImmutableMap.of( "deleteStatus", 0);
         Providers providers = new Providers();
-        providers.setProviders(getProjectDAO().queryForAll());
+        providers.setProviders(getProjectDAO().queryForFieldValues(conditions));
         return providers;
     }
 
@@ -45,7 +49,7 @@ public class ProviderLite implements ProviderPersistence {
     }
 
     public int deleteById(Integer id) throws SQLException {
-        return getProjectDAO().deleteById(id);
+        return getProjectDAO().executeRawNoArgs("update provider set deleteStatus=1 where id=" + id);
     }
 
     public Dao<Provider, Integer> getProjectDAO() {
