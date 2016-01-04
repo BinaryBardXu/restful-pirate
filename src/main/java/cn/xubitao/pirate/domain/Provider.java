@@ -23,6 +23,9 @@ public class Provider {
     @DatabaseField(canBeNull = false)
     private String version;
 
+    @DatabaseField(canBeNull = false)
+    private Integer deleteStatus;
+
     public Integer getId() {
         return id;
     }
@@ -45,5 +48,13 @@ public class Provider {
 
     public void setVersion(String version) {
         this.version = version;
+    }
+
+    public Integer getDeleteStatus() {
+        return deleteStatus;
+    }
+
+    public void setDeleteStatus(Integer deleteStatus) {
+        this.deleteStatus = deleteStatus;
     }
 }
