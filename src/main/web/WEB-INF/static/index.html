@@ -4,17 +4,19 @@
     <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../static/bootstrap/css/bootstrap-table.css">
     <link rel="stylesheet" href="../static/bootstrap/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/toastr/toastr.min.css">
     <link rel="stylesheet" href="../static/css/pirate.css">
     <link rel="stylesheet" href="../static/css/buttons.css">
     <script src="../static/scripts/jquery.min.js"></script>
     <script src="../static/scripts/racoon.js"></script>
+    <script src="../static/toastr/toastr.min.js"></script>
     <script src="../static/bootstrap/js/bootstrap.js"></script>
     <script src="../static/bootstrap/js/bootstrap-table.js"></script>
     <script src="../static/bootstrap/js/buttons.js"></script>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 </head>
 <script>
-    $(function () {
+    function loadProviders() {
         Racoon.restful({
             url: 'http://localhost:8080/providers',
             success: function (_data) {
@@ -22,9 +24,36 @@
                 $('#table').bootstrapTable('load', providers);
             }
         })
+    }
+    $(function () {
+        loadProviders();
     });
-    function optionsFormatter(value) {
-        return "<span class='button-dropdown' data-buttons='dropdown'><button class='button button-rounded'><i class='fa fa-bars'></i> Select Me </button> <ul class='button-dropdown-list'> <li><a href='http://www.bootcss.com/'>Option Link 1</a></li> <li><a href='http://www.bootcss.com/'>Option Link 2</a></li> <li class='button-dropdown-divider'> <a href='#'>Option Link 3</a> </li> </ul> </span>";
+
+    function confirmDeleteOption(_link) {
+        $('#delete-button').click(function () {
+            Racoon.restful({
+                url: _link,
+                type: 'delete',
+                success: function () {
+                    $('#confirmDeleteModel').modal('hide');
+                    loadProviders();
+                }
+            })
+        });
+        $('#confirmDeleteModel').modal();
+    }
+    function optionsFormatter(_links) {
+        var options = $("<div></div>");
+        var span = $("<span class='button-dropdown' data-buttons='dropdown'></span>");
+        var button = "<button class='button button-rounded'><i class='fa fa-bars'></i> 操作 </button>";
+        var ul = $("<ul class='button-dropdown-list'></ul>");
+        var deleteLink = $("<li><a class='pirate-link' onclick='confirmDeleteOption(\"" + Racoon.getLink(_links, "self") + "\")'>删除</a></li>");
+        ul.append(deleteLink);
+
+        span.append(button);
+        span.append(ul);
+        options.append(span);
+        return options.html();
     }
 </script>
 <body>
@@ -52,15 +81,35 @@
         <div id="pirate-search" class="pull-right search"><input class="form-control" placeholder="Search" type="text">
         </div>
     </div>
-    <table id="table" data-toggle="table" data-height="246">
+    <table id="table" data-toggle="table">
         <thead>
         <tr>
-            <th data-field="name" data-align="center">系统名称</th>
-            <th data-field="version" data-align="center">版本号</th>
-            <th data-field="links" data-formatter="optionsFormatter">操作</th>
+            <th data-field="name" data-align="center" data-width="40%">系统名称</th>
+            <th data-field="version" data-align="center" data-width="40%">版本号</th>
+            <th data-field="links" data-formatter="optionsFormatter" data-align="center" data-width="20%">Options</th>
         </tr>
         </thead>
     </table>
+</div>
+
+<!-- deleteProvidersModal -->
+<div class="modal fade" id="confirmDeleteModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">提示</h4>
+            </div>
+            <div class="modal-body">
+                删除后其下的所有契约都将不可用,确认删除?
+            </div>
+            <div class="modal-footer">
+                <button id="delete-button" type="button" class="btn btn-default ">确认</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>
