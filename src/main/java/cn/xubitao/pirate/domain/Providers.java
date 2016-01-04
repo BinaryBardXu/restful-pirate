@@ -29,8 +29,8 @@ public class Providers {
     private List<Provider> providers;
 
     public Provider create(final Provider provider) throws Exception {
-        Map fieldValues = ImmutableMap.of("name", provider.getName(), "version", provider.getVersion());
-        List<Provider> providerList = providerPersistence.findByFieldValues(fieldValues);
+        Map conditions = ImmutableMap.of("name", provider.getName(), "version", provider.getVersion());
+        List<Provider> providerList = providerPersistence.findByConditions(conditions);
         if (providerList.size() > 0) {
             throw new ClientException("Provider已经存在,请核实你的数据.");
         }
