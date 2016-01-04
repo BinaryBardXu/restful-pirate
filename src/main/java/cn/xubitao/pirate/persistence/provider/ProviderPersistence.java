@@ -21,5 +21,5 @@ public interface ProviderPersistence {
 
     int deleteById(Integer id) throws SQLException;
 
-    List<Provider> findByFieldValues(Map fieldValues) throws SQLException;
+    List<Provider> findByConditions(Map fieldValues) throws SQLException;
 }
