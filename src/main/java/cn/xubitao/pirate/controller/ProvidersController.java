@@ -12,6 +12,8 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
+
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
 /**
@@ -20,8 +22,8 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 @RestController
 @RequestMapping("/providers")
 public class ProvidersController {
-    @javax.annotation.Resource
-    Providers providers;
+    @Resource
+    private Providers providers;
 
     @RequestMapping(method = RequestMethod.GET)
     public HttpEntity<ResourceSupport> loadAll() throws Exception {
