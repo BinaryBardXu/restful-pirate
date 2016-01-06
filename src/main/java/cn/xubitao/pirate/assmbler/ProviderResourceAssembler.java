@@ -19,7 +19,8 @@ public class ProviderResourceAssembler extends DolphinAssembler {
         super(ProvidersController.class, RestResource.class);
     }
 
-    public RestResource toRestResource(Object domain) throws Exception {
+    @Override
+    public RestResource toRestResource(Object domain, Integer... pathVariables) throws Exception {
         Provider provider = (Provider) domain;
         ProviderResource providerResource = new ProviderResource();
         Link providersLink = linkTo(ProvidersController.class).withRel("providers");

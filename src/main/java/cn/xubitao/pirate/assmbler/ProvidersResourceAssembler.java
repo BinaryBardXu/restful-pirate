@@ -6,6 +6,7 @@ import cn.xubitao.pirate.controller.ProvidersController;
 import cn.xubitao.pirate.domain.Providers;
 import cn.xubitao.pirate.resource.ProvidersResource;
 import org.springframework.hateoas.Link;
+import org.springframework.hateoas.ResourceSupport;
 
 import java.util.List;
 
@@ -20,7 +21,8 @@ public class ProvidersResourceAssembler extends DolphinAssembler {
         super(ProvidersController.class, RestResource.class);
     }
 
-    public RestResource toRestResource(Object domain) throws Exception {
+    @Override
+    public RestResource toRestResource(Object domain, Integer... pathVariables) throws Exception {
         Providers providers = (Providers) domain;
         ProvidersResource providersResource = new ProvidersResource();
 
@@ -28,7 +30,7 @@ public class ProvidersResourceAssembler extends DolphinAssembler {
         if (providers == null) {
             return RestResource.link(providersLink);
         }
-        List<RestResource> providerResources = buildResources(providers.getProviders(), new ProviderResourceAssembler());
+        List<ResourceSupport> providerResources = buildResources(providers.getProviders(), new ProviderResourceAssembler(), pathVariables);
         providersResource.setProviders(providerResources);
         providersResource.add(linkTo(methodOn(ProvidersController.class).loadAll()).withSelfRel());
         return providersResource;
