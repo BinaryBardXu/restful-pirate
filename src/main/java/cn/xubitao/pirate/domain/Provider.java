@@ -12,7 +12,6 @@ import java.sql.SQLException;
  * Created by xubitao on 12/25/15.
  */
 @DatabaseTable(tableName = "provider")
-@Service
 public class Provider {
     @DatabaseField(generatedId = true)
     private Integer id;
