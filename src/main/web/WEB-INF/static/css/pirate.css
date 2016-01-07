@@ -1308,3 +1308,7 @@ h1[id] {
 .pirate-link {
     cursor: pointer;
 }
+.pirate-table-container
+{
+    padding:6px;
+}
