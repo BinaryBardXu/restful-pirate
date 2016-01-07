@@ -2,6 +2,7 @@ package cn.xubitao.pirate.assmbler.provider;
 
 import cn.xubitao.dolphin.foundation.assmbler.DolphinAssembler;
 import cn.xubitao.dolphin.foundation.resource.RestResource;
+import cn.xubitao.pirate.controller.ContractsController;
 import cn.xubitao.pirate.controller.ProvidersController;
 import cn.xubitao.pirate.domain.provider.Provider;
 import cn.xubitao.pirate.resource.ProviderResource;
@@ -29,8 +30,9 @@ public class ProviderResourceAssembler extends DolphinAssembler {
         }
         providerResource.setName(provider.getName());
         providerResource.setVersion(provider.getVersion());
+        Link contractLink = linkTo(methodOn(ContractsController.class).loadAll(provider.getId())).withRel("contracts");
         providerResource.add(linkTo(methodOn(ProvidersController.class).findById(provider.getId())).withSelfRel());
-
+        providerResource.add(contractLink);
         providerResource.add(providersLink);
         return providerResource;
     }
