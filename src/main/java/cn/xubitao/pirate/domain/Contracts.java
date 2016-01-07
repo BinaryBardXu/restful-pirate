@@ -29,7 +29,7 @@ public class Contracts {
     private List<Contract> contracts;
 
     public Contract create(final Contract Contract) throws Exception {
-        Map conditions = ImmutableMap.of("name", Contract.getName());
+        Map conditions = ImmutableMap.of("deleteStatus", 0, "name", Contract.getName());
         List<Contract> ContractList = contractPersistence.findByConditions(conditions);
         if (ContractList.size() > 0) {
             throw new ClientException("Contract已经存在,请核实你的数据.");
@@ -45,8 +45,13 @@ public class Contracts {
         return contractPersistence.loadAll(providerId);
     }
 
-    public int update(Contract Contract, Integer id) throws SQLException {
-        return contractPersistence.update(Contract, id);
+    public Contract update(Contract contract, Integer id) throws Exception {
+        Map conditions = ImmutableMap.of("deleteStatus", 0, "name", contract.getName());
+        List<Contract> contracts = contractPersistence.findByConditions(conditions);
+        if (contracts.size() > 0 && contracts.get(0).getId() != id) {
+            throw new ClientException("Contract已经存在,请核实你的数据.");
+        }
+        return contractPersistence.update(contract, id);
     }
 
     public int deleteById(Integer id) throws SQLException {
