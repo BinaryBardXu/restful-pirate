@@ -1,8 +1,8 @@
 package cn.xubitao.pirate.persistence.provider;
 
 import cn.xubitao.dolphin.sqllite.Dolphin;
-import cn.xubitao.pirate.domain.Provider;
-import cn.xubitao.pirate.domain.Providers;
+import cn.xubitao.pirate.domain.provider.Provider;
+import cn.xubitao.pirate.domain.provider.Providers;
 import com.google.common.collect.ImmutableMap;
 import com.j256.ormlite.dao.Dao;
 import org.springframework.stereotype.Service;

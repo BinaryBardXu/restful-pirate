@@ -1,4 +1,4 @@
-package cn.xubitao.pirate.domain;
+package cn.xubitao.pirate.domain.provider;
 
 import cn.xubitao.dolphin.foundation.exceptions.ClientException;
 import cn.xubitao.pirate.persistence.provider.ProviderPersistence;

@@ -1,4 +1,4 @@
-package cn.xubitao.pirate.domain;
+package cn.xubitao.pirate.domain.contract;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;

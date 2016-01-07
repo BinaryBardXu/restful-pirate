@@ -2,10 +2,10 @@ package cn.xubitao.pirate.controller;
 
 import cn.xubitao.dolphin.foundation.resource.RestResource;
 import cn.xubitao.dolphin.foundation.response.Response;
-import cn.xubitao.pirate.assmbler.ContractResourceAssembler;
-import cn.xubitao.pirate.assmbler.ContractsResourceAssembler;
-import cn.xubitao.pirate.domain.Contract;
-import cn.xubitao.pirate.domain.Contracts;
+import cn.xubitao.pirate.assmbler.contract.ContractResourceAssembler;
+import cn.xubitao.pirate.assmbler.contract.ContractsResourceAssembler;
+import cn.xubitao.pirate.domain.contract.Contract;
+import cn.xubitao.pirate.domain.contract.Contracts;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.http.HttpEntity;

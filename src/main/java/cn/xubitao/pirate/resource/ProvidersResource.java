@@ -1,6 +1,7 @@
 package cn.xubitao.pirate.resource;
 
 import cn.xubitao.dolphin.foundation.resource.RestResource;
+import org.springframework.hateoas.ResourceSupport;
 
 import java.util.List;
 
@@ -8,14 +9,14 @@ import java.util.List;
  * Created by xubitao on 1/1/16.
  */
 public class ProvidersResource extends RestResource {
-    private List<RestResource> providers;
+    private List<ResourceSupport> providers;
 
-    public List<RestResource> getProviders() {
+    public List<ResourceSupport> getProviders() {
         return providers;
     }
 
 
-    public void setProviders(List<RestResource> providers) {
+    public void setProviders(List<ResourceSupport> providers) {
         this.providers = providers;
     }
 }

@@ -1,7 +1,7 @@
 package cn.xubitao.pirate.persistence.contract;
 
-import cn.xubitao.pirate.domain.Contract;
-import cn.xubitao.pirate.domain.Contracts;
+import cn.xubitao.pirate.domain.contract.Contract;
+import cn.xubitao.pirate.domain.contract.Contracts;
 
 import java.sql.SQLException;
 import java.util.List;

@@ -1,9 +1,8 @@
 package cn.xubitao.pirate.persistence.contract;
 
-import cn.xubitao.dolphin.foundation.exceptions.ClientException;
 import cn.xubitao.dolphin.sqllite.Dolphin;
-import cn.xubitao.pirate.domain.Contract;
-import cn.xubitao.pirate.domain.Contracts;
+import cn.xubitao.pirate.domain.contract.Contract;
+import cn.xubitao.pirate.domain.contract.Contracts;
 import com.google.common.collect.ImmutableMap;
 import com.j256.ormlite.dao.Dao;
 import org.springframework.stereotype.Service;

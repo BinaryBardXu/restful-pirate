@@ -1,9 +1,9 @@
-package cn.xubitao.pirate.assmbler;
+package cn.xubitao.pirate.assmbler.provider;
 
 import cn.xubitao.dolphin.foundation.assmbler.DolphinAssembler;
 import cn.xubitao.dolphin.foundation.resource.RestResource;
 import cn.xubitao.pirate.controller.ProvidersController;
-import cn.xubitao.pirate.domain.Providers;
+import cn.xubitao.pirate.domain.provider.Providers;
 import cn.xubitao.pirate.resource.ProvidersResource;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.ResourceSupport;

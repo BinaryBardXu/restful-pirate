@@ -1,7 +1,7 @@
 package cn.xubitao.pirate.persistence.provider;
 
-import cn.xubitao.pirate.domain.Provider;
-import cn.xubitao.pirate.domain.Providers;
+import cn.xubitao.pirate.domain.provider.Provider;
+import cn.xubitao.pirate.domain.provider.Providers;
 
 import java.sql.SQLException;
 import java.util.List;
