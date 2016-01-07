@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 /**
  * Created by xubitao on 12/27/15.
@@ -36,16 +37,16 @@ public class ContractsController {
         return Response.build(contract, new ContractResourceAssembler(), providerId);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity update(@RequestBody Contract contract, @PathVariable Integer id) throws Exception {
-        contracts.update(contract, id);
-        return Response.ok();
+    @RequestMapping(value = "/providers/{providerId}/contracts/{id}", method = RequestMethod.PUT)
+    public HttpEntity<ResourceSupport> update(@RequestBody Contract contract, @PathVariable Integer providerId, @PathVariable Integer id) throws Exception {
+        Contract updatedContract = contracts.update(contract, id);
+        return Response.build(updatedContract, new ContractResourceAssembler(), providerId);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity deleteById(@PathVariable Integer id) throws Exception {
+    @RequestMapping(value = "/providers/{providerId}/contracts/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity deleteById(@PathVariable Integer providerId, @PathVariable Integer id) throws Exception {
         contracts.deleteById(id);
-        Link link = linkTo(ContractsController.class).withRel("contracts");
+        Link link = linkTo(methodOn(ContractsController.class).loadAll(providerId)).withRel("contracts");
         return Response.ok(RestResource.link(link));
     }
 
