@@ -33,7 +33,7 @@
         $('#delete-button').click(function () {
             Racoon.restful({
                 url: _link,
-                type: 'delete',
+                type: 'DELETE',
                 success: function () {
                     $('#confirmDeleteModel').modal('hide');
                     loadProviders();
@@ -42,13 +42,26 @@
         });
         $('#confirmDeleteModel').modal();
     }
+
+    function openContractModel(_link) {
+        Racoon.restful({
+            url: _link,
+            success: function (_data) {
+                var contracts = _data.contracts;
+                $('#contracts-table').bootstrapTable('load', contracts);
+            }
+        });
+        $('#contractsModel').modal();
+    }
     function optionsFormatter(_links) {
         var options = $("<div></div>");
         var span = $("<span class='button-dropdown' data-buttons='dropdown'></span>");
         var button = "<button class='button button-rounded'><i class='fa fa-bars'></i> 操作 </button>";
         var ul = $("<ul class='button-dropdown-list'></ul>");
         var deleteLink = $("<li><a class='pirate-link' onclick='confirmDeleteOption(\"" + Racoon.getLink(_links, "self") + "\")'>删除</a></li>");
+        var contractLink = $("<li><a class='pirate-link' onclick='openContractModel(\"" + Racoon.getLink(_links, "contracts") + "\")'>契约</a></li>");
         ul.append(deleteLink);
+        ul.append(contractLink);
 
         span.append(button);
         span.append(ul);
@@ -93,8 +106,8 @@
 </div>
 
 <!-- deleteProvidersModal -->
-<div class="modal fade" id="confirmDeleteModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
+<div class="modal fade " id="confirmDeleteModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-middle" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
@@ -107,6 +120,33 @@
             <div class="modal-footer">
                 <button id="delete-button" type="button" class="btn btn-default ">确认</button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- deleteProvidersModal -->
+<div class="modal fade" id="contractsModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-pirate" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">契约</h4>
+            </div>
+            <div class="pirate-table-container">
+                <table id="contracts-table" data-toggle="table">
+                    <thead>
+                    <tr>
+                        <th data-field="name" data-align="center" data-width="10%">名称</th>
+                        <th data-field="request" data-align="center" data-width="25%">请求体</th>
+                        <th data-field="response" data-align="center" data-width="25%">响应体</th>
+                        <th data-field="desc" data-align="center" data-width="20%">描述</th>
+                        <th data-field="links" data-formatter="optionsFormatter" data-align="center" data-width="20%">
+                            Options
+                        </th>
+                    </tr>
+                    </thead>
+                </table>
             </div>
         </div>
     </div>
