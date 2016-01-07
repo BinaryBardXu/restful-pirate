@@ -80,6 +80,7 @@ button.toast-close-button {
     height: 50px;
     width: 250px;
     position: sticky;
+    text-align: center;
 }
 .toast-bottom-left {
     bottom: 12px;
@@ -169,7 +170,7 @@ button.toast-close-button {
     #toast-container > div {
         padding: 8px 8px 8px 50px;
         width: 11em
-    }
+    }xiugai 
 
     #toast-container .toast-close-button {
         right: -0.2em;
