@@ -27,7 +27,7 @@ public class ContractsResourceAssembler extends DolphinAssembler {
         Contracts contracts = (Contracts) domain;
         ContractsResource contractsResource = new ContractsResource();
 
-        Link contractsLink = linkTo(ContractsController.class).withRel("contracts");
+        Link contractsLink = linkTo(methodOn(ContractsController.class).loadAll(pathVariables[0])).withRel("contracts");
         if (contracts == null) {
             return RestResource.link(contractsLink);
         }
