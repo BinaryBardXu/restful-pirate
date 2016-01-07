@@ -17,7 +17,7 @@ public interface ContractPersistence {
 
     Contracts loadAll(Integer providerId) throws SQLException;
 
-    int update(Contract Contract, Integer id) throws SQLException;
+    Contract update(Contract Contract, Integer id) throws Exception;
 
     int deleteById(Integer id) throws SQLException;
 

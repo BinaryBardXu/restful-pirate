@@ -1,5 +1,6 @@
 package cn.xubitao.pirate.persistence.contract;
 
+import cn.xubitao.dolphin.foundation.exceptions.ClientException;
 import cn.xubitao.dolphin.sqllite.Dolphin;
 import cn.xubitao.pirate.domain.Contract;
 import cn.xubitao.pirate.domain.Contracts;
@@ -43,9 +44,10 @@ public class ContractLite implements ContractPersistence {
         return Contracts;
     }
 
-    public int update(Contract Contract, Integer id) throws SQLException {
-        Contract.setId(id);
-        return getProjectDAO().update(Contract);
+    public Contract update(Contract contract, Integer id) throws Exception {
+        contract.setId(id);
+        getProjectDAO().update(contract);
+        return findById(id);
     }
 
     public int deleteById(Integer id) throws SQLException {
