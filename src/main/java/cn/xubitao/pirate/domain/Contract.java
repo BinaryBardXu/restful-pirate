@@ -16,11 +16,13 @@ public class Contract {
     private String response;
     @DatabaseField(canBeNull = false)
     private String name;
+    @DatabaseField
     private String desc;
     @DatabaseField(canBeNull = false)
     private Integer providerId;
-    @DatabaseField(canBeNull = false)
+    @DatabaseField(defaultValue = "0")
     private Integer deleteStatus;
+
     public Integer getId() {
         return id;
     }
