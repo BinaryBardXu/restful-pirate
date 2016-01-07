@@ -12,7 +12,20 @@ var Racoon = {
             async: _options.async || true,
             success: function (_data) {
                 toastr.clear();
-                toastr.success('成功!');
+                toastr.remove();
+                if (this.type == "GET") {
+                    toastr.success(' 加载成功!');
+                }
+                if (this.type == "POST") {
+                    toastr.success(' 创建成功!');
+                }
+                if (this.type == "DELETE") {
+                    toastr.success(' 删除成功!');
+                }
+                if (this.type == "UPDATE") {
+                    toastr.success(' 修改成功!');
+                }
+
                 _options.success(_data);
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
