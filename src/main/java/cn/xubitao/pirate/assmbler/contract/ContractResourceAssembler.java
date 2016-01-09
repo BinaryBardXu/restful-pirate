@@ -4,7 +4,7 @@ import cn.xubitao.dolphin.foundation.assmbler.DolphinAssembler;
 import cn.xubitao.dolphin.foundation.resource.RestResource;
 import cn.xubitao.pirate.controller.ContractsController;
 import cn.xubitao.pirate.domain.contract.Contract;
-import cn.xubitao.pirate.resource.ContractResource;
+import cn.xubitao.pirate.resource.contract.ContractResource;
 import org.springframework.hateoas.Link;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;

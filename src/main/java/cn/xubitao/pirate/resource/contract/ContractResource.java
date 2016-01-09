@@ -1,4 +1,4 @@
-package cn.xubitao.pirate.resource;
+package cn.xubitao.pirate.resource.contract;
 
 import cn.xubitao.dolphin.foundation.resource.RestResource;
 import com.j256.ormlite.field.DatabaseField;
