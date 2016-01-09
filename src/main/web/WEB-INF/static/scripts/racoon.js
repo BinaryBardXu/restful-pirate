@@ -10,6 +10,13 @@ var Racoon = {
             url: _options.url,
             dataType: _options.dataType || "json",
             async: _options.async || true,
+            data: JSON.stringify(_options.data),
+            contentType: "application/json",
+            before: function () {
+                if (_options.before != undefined) {
+                    _options.before();
+                }
+            },
             success: function (_data) {
                 toastr.clear();
                 toastr.remove();
@@ -28,12 +35,17 @@ var Racoon = {
 
                 _options.success(_data);
             },
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                var httpErrorModel = $("#httpErrorModel");
-                if (httpErrorModel.html() == undefined) {
-                    loadErrorModel(XMLHttpRequest.responseJSON.message)
+            complete: function (XHR, TS) {
+                if (XHR.status == 500) {
+                    var httpErrorModel = $("#httpErrorModel");
+                    if (httpErrorModel.html() == undefined) {
+                        loadErrorModel(XMLHttpRequest.responseJSON.message)
+                    }
+                    $('#errorModel').modal();
                 }
-                $('#errorModel').modal();
+                if (XHR.status == 201) {
+                    _options.success();
+                }
             }
         });
     },
