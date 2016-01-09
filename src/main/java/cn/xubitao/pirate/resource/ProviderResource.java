@@ -12,6 +12,8 @@ public class ProviderResource extends RestResource {
 
     private String version;
 
+    private String consumerKey;
+
 
     public void setName(String name) {
         this.name = name;
@@ -27,5 +29,13 @@ public class ProviderResource extends RestResource {
 
     public String getName() {
         return name;
+    }
+
+    public String getConsumerKey() {
+        return consumerKey;
+    }
+
+    public void setConsumerKey(String consumerKey) {
+        this.consumerKey = consumerKey;
     }
 }
