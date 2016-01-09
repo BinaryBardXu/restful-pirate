@@ -21,6 +21,8 @@ public class Provider {
 
     @DatabaseField(canBeNull = false)
     private String version;
+    @DatabaseField(canBeNull = false)
+    private String consumerKey;
 
     @DatabaseField(canBeNull = false)
     private Integer deleteStatus;
@@ -55,5 +57,13 @@ public class Provider {
 
     public void setDeleteStatus(Integer deleteStatus) {
         this.deleteStatus = deleteStatus;
+    }
+
+    public String getConsumerKey() {
+        return consumerKey;
+    }
+
+    public void setConsumerKey(String consumerKey) {
+        this.consumerKey = consumerKey;
     }
 }
