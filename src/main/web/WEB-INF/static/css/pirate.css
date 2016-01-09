@@ -1316,6 +1316,9 @@ h1[id] {
     margin: 5px;
     height: 35px;
 }
-.pirate-form{
+.pirate-form {
     margin: 5px;
+}
+#confirmDeleteModel{
+z-index: 10000;
 }
