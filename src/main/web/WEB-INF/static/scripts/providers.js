@@ -9,15 +9,20 @@ var Providers = {
     loadProviders: function () {
         Racoon.restful({
             url: GlobalConfig.entrance,
+            before: function () {
+                $('#table').bootstrapTable('showLoading');
+            },
             success: function (_data) {
                 var providers = _data.providers;
                 $('#table').bootstrapTable('load', providers);
+                $('#table').bootstrapTable('hideLoading');
             }
         })
     }
 
 };
 function openConfirmDeleteModal(_link) {
+    $('#delete-button').unbind();
     $('#delete-button').click(function () {
         Racoon.restful({
             url: _link,
