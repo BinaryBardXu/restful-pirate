@@ -5923,10 +5923,16 @@ button.close {
 
 @media (min-width: 992px) {
     .modal-pirate {
-        width: 90%
+        width: 90%;
+        height:90%;
     }
 }
-
+@media (min-width: 662px) {
+    .modal-pirate-middle {
+        width: 60%;
+        margin-top: 5%;
+    }
+}
 .tooltip {
     position: absolute;
     z-index: 1070;
