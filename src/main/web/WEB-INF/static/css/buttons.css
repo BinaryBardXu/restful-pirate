@@ -441,6 +441,7 @@
 
 .button-rounded {
     border-radius: 4px;
+    width: -moz-max-content;
 }
 
 .button-pill {
