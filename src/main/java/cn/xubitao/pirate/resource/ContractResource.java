@@ -14,6 +14,7 @@ public class ContractResource  extends RestResource {
     private String response;
     private String name;
     private String desc;
+    private String url;
     private Integer providerId;
 
     public String getName() {
@@ -27,7 +28,13 @@ public class ContractResource  extends RestResource {
     public String getDesc() {
         return desc;
     }
+    public String getUrl() {
+        return url;
+    }
 
+    public void setUrl(String url) {
+        this.url = url;
+    }
     public void setDesc(String desc) {
         this.desc = desc;
     }
