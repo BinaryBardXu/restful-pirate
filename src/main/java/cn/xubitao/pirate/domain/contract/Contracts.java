@@ -28,13 +28,13 @@ public class Contracts {
 
     private List<Contract> contracts;
 
-    public Contract create(final Contract Contract) throws Exception {
-        Map conditions = ImmutableMap.of("deleteStatus", 0, "name", Contract.getName());
+    public Contract create(final Contract contract) throws Exception {
+        Map conditions = ImmutableMap.of("deleteStatus", 0, "name", contract.getName(),"providerId", contract.getProviderId());
         List<Contract> ContractList = contractPersistence.findByConditions(conditions);
         if (ContractList.size() > 0) {
             throw new ClientException("Contract已经存在,请核实你的数据.");
         }
-        return contractPersistence.create(Contract);
+        return contractPersistence.create(contract);
     }
 
     public Contract findById(Integer id) throws SQLException {
