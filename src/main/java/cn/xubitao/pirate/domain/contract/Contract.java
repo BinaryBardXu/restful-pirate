@@ -16,6 +16,8 @@ public class Contract {
     private String response;
     @DatabaseField(canBeNull = false)
     private String name;
+    @DatabaseField(canBeNull = false)
+    private String url;
     @DatabaseField
     private String desc;
     @DatabaseField(canBeNull = false)
@@ -77,5 +79,13 @@ public class Contract {
 
     public void setDeleteStatus(Integer deleteStatus) {
         this.deleteStatus = deleteStatus;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }
