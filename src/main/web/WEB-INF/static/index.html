@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../static/bootstrap/css/bootstrap-table.css">
     <link rel="stylesheet" href="../static/bootstrap/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/validator/css/bootstrapValidator.css">
     <link rel="stylesheet" href="../static/toastr/toastr.min.css">
     <link rel="stylesheet" href="../static/css/pirate.css">
     <link rel="stylesheet" href="../static/css/buttons.css">
@@ -13,6 +14,7 @@
     <script src="../static/bootstrap/js/bootstrap.js"></script>
     <script src="../static/bootstrap/js/bootstrap-table.js"></script>
     <script src="../static/bootstrap/js/buttons.js"></script>
+    <script src="../static/validator/js/bootstrapValidator.js"></script>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 </head>
 <script>
@@ -51,9 +53,65 @@
                 $('#contracts-table').bootstrapTable('load', contracts);
             }
         });
+        $('#create-contract-button').click(function () {
+            $('#create-contract-form').data('bootstrapValidator').resetForm(true);
+            $('#createContractsModel').modal();
+        });
         $('#contractsModel').modal();
+        $('#resetBtn').click(function () {
+            $('#create-contract-form').data('bootstrapValidator').resetForm(true);
+        });
+        $('#create-contract-form').bootstrapValidator({
+            live: 'enabled',
+            fields: {
+                name: {
+                    validators: {
+                        notEmpty: {
+                            message: '契约名称不可以为空'
+                        }
+                    }
+                },
+                url: {
+                    validators: {
+                        notEmpty: {
+                            message: 'url不可以为空'
+                        }
+                    }
+                },
+                request: {
+                    validators: {
+                        notEmpty: {
+                            message: '请求体不可以为空'
+                        }
+                    }
+                },
+                response: {
+                    validators: {
+                        notEmpty: {
+                            message: '响应体不可以为空'
+                        }
+                    }
+                },
+                desc: {}
+            }
+        });
     }
     function optionsFormatter(_links) {
+        var options = $("<div></div>");
+        var span = $("<span class='button-dropdown' data-buttons='dropdown'></span>");
+        var button = "<button class='button button-rounded'><i class='fa fa-bars'></i> 操作 </button>";
+        var ul = $("<ul class='button-dropdown-list'></ul>");
+        var deleteLink = $("<li><a class='pirate-link' onclick='confirmDeleteOption(\"" + Racoon.getLink(_links, "self") + "\")'>删除</a></li>");
+        var contractLink = $("<li><a class='pirate-link' onclick='openContractModel(\"" + Racoon.getLink(_links, "contracts") + "\")'>契约</a></li>");
+        ul.append(deleteLink);
+        ul.append(contractLink);
+
+        span.append(button);
+        span.append(ul);
+        options.append(span);
+        return options.html();
+    }
+    function contractsOptionsFormatter(_links) {
         var options = $("<div></div>");
         var span = $("<span class='button-dropdown' data-buttons='dropdown'></span>");
         var button = "<button class='button button-rounded'><i class='fa fa-bars'></i> 操作 </button>";
@@ -124,7 +182,7 @@
         </div>
     </div>
 </div>
-<!-- deleteProvidersModal -->
+<!-- contractsModel -->
 <div class="modal fade" id="contractsModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog modal-pirate" role="document">
         <div class="modal-content">
@@ -132,6 +190,11 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">契约</h4>
+            </div>
+            <div>
+                <div class="pirate-toolbar">
+                    <a id="create-contract-button" class="button button-pirate button-royal button-rounded">创建 </a>
+                </div>
             </div>
             <div class="pirate-table-container">
                 <table id="contracts-table" data-toggle="table">
@@ -141,12 +204,69 @@
                         <th data-field="request" data-align="center" data-width="25%">请求体</th>
                         <th data-field="response" data-align="center" data-width="25%">响应体</th>
                         <th data-field="desc" data-align="center" data-width="20%">描述</th>
-                        <th data-field="links" data-formatter="optionsFormatter" data-align="center" data-width="20%">
+                        <th data-field="links" data-formatter="contractsOptionsFormatter" data-align="center"
+                            data-width="20%">
                             Options
                         </th>
                     </tr>
                     </thead>
                 </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- createContractsModel -->
+<div class="modal fade" id="createContractsModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-pirate-middle" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">新的契约</h4>
+            </div>
+            <div class="pirate-form">
+                <form id="create-contract-form" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">名称</label>
+                        <div class="col-lg-4">
+                            <input type="text" class="form-control" name="name"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">URL</label>
+                        <div class="col-lg-5">
+                            <input type="text" class="form-control" name="url"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">请求体</label>
+                        <div class="col-lg-5">
+                            <input type="text" class="form-control" name="request"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">响应体</label>
+                        <div class="col-lg-5">
+                            <input type="text" class="form-control" name="response"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">描述</label>
+                        <div class="col-lg-5">
+                            <input type="text" class="form-control" name="desc"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-lg-9 col-lg-offset-3">
+                            <button type="submit" class="btn btn-primary" name="signup" value="Sign up">创建</button>
+                            <button type="button" class="btn btn-info" id="resetBtn">重置</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
