@@ -54,8 +54,9 @@
     <table id="table" data-toggle="table">
         <thead>
         <tr>
-            <th data-field="name" data-align="center" data-width="40%">系统名称</th>
-            <th data-field="version" data-align="center" data-width="40%">版本号</th>
+            <th data-field="name" data-align="center" data-width="25%">系统名称</th>
+            <th data-field="version" data-align="center" data-width="25%">版本号</th>
+            <th data-field="consumerKey" data-align="center" data-width="20%">ConsumerKey</th>
             <th data-field="links" data-formatter="optionsFormatter" data-align="center" data-width="20%">Options</th>
         </tr>
         </thead>
@@ -71,7 +72,7 @@
                         aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">提示</h4>
             </div>
-            <div class="modal-body">
+            <div id="modal-body" class="modal-body">
                 删除后其下的所有契约都将不可用,确认删除?
             </div>
             <div class="modal-footer">
@@ -100,11 +101,12 @@
                     <thead>
                     <tr>
                         <th data-field="name" data-align="center" data-width="10%">名称</th>
-                        <th data-field="request" data-align="center" data-width="25%">请求体</th>
-                        <th data-field="response" data-align="center" data-width="25%">响应体</th>
+                        <th data-field="url" data-align="center" data-width="20%">地址</th>
+                        <th data-field="request" data-align="center" data-width="20%">请求体</th>
+                        <th data-field="response" data-align="center" data-width="20%">响应体</th>
                         <th data-field="desc" data-align="center" data-width="20%">描述</th>
                         <th data-field="links" data-formatter="contractsOptionsFormatter" data-align="center"
-                            data-width="20%">
+                            data-width="10%">
                             Options
                         </th>
                     </tr>
@@ -128,41 +130,41 @@
                     <div class="form-group">
                         <label class="col-lg-3  control-label">名称</label>
                         <div class="col-lg-4">
-                            <input type="text" class="form-control" name="name"/>
+                            <input type="text" class="form-control" name="name" id="name"/>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-lg-3 control-label">URL</label>
                         <div class="col-lg-5">
-                            <input type="text" class="form-control" name="url"/>
+                            <input type="text" class="form-control" name="url" id="url"/>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-lg-3 control-label">请求体</label>
                         <div class="col-lg-5">
-                            <input type="text" class="form-control" name="request"/>
+                            <input type="text" class="form-control" name="request" id="request"/>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-lg-3 control-label">响应体</label>
                         <div class="col-lg-5">
-                            <input type="text" class="form-control" name="response"/>
+                            <input type="text" class="form-control" name="response" id="response"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-3 control-label">描述</label>
                         <div class="col-lg-5">
-                            <input type="text" class="form-control" name="desc"/>
+                            <input type="text" class="form-control" name="desc" id="desc"/>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-lg-9 col-lg-offset-3">
                             <button type="button" class="btn btn-default" id="resetBtn">重置</button>
-                            <button type="submit" class="btn btn-primary" name="signup" value="Sign up">创建</button>
+                            <button type="button" class="btn btn-primary" id="create-button">创建</button>
                         </div>
                     </div>
                 </form>
