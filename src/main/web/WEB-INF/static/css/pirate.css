@@ -1312,3 +1312,10 @@ h1[id] {
 {
     padding:6px;
 }
+.pirate-toolbar{
+    margin: 5px;
+    height: 35px;
+}
+.pirate-form{
+    margin: 5px;
+}
