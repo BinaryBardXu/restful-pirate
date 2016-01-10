@@ -116,55 +116,56 @@
         </div>
     </div>
 </div>
-<!-- createContractsModel -->
+
+!-- createContractsModel -->
 <div class="modal fade" id="createContractsModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog modal-pirate-middle" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">新的契约</h4>
+                <h4 class="modal-title">创建Contract</h4>
             </div>
             <div class="pirate-form">
                 <form id="create-contract-form" class="form-horizontal">
                     <div class="form-group">
                         <label class="col-lg-3  control-label">名称</label>
                         <div class="col-lg-4">
-                            <input type="text" class="form-control" name="name" id="name"/>
+                            <input type="text" class="form-control" name="name" id="contract-name"/>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-lg-3 control-label">URL</label>
                         <div class="col-lg-5">
-                            <input type="text" class="form-control" name="url" id="url"/>
+                            <input type="text" class="form-control" name="url" id="contract-url"/>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-lg-3 control-label">请求体</label>
                         <div class="col-lg-5">
-                            <input type="text" class="form-control" name="request" id="request"/>
+                            <input type="text" class="form-control" name="request" id="contract-request"/>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-lg-3 control-label">响应体</label>
                         <div class="col-lg-5">
-                            <input type="text" class="form-control" name="response" id="response"/>
+                            <input type="text" class="form-control" name="response" id="contract-response"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-3 control-label">描述</label>
                         <div class="col-lg-5">
-                            <input type="text" class="form-control" name="desc" id="desc"/>
+                            <input type="text" class="form-control" name="desc" id="contract-desc"/>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-lg-9 col-lg-offset-3">
-                            <button type="button" class="btn btn-default" id="resetBtn">重置</button>
-                            <button type="button" class="btn btn-primary" id="create-button">创建</button>
+                            <button type="button" class="btn btn-default" id="contract-resetBtn">重置</button>
+                            <button type="button" class="btn btn-primary" id="contract-create-button">创建</button>
                         </div>
                     </div>
                 </form>
@@ -172,5 +173,6 @@
         </div>
     </div>
 </div>
+
 </body>
 </html>
