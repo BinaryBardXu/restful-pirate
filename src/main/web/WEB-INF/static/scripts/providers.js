@@ -70,6 +70,8 @@ var Providers = {
         });
         $("#provider-create-button"). unbind();
         $("#provider-create-button").click(function () {
+            $('#provider-modal-title').html("创建Provider");
+            $("#provider-create-button"). text("创建");
             Providers.create(_link);
         });
     },
@@ -118,7 +120,7 @@ function openContractsModal(_link) {
     Contracts.init(_link);
 }
 
-function openUpdateModal(_link) {
+function openProviderUpdateModal(_link) {
     Racoon.restful({
         url: _link,
         success: function (_data) {
@@ -142,7 +144,7 @@ function optionsFormatter(_links) {
     var button = "<button class='button button-rounded'><i class='fa fa-bars'></i> 操作 </button>";
     var ul = $("<ul class='button-dropdown-list'></ul>");
     var contractLink = $("<li><a class='pirate-link' onclick='openContractsModal(\"" + Racoon.getLink(_links, "contracts") + "\")'>契约</a></li>");
-    var updateLink = $("<li><a class='pirate-link' onclick='openUpdateModal(\"" + Racoon.getLink(_links, "self") + "\")'>更新</a></li>");
+    var updateLink = $("<li><a class='pirate-link' onclick='openProviderUpdateModal(\"" + Racoon.getLink(_links, "self") + "\")'>更新</a></li>");
     var deleteLink = $("<li><a class='pirate-link' onclick='openConfirmDeleteModal(\"" + Racoon.getLink(_links, "self") + "\")'>删除</a></li>");
     ul.append(contractLink);
     ul.append(updateLink);
