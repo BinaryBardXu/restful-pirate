@@ -73,27 +73,13 @@ var Providers = {
             Providers.save(_link);
         });
     },
-    update: function (_link) {
-        Providers.setValidator();
-        var validResult = $('#create-provider-form').data('bootstrapValidator').validate().isValid();
-        if (!validResult) {
-            return;
-        }
-        var provider = {};
-        provider.name = $('#provider-name').val();
-        provider.version = $('#provider-version').val();
-        provider.consumerKey = $('#provider-consumerKey').val();
-        Racoon.restful({
-            url: _link,
-            type: "PUT",
-            data: provider,
-            success: function () {
-                $('#createProvidersModel').modal('hide');
-                Providers.loadProviders();
-            }
-        });
+    create: function (_link) {
+        Providers.save(_link, HttpType.POST);
     },
-    save: function (_link) {
+    update: function (_link) {
+        Providers.save(_link, HttpType.PUT);
+    },
+    save: function (_link, _type) {
         var validResult = $('#create-provider-form').data('bootstrapValidator').validate().isValid();
         if (!validResult) {
             return;
@@ -104,7 +90,7 @@ var Providers = {
         provider.consumerKey = $('#provider-consumerKey').val();
         Racoon.restful({
             url: _link,
-            type: "POST",
+            type: _type,
             data: provider,
             success: function () {
                 Providers.init();
