@@ -4,7 +4,9 @@
 
 var Providers = {
     init: function () {
+        this.bindCreateButton();
         this.loadProviders();
+        this.bindProvidersRefreshButton();
     },
     loadProviders: function () {
         Racoon.restful({
@@ -18,8 +20,75 @@ var Providers = {
                 $('#table').bootstrapTable('hideLoading');
             }
         })
+    },
+    bindCreateButton: function () {
+        $("#create-button-provider").unbind();
+        $("#create-button-provider").click(function () {
+            Providers.initModal(GlobalConfig.entrance);
+        });
+    },
+    bindProvidersRefreshButton: function () {
+        $("#providers-refresh-button").unbind();
+        $("#providers-refresh-button").click(function () {
+            Providers.loadProviders();
+        });
+    },
+    initModal: function (_link) {
+        $('#create-provider-form').bootstrapValidator({
+            live: 'enabled',
+            fields: {
+                name: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Provider名称不可以为空'
+                        }
+                    }
+                },
+                version: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Provider的版本号不可以为空'
+                        }
+                    }
+                },
+                consumerKey: {
+                    validators: {
+                        notEmpty: {
+                            message: 'consumerKey不可以为空'
+                        }
+                    }
+                }
+            }
+        });
+        $('#create-provider-form').data('bootstrapValidator').resetForm(true);
+        $('#createProvidersModel').modal();
+        $('#provider-resetBtn').click(function () {
+            $('#create-provider-form').data('bootstrapValidator').resetForm(true);
+        });
+        $("#provider-create-button"). unbind();
+        $("#provider-create-button").click(function () {
+            Providers.save(_link);
+        });
+    },
+    save: function (_link) {
+        var validResult = $('#create-provider-form').data('bootstrapValidator').validate().isValid();
+        if (!validResult) {
+            return;
+        }
+        var provider = {};
+        provider.name = $('#provider-name').val();
+        provider.version = $('#provider-version').val();
+        provider.consumerKey = $('#provider-consumerKey').val();
+        Racoon.restful({
+            url: _link,
+            type: "POST",
+            data: provider,
+            success: function () {
+                Providers.init();
+                $('#createProvidersModel').modal('hide');
+            }
+        });
     }
-
 };
 function openConfirmDeleteModal(_link) {
     $('#delete-button').unbind();

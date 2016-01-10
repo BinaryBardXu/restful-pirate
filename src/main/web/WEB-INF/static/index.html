@@ -40,11 +40,12 @@
 <div class="container pirate-container">
     <div id="toolbar">
         <div id="pirate-button">
-            <a class="button button-pirate button-royal button-rounded">创建 </a>
+            <a id="create-button-provider" class="button button-pirate button-royal button-rounded">创建</a>
         </div>
 
         <div id="pirate-refresh" class="pull-right">
-            <button class="btn btn-default pirate-refresh-button" type="button" name="refresh" title="Refresh"><i
+            <button id="providers-refresh-button" class="btn btn-default pirate-refresh-button" type="button"
+                    name="refresh" title="Refresh"><i
                     class="glyphicon glyphicon-refresh icon-refresh"></i></button>
         </div>
 
@@ -116,8 +117,51 @@
         </div>
     </div>
 </div>
+<!-- createProvidersModel -->
 
-!-- createContractsModel -->
+<div class="modal fade" id="createProvidersModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-pirate-middle" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 id="provider-modal-title" class="modal-title">创建Provider</h4>
+            </div>
+            <div class="pirate-form">
+                <form id="create-provider-form" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-lg-3  control-label">名称</label>
+                        <div class="col-lg-4">
+                            <input type="text" class="form-control" name="name" id="provider-name"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">版本号</label>
+                        <div class="col-lg-5">
+                            <input type="text" class="form-control" name="version" id="provider-version"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">consumerKey</label>
+                        <div class="col-lg-5">
+                            <input type="text" class="form-control" name="consumerKey" id="provider-consumerKey"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-lg-9 col-lg-offset-3">
+                            <button type="button" class="btn btn-default" id="provider-resetBtn">重置</button>
+                            <button type="button" class="btn btn-primary" id="provider-create-button">创建</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- createContractsModel -->
 <div class="modal fade" id="createContractsModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog modal-pirate-middle" role="document">
         <div class="modal-content">
@@ -173,6 +217,5 @@
         </div>
     </div>
 </div>
-
 </body>
 </html>
