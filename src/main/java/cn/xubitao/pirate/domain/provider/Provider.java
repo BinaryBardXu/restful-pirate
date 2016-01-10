@@ -24,7 +24,7 @@ public class Provider {
     @DatabaseField(canBeNull = false)
     private String consumerKey;
 
-    @DatabaseField(canBeNull = false)
+    @DatabaseField(defaultValue = "0")
     private Integer deleteStatus;
 
     public Integer getId() {
