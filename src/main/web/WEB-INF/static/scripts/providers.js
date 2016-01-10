@@ -115,7 +115,6 @@ function optionsFormatter(_links) {
     var ul = $("<ul class='button-dropdown-list'></ul>");
     var deleteLink = $("<li><a class='pirate-link' onclick='openConfirmDeleteModal(\"" + Racoon.getLink(_links, "self") + "\")'>删除</a></li>");
     var contractLink = $("<li><a class='pirate-link' onclick='openContractsModal(\"" + Racoon.getLink(_links, "contracts") + "\")'>契约</a></li>");
-    ul.append(deleteLink);
     ul.append(contractLink);
     ul.append(deleteLink);
 
