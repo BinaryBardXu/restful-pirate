@@ -4,9 +4,10 @@
 
 var Providers = {
     init: function () {
-        this.bindCreateButton();
-        this.loadProviders();
-        this.bindProvidersRefreshButton();
+        Providers.bindCreateButton();
+        Providers.setValidator();
+        Providers.loadProviders();
+        Providers.bindProvidersRefreshButton();
     },
     loadProviders: function () {
         Racoon.restful({
@@ -22,9 +23,10 @@ var Providers = {
         })
     },
     bindCreateButton: function () {
-        $("#create-button-provider").unbind();
-        $("#create-button-provider").click(function () {
-            Providers.initModal(GlobalConfig.entrance);
+        $("#create-provider-button").unbind();
+        $("#create-provider-button").click(function () {
+            $('#provider-modal-title').html("创建Provider");
+            Providers.bindCreateProviderButton(GlobalConfig.entrance);
         });
     },
     bindProvidersRefreshButton: function () {
@@ -61,17 +63,15 @@ var Providers = {
             }
         });
     },
-    initModal: function (_link) {
-        Providers.setValidator();
+    bindCreateProviderButton: function (_link) {
         $('#create-provider-form').data('bootstrapValidator').resetForm(true);
         $('#createOrUpdateProvidersModel').modal();
+        $("#provider-resetBtn"). unbind();
         $('#provider-resetBtn').click(function () {
             $('#create-provider-form').data('bootstrapValidator').resetForm(true);
         });
-        $("#provider-create-button"). unbind();
-        $("#provider-create-button").click(function () {
-            $('#provider-modal-title').html("创建Provider");
-            $("#provider-create-button"). text("创建");
+        $("#provider-save-button"). unbind();
+        $("#provider-save-button").click(function () {
             Providers.create(_link);
         });
     },
@@ -129,10 +129,9 @@ function openProviderUpdateModal(_link) {
             $('#provider-name').val(provider.name);
             $('#provider-version').val(provider.version);
             $('#provider-consumerKey').val(provider.consumerKey);
-            $("#provider-create-button"). text("保存");
-            $("#provider-create-button"). unbind();
+            $("#provider-save-button"). unbind();
             $('#createOrUpdateProvidersModel').modal();
-            $("#provider-create-button").click(function () {
+            $("#provider-save-button").click(function () {
                 Providers.update(_link);
             });
         }
