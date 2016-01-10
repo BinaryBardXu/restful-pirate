@@ -1,6 +1,8 @@
 package cn.xubitao.pirate.domain.provider;
 
 import cn.xubitao.dolphin.foundation.exceptions.ClientException;
+import cn.xubitao.pirate.domain.contract.Contracts;
+import cn.xubitao.pirate.persistence.contract.ContractPersistence;
 import cn.xubitao.pirate.persistence.provider.ProviderPersistence;
 import com.google.common.collect.ImmutableMap;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,8 @@ import java.util.Map;
 public class Providers {
     @Autowired
     private ProviderPersistence providerPersistence;
+    @Autowired
+    private Contracts contracts;
 
     public List<Provider> getProviders() {
         return providers;
@@ -51,6 +55,8 @@ public class Providers {
     }
 
     public int deleteById(Integer id) throws SQLException {
-        return providerPersistence.deleteById(id);
+        int deleteResult = providerPersistence.deleteById(id);
+        contracts.deleteByProviderId(id);
+        return deleteResult;
     }
 }

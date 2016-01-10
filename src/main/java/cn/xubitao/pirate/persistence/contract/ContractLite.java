@@ -53,6 +53,10 @@ public class ContractLite implements ContractPersistence {
         return getProjectDAO().executeRawNoArgs("update Contract set deleteStatus=1 where id=" + id);
     }
 
+    public int deleteByProviderId(Integer providerId) throws SQLException {
+        return getProjectDAO().executeRawNoArgs("update Contract set deleteStatus=1 where providerId=" + providerId);
+    }
+
     public Dao<Contract, Integer> getProjectDAO() {
         if (projectDAO == null) {
             projectDAO = dolphin.lite(Contract.class);
