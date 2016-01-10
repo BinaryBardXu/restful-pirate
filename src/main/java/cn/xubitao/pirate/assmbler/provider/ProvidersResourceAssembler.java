@@ -22,7 +22,7 @@ public class ProvidersResourceAssembler extends DolphinAssembler {
     }
 
     @Override
-    public RestResource toRestResource(Object domain, Integer... pathVariables) throws Exception {
+    public RestResource toRestResource(Object domain, Object... pathVariables) throws Exception {
         Providers providers = (Providers) domain;
         ProvidersResource providersResource = new ProvidersResource();
 
@@ -32,7 +32,7 @@ public class ProvidersResourceAssembler extends DolphinAssembler {
         }
         List<ResourceSupport> providerResources = buildResources(providers.getProviders(), new ProviderResourceAssembler(), pathVariables);
         providersResource.setProviders(providerResources);
-        providersResource.add(linkTo(methodOn(ProvidersController.class).loadAll()).withSelfRel());
+        providersResource.add(linkTo(methodOn(ProvidersController.class).loadAll((String) pathVariables[0])).withSelfRel());
         return providersResource;
     }
 }

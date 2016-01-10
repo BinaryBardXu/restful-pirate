@@ -16,7 +16,7 @@ public class Provider {
     @DatabaseField(generatedId = true)
     private Integer id;
 
-    @DatabaseField(canBeNull = false)
+    @DatabaseField(columnName = "name", canBeNull = false)
     private String name;
 
     @DatabaseField(canBeNull = false)

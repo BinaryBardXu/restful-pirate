@@ -45,8 +45,8 @@ public class Providers {
         return providerPersistence.findById(id);
     }
 
-    public Providers loadAll() throws SQLException {
-        return providerPersistence.loadAll();
+    public Providers loadAll(String keyword) throws SQLException {
+        return providerPersistence.loadAll(keyword);
     }
 
     public Provider update(Provider provider, Integer id) throws SQLException {

@@ -5,6 +5,7 @@ import cn.xubitao.pirate.domain.provider.Provider;
 import cn.xubitao.pirate.domain.provider.Providers;
 import com.google.common.collect.ImmutableMap;
 import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.stmt.QueryBuilder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -36,10 +37,13 @@ public class ProviderLite implements ProviderPersistence {
         return getProjectDAO().queryForFieldValues(conditions);
     }
 
-    public Providers loadAll() throws SQLException {
-        Map conditions = ImmutableMap.of( "deleteStatus", 0);
+    public Providers loadAll(String keyword) throws SQLException {
+        keyword = keyword == null ? "%%" : "%" + keyword + "%";
+        QueryBuilder<Provider, Integer> queryBuilder = getProjectDAO().queryBuilder();
+        queryBuilder.where().like("name", keyword).or().like("consumerKey", keyword).and().eq("deleteStatus", 0);
+
         Providers providers = new Providers();
-        providers.setProviders(getProjectDAO().queryForFieldValues(conditions));
+        providers.setProviders(queryBuilder.query());
         return providers;
     }
 

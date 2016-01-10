@@ -27,9 +27,9 @@ public class ProvidersController {
     private Providers providers;
 
     @RequestMapping(method = RequestMethod.GET)
-    public HttpEntity<ResourceSupport> loadAll() throws Exception {
-        Providers providerList = providers.loadAll();
-        return Response.build(providerList, new ProvidersResourceAssembler());
+    public HttpEntity<ResourceSupport> loadAll(@RequestParam(required = false) String keyword) throws Exception {
+        Providers providerList = providers.loadAll(keyword);
+        return Response.build(providerList, new ProvidersResourceAssembler(), keyword);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
