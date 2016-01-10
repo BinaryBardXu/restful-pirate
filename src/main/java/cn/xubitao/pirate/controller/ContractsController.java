@@ -39,6 +39,7 @@ public class ContractsController {
 
     @RequestMapping(value = "/providers/{providerId}/contracts/{id}", method = RequestMethod.PUT)
     public HttpEntity<ResourceSupport> update(@RequestBody Contract contract, @PathVariable Integer providerId, @PathVariable Integer id) throws Exception {
+        contract.setProviderId(providerId);
         Contract updatedContract = contracts.update(contract, id);
         return Response.build(updatedContract, new ContractResourceAssembler(), providerId);
     }
