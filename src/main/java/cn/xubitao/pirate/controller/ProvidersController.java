@@ -2,6 +2,7 @@ package cn.xubitao.pirate.controller;
 
 import cn.xubitao.dolphin.foundation.resource.RestResource;
 import cn.xubitao.dolphin.foundation.response.Response;
+import cn.xubitao.pirate.assmbler.contract.ContractResourceAssembler;
 import cn.xubitao.pirate.assmbler.provider.ProviderResourceAssembler;
 import cn.xubitao.pirate.assmbler.provider.ProvidersResourceAssembler;
 import cn.xubitao.pirate.domain.provider.Provider;
@@ -38,9 +39,9 @@ public class ProvidersController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity update(@RequestBody Provider provider, @PathVariable Integer id) throws Exception {
-        providers.update(provider, id);
-        return Response.ok();
+    public HttpEntity<ResourceSupport> update(@RequestBody Provider provider, @PathVariable Integer id) throws Exception {
+        Provider updatedProvider = providers.update(provider, id);
+        return Response.build(updatedProvider, new ProviderResourceAssembler());
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)

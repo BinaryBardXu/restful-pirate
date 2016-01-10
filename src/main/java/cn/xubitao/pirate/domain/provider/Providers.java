@@ -45,8 +45,9 @@ public class Providers {
         return providerPersistence.loadAll();
     }
 
-    public int update(Provider provider, Integer id) throws SQLException {
-        return providerPersistence.update(provider, id);
+    public Provider update(Provider provider, Integer id) throws SQLException {
+        providerPersistence.update(provider, id);
+        return providerPersistence.findById(id);
     }
 
     public int deleteById(Integer id) throws SQLException {
