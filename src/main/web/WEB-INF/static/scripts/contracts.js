@@ -14,10 +14,10 @@ var Contracts = {
             $('#createContractsModel').modal();
         });
         $('#contractsModel').modal();
-        $('#resetBtn').click(function () {
+        $('#contract-resetBtn').click(function () {
             $('#create-contract-form').data('bootstrapValidator').resetForm(true);
         });
-        $("#create-button").click(function () {
+        $("#contract-create-button").click(function () {
             Contracts.save(_link);
         });
         $('#create-contract-form').bootstrapValidator({
@@ -83,11 +83,11 @@ var Contracts = {
             return;
         }
         var contract = {};
-        contract.name = $('#name').val();
-        contract.url = $('#url').val();
-        contract.request = $('#request').val();
-        contract.response = $('#response').val();
-        contract.desc = $('#desc').val();
+        contract.name = $('#contract-name').val();
+        contract.url = $('#contract-url').val();
+        contract.request = $('#contract-request').val();
+        contract.response = $('#contract-response').val();
+        contract.desc = $('#contract-desc').val();
         Racoon.restful({
             url: _link,
             type: "POST",
