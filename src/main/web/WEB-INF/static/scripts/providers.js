@@ -64,7 +64,7 @@ var Providers = {
     initModal: function (_link) {
         Providers.setValidator();
         $('#create-provider-form').data('bootstrapValidator').resetForm(true);
-        $('#createProvidersModel').modal();
+        $('#createOrUpdateProvidersModel').modal();
         $('#provider-resetBtn').click(function () {
             $('#create-provider-form').data('bootstrapValidator').resetForm(true);
         });
@@ -95,8 +95,8 @@ var Providers = {
             type: _type,
             data: provider,
             success: function () {
-                Providers.init();
-                $('#createProvidersModel').modal('hide');
+                Providers.loadProviders();
+                $('#createOrUpdateProvidersModel').modal('hide');
             }
         });
     }
@@ -131,7 +131,7 @@ function openProviderUpdateModal(_link) {
             $('#provider-consumerKey').val(provider.consumerKey);
             $("#provider-create-button"). text("保存");
             $("#provider-create-button"). unbind();
-            $('#createProvidersModel').modal();
+            $('#createOrUpdateProvidersModel').modal();
             $("#provider-create-button").click(function () {
                 Providers.update(_link);
             });
