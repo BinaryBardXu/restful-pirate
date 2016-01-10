@@ -70,7 +70,7 @@ var Providers = {
         });
         $("#provider-create-button"). unbind();
         $("#provider-create-button").click(function () {
-            Providers.save(_link);
+            Providers.create(_link);
         });
     },
     create: function (_link) {
