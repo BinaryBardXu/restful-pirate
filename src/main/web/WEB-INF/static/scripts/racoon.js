@@ -6,7 +6,7 @@ var host = "http://localhost:8080";
 var Racoon = {
     restful: function (_options) {
         $.ajax({
-            type: _options.type || "GET",
+            type: _options.type || HttpType.GET,
             url: _options.url,
             dataType: _options.dataType || "json",
             async: _options.async || true,
@@ -20,16 +20,16 @@ var Racoon = {
             success: function (_data) {
                 toastr.clear();
                 toastr.remove();
-                if (this.type == "GET") {
+                if (this.type == HttpType.GET) {
                     toastr.success(' 加载成功!');
                 }
-                if (this.type == "POST") {
+                if (this.type == HttpType.POST) {
                     toastr.success(' 创建成功!');
                 }
-                if (this.type == "DELETE") {
+                if (this.type == HttpType.DELETE) {
                     toastr.success(' 删除成功!');
                 }
-                if (this.type == "PUT") {
+                if (this.type == HttpType.PUT) {
                     toastr.success(' 修改成功!');
                 }
 
@@ -43,7 +43,7 @@ var Racoon = {
                     }
                     $('#errorModel').modal();
                 }
-                if (XHR.status == 201) {
+                if (XHR.status > 200 && XHR.status < 300) {
                     _options.success();
                 }
             }
