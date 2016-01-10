@@ -6,6 +6,7 @@ import cn.xubitao.pirate.assmbler.contract.ContractResourceAssembler;
 import cn.xubitao.pirate.assmbler.contract.ContractsResourceAssembler;
 import cn.xubitao.pirate.domain.contract.Contract;
 import cn.xubitao.pirate.domain.contract.Contracts;
+import com.j256.ormlite.stmt.query.In;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.http.HttpEntity;

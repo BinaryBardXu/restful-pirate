@@ -22,18 +22,18 @@ public class ContractsResourceAssembler extends DolphinAssembler {
     }
 
     @Override
-    public RestResource toRestResource(Object domain, Integer... pathVariables) throws Exception {
+    public RestResource toRestResource(Object domain, Object... pathVariables) throws Exception {
         this.pathVariables = pathVariables;
         Contracts contracts = (Contracts) domain;
         ContractsResource contractsResource = new ContractsResource();
 
-        Link contractsLink = linkTo(methodOn(ContractsController.class).loadAll(pathVariables[0])).withRel("contracts");
+        Link contractsLink = linkTo(methodOn(ContractsController.class).loadAll((Integer) pathVariables[0])).withRel("contracts");
         if (contracts == null) {
             return RestResource.link(contractsLink);
         }
         List<ResourceSupport> contractResources = buildResources(contracts.getContracts(), new ContractResourceAssembler(), pathVariables);
         contractsResource.setContracts(contractResources);
-        contractsResource.add(linkTo(methodOn(ContractsController.class).loadAll(pathVariables[0])).withSelfRel());
+        contractsResource.add(linkTo(methodOn(ContractsController.class).loadAll((Integer) pathVariables[0])).withSelfRel());
         return contractsResource;
     }
 }
