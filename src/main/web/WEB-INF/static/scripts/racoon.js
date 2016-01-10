@@ -29,7 +29,7 @@ var Racoon = {
                 if (this.type == "DELETE") {
                     toastr.success(' 删除成功!');
                 }
-                if (this.type == "UPDATE") {
+                if (this.type == "PUT") {
                     toastr.success(' 修改成功!');
                 }
 
