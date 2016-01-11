@@ -24,4 +24,6 @@ public interface ContractPersistence {
     int deleteByProviderId(Integer providerId) throws SQLException;
 
     List<Contract> findByConditions(Map fieldValues) throws SQLException;
+
+    List<Contract> loadByConsumerKey(String consumerKey) throws SQLException;
 }

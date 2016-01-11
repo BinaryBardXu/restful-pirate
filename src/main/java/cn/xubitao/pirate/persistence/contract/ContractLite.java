@@ -3,8 +3,13 @@ package cn.xubitao.pirate.persistence.contract;
 import cn.xubitao.dolphin.sqllite.Dolphin;
 import cn.xubitao.pirate.domain.contract.Contract;
 import cn.xubitao.pirate.domain.contract.Contracts;
+import cn.xubitao.pirate.domain.provider.Provider;
 import com.google.common.collect.ImmutableMap;
 import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.dao.GenericRawResults;
+import com.j256.ormlite.dao.RawRowMapper;
+import com.j256.ormlite.stmt.ColumnArg;
+import com.j256.ormlite.stmt.QueryBuilder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -36,6 +41,14 @@ public class ContractLite implements ContractPersistence {
         return getProjectDAO().queryForFieldValues(conditions);
     }
 
+    public List<Contract> loadByConsumerKey(String consumerKey) throws SQLException {
+        QueryBuilder<Contract, Integer> queryBuilder = getProjectDAO().queryBuilder();
+        queryBuilder.where().eq("deleteStatus", 0);
+        QueryBuilder<Provider, Integer> providerQueryBuilder = getProviderDAO().queryBuilder();
+        providerQueryBuilder.where().eq("consumerKey", consumerKey).and().eq("deleteStatus", 0);
+        return queryBuilder.join(providerQueryBuilder).query();
+    }
+
     public Contracts loadAll(Integer providerId) throws SQLException {
         Map conditions = ImmutableMap.of("deleteStatus", 0, "providerId", providerId);
         Contracts Contracts = new Contracts();
@@ -62,5 +75,9 @@ public class ContractLite implements ContractPersistence {
             projectDAO = dolphin.lite(Contract.class);
         }
         return projectDAO;
+    }
+
+    public Dao<Provider, Integer> getProviderDAO() {
+        return dolphin.lite(Provider.class);
     }
 }
