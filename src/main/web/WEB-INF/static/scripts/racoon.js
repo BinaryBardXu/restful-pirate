@@ -56,6 +56,17 @@ var Racoon = {
                 return link.href;
             }
         }
+    },
+    isFirefoxBrowser: function () {
+        var Sys = {};
+        var ua = navigator.userAgent.toLowerCase();
+        var re = /(msie|firefox|chrome|opera|version).*?([\d.]+)/;
+        var m = ua.match(re);
+        Sys.browser = m[1].replace(/version/, "'safari");
+        Sys.ver = m[2];
+        if (Sys.browser != "firefox") {
+            window.location.href = "html/pleaseSwitchYourBrowser.html"
+        }
     }
 };
 
