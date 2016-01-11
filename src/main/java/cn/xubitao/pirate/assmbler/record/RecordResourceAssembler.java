@@ -7,6 +7,7 @@ import cn.xubitao.pirate.domain.record.Record;
 import cn.xubitao.pirate.resource.record.RecordResource;
 import org.springframework.hateoas.Link;
 
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 /**
