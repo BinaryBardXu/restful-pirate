@@ -19,9 +19,11 @@
     <script src="scripts/racoon.js"></script>
     <script src="scripts/providers.js"></script>
     <script src="scripts/contracts.js"></script>
+    <script src="scripts/records.js"></script>
 </head>
 <script>
     $(function () {
+        Racoon.isFirefoxBrowser();
         Providers.init();
     });
 
@@ -214,6 +216,33 @@
                         </div>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- recordsModel -->
+<div class="modal fade" id="recordsModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-pirate" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">记录</h4>
+            </div>
+            <div class="pirate-table-container">
+                <table id="records-table" data-toggle="table">
+                    <thead>
+                    <tr>
+                        <th data-field="url" data-align="center" data-width="20%">地址</th>
+                        <th data-field="request" data-align="center" data-width="20%">请求体</th>
+                        <th data-field="response" data-align="center" data-width="25%">响应体</th>
+                        <th data-field="consumerKey" data-align="center" data-width="20%">consumerKey</th>
+                        <th data-field="isHit" data-align="center" data-width="5%">isHit</th>
+                        <th data-field="createTime" data-align="center" data-width="10%">时间</th>
+                    </tr>
+                    </thead>
+                </table>
             </div>
         </div>
     </div>
