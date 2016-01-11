@@ -3,6 +3,7 @@ package cn.xubitao.pirate.domain.contract;
 import cn.xubitao.dolphin.foundation.exceptions.ClientException;
 import cn.xubitao.pirate.persistence.contract.ContractPersistence;
 import com.google.common.collect.ImmutableMap;
+import com.j256.ormlite.stmt.QueryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -60,5 +61,9 @@ public class Contracts {
 
     public int deleteByProviderId(Integer providerId) throws SQLException {
         return contractPersistence.deleteByProviderId(providerId);
+    }
+
+    public List<Contract> loadByConsumerKey(String consumerKey) throws SQLException {
+        return contractPersistence.loadByConsumerKey(consumerKey);
     }
 }
