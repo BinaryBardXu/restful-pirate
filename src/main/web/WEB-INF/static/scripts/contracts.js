@@ -143,7 +143,7 @@ function openContractUpdateModal(_selfLink, _contractLink) {
             $('#contract-response').val(contract.response);
             $('#contract-desc').val(contract.desc);
 
-            $("#contract-save-button"). unbind();
+            $("#contract-save-button").unbind();
             $("#contract-save-button").click(function () {
                 Contracts.update(_selfLink, _contractLink);
             });
@@ -156,9 +156,11 @@ function contractsOptionsFormatter(_links) {
     var span = $("<span class='button-dropdown' data-buttons='dropdown'></span>");
     var button = "<button class='button button-rounded'><i class='fa fa-bars'></i> 操作 </button>";
     var ul = $("<ul class='button-dropdown-list'></ul>");
+    var recordsLink = $("<li><a class='pirate-link' onclick='openRecordsModal(\"" + Racoon.getLink(_links, "records") + "\",\"" + Racoon.getLink(_links, "records") + "\")'>记录</a></li>");
     var updateLink = $("<li><a class='pirate-link' onclick='openContractUpdateModal(\"" + Racoon.getLink(_links, "self") + "\",\"" + Racoon.getLink(_links, "contracts") + "\")'>更新</a></li>");
     var deleteLink = $("<li><a class='pirate-link' onclick='openConfirmDeleteContractModal(\"" + Racoon.getLink(_links, "self") + "\",\"" + Racoon.getLink(_links, "contracts") + "\")'>删除</a></li>"
     );
+    ul.append(recordsLink);
     ul.append(updateLink);
     ul.append(deleteLink);
 
@@ -166,4 +168,8 @@ function contractsOptionsFormatter(_links) {
     span.append(ul);
     options.append(span);
     return options.html();
+}
+
+function openRecordsModal(_link) {
+    Records.init(_link);
 }
