@@ -1,6 +1,5 @@
 package cn.xubitao.pirate.domain.record;
 
-import cn.xubitao.dolphin.foundation.comparator.People;
 import cn.xubitao.dolphin.foundation.date.DateUtil;
 import cn.xubitao.pirate.domain.contract.Contract;
 import cn.xubitao.pirate.domain.contract.Contracts;
