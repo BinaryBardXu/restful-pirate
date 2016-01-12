@@ -1,8 +1,10 @@
 package cn.xubitao.pirate.domain.record;
 
 import cn.xubitao.dolphin.foundation.comparator.People;
+import cn.xubitao.dolphin.foundation.date.DateUtil;
 import cn.xubitao.pirate.domain.contract.Contract;
 import cn.xubitao.pirate.domain.contract.Contracts;
+import cn.xubitao.pirate.domain.record.matcher.Matcher;
 import cn.xubitao.pirate.persistence.record.RecordPersistence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,12 +18,13 @@ import java.util.List;
 @Service
 public class Records {
     public static final int IS_HIT = 1;
-    public static final int IS_NOT_HIT = 0;
     public static final int NOT_EXIST = -1;
     @Autowired
     private RecordPersistence recordPersistence;
     @Autowired
     private Contracts contracts;
+    @Autowired
+    private Matcher matcher;
 
     public List<Record> getRecords() {
         return Records;
@@ -35,19 +38,19 @@ public class Records {
 
     public Record create(final Record record) throws Exception {
         List<Contract> contractList = contracts.loadByConsumerKey(record.getConsumerKey());
+        record.setCreateTime(DateUtil.getNow());
         for (Contract contract : contractList) {
-            if (!contract.getUrl().equals(record.getUrl())) continue;
-            if (!People.compare(contract.getRequest(), record.getRequest())) continue;
-            if (!People.compare(contract.getResponse(), record.getResponse())) continue;
+            if (!matcher.match(contract, record)) continue;
             record.setContractId(contract.getId());
             record.setIsHit(IS_HIT);
             return recordPersistence.create(record);
         }
         record.setContractId(NOT_EXIST);
+        recordPersistence.create(record);
         return recordPersistence.create(record);
     }
 
-    public cn.xubitao.pirate.domain.record.Records loadAll(Integer contractId) throws SQLException {
-        return recordPersistence.loadAll(contractId);
+    public Records loadAll(Integer contractId, Integer isHit, String consumerKey) throws SQLException {
+        return recordPersistence.loadAll(contractId, isHit, consumerKey);
     }
 }
