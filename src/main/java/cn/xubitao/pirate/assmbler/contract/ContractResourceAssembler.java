@@ -3,6 +3,7 @@ package cn.xubitao.pirate.assmbler.contract;
 import cn.xubitao.dolphin.foundation.assmbler.DolphinAssembler;
 import cn.xubitao.dolphin.foundation.resource.RestResource;
 import cn.xubitao.pirate.controller.ContractsController;
+import cn.xubitao.pirate.controller.RecordsController;
 import cn.xubitao.pirate.domain.contract.Contract;
 import cn.xubitao.pirate.resource.contract.ContractResource;
 import org.springframework.hateoas.Link;
@@ -35,6 +36,7 @@ public class ContractResourceAssembler extends DolphinAssembler {
         contractResource.setDesc(contract.getDesc());
         contractResource.setUrl(contract.getUrl());
         contractResource.add(linkTo(methodOn(ContractsController.class).findById(contract.getProviderId(), contract.getId())).withSelfRel());
+        contractResource.add(linkTo(methodOn(RecordsController.class).loadAll(contract.getId(), null, null)).withRel("records"));
 
         contractResource.add(contractsLink);
         return contractResource;
