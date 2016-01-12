@@ -7,6 +7,7 @@ var Contracts = {
         Contracts.loadContracts(_link);
         Contracts.setValidator();
         Contracts.bindContractCreateButton(_link);
+        Contracts.bindJSONFormatButton();
     },
     bindContractCreateButton: function (_link) {
         $('#create-contract-button').click(function () {
@@ -26,6 +27,14 @@ var Contracts = {
         $("#contract-save-button").unbind();
         $("#contract-save-button").click(function () {
             Contracts.create(_link);
+        });
+    },
+    bindJSONFormatButton: function () {
+        $('.json-logo').each(function () {
+            $(this).unbind();
+            $(this).click(function () {
+                window.open("http://www.json.org.cn/tools/JSONEditorOnline/index.htm");
+            });
         });
     },
     setValidator: function () {
@@ -72,6 +81,7 @@ var Contracts = {
                 var contracts = _data.contracts;
                 $('#contracts-table').bootstrapTable('load', contracts);
                 $('#contracts-table').bootstrapTable('hideLoading');
+                $('[data-toggle="popover"]').popover();
             }
         });
     },
@@ -83,6 +93,7 @@ var Contracts = {
                 var contracts = _data.contracts;
                 $('#contracts-table').bootstrapTable('refresh', contracts);
                 $('#contracts-table').bootstrapTable('hideLoading');
+                $('[data-toggle="popover"]').popover();
             }
         });
     },
@@ -107,7 +118,7 @@ var Contracts = {
         Racoon.restful({
             url: _selfLink,
             type: _type,
-            data: contract,
+            data: JSON.stringify(contract),
             success: function () {
                 Contracts.loadContracts(_contractLink);
                 $('#createOrUpdateContractsModel').modal('hide');
@@ -172,4 +183,12 @@ function contractsOptionsFormatter(_links) {
 
 function openRecordsModal(_link) {
     Records.init(_link);
+}
+
+function requestAndResponseFormatter(_request) {
+    var requestContain = $("<div></div>");
+    var requestButton = $("<button type='button' animation='true' html='true' class='btn btn-default' data-toggle='popover' data-placement='bottom' >{...}</button>'");
+    requestButton.attr("data-content", Racoon.formatJson(_request));
+    requestContain.append(requestButton);
+    return requestContain.html();
 }
