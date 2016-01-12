@@ -24,7 +24,7 @@ public class RecordResourceAssembler extends DolphinAssembler {
         this.pathVariables = pathVariables;
         Record record = (Record) domain;
         RecordResource recordResource = new RecordResource();
-        Link recordsLink = linkTo(methodOn(RecordsController.class).loadAll(null)).withRel("records");
+        Link recordsLink = linkTo(methodOn(RecordsController.class).loadAll(null, null, null)).withRel("records");
         if (domain == null) {
             return RestResource.link(recordsLink);
         }
