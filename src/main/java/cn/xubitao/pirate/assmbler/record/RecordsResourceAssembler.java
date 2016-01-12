@@ -27,13 +27,14 @@ public class RecordsResourceAssembler extends DolphinAssembler {
         Records records = (Records) domain;
         RecordsResource recordsResource = new RecordsResource();
 
-        Link recordsLink = linkTo(methodOn(RecordsController.class).loadAll(null)).withRel("records");
+        Link recordsLink = linkTo(methodOn(RecordsController.class).loadAll(null, null, null)).withRel("records");
         if (records == null) {
             return RestResource.link(recordsLink);
         }
         List<ResourceSupport> contractResources = buildResources(records.getRecords(), new RecordResourceAssembler(), pathVariables);
         recordsResource.setRecords(contractResources);
-        recordsResource.add(linkTo(methodOn(RecordsController.class).loadAll((Integer) pathVariables[0])).withSelfRel());
+        recordsResource.add(recordsLink);
+        recordsResource.add(linkTo(methodOn(RecordsController.class).loadAll((Integer) pathVariables[0], (Integer) pathVariables[1], (String) pathVariables[2])).withSelfRel());
         return recordsResource;
     }
 }
