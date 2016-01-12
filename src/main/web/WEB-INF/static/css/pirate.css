@@ -1308,17 +1308,35 @@ h1[id] {
 .pirate-link {
     cursor: pointer;
 }
-.pirate-table-container
-{
-    padding:6px;
+
+.pirate-table-container {
+    padding: 6px;
 }
-.pirate-toolbar{
+
+.pirate-toolbar {
     margin: 5px;
     height: 35px;
 }
+
 .pirate-form {
     margin: 5px;
 }
-#confirmDeleteModel{
-z-index: 10000;
+
+#confirmDeleteModel {
+    z-index: 10000;
+}
+
+#missed-record-search-input {
+    width: 20%;
+    float: right;
+    margin-right: 20px;
+}
+.pirate-button {
+    float: right;
+    margin-left: 5px;
+    height: 34px;
+}
+
+.json-logo{
+    font-weight: 900;
 }
