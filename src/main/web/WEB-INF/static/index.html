@@ -41,27 +41,35 @@
 
 <div class="container pirate-container">
     <div id="toolbar">
-        <div id="pirate-button">
-            <a id="create-provider-button" class="button button-pirate button-royal button-rounded">创建</a>
+        <div class="pirate-button">
+            <button id="missed-record-button" class="btn btn-default pirate-button" type="button" title="未命中的记录">
+                <i class="glyphicon glyphicon-screenshot"></i>
+            </button>
+        </div>
+        <div class="pirate-button">
+            <a id="create-provider-button" class="btn button-pirate button-royal button-rounded">创建</a>
         </div>
 
         <div id="pirate-refresh" class="pull-right">
             <button id="providers-refresh-button" class="btn btn-default pirate-refresh-button" type="button"
-                    name="refresh" title="Refresh"><i
+                    name="refresh" title="重新载入"><i
                     class="glyphicon glyphicon-refresh icon-refresh"></i></button>
         </div>
 
-        <div id="pirate-search" class="pull-right search"><input class="form-control" placeholder="name/consumerKey"
+        <div id="pirate-search" class="pull-right search"><input id="providers-search-input" class="form-control"
+                                                                 placeholder="name/consumerKey↵"
                                                                  type="text">
         </div>
     </div>
     <table id="table" data-toggle="table">
         <thead>
         <tr>
-            <th data-field="name" data-align="center" data-width="25%">系统名称</th>
-            <th data-field="version" data-align="center" data-width="25%">版本号</th>
-            <th data-field="consumerKey" data-align="center" data-width="20%">ConsumerKey</th>
-            <th data-field="links" data-formatter="optionsFormatter" data-align="center" data-width="20%">Options</th>
+            <th data-field="name" data-valign="middle" data-align="center" data-width="25%">系统名称</th>
+            <th data-field="version" data-valign="middle" data-align="center" data-width="25%">版本号</th>
+            <th data-field="consumerKey" data-valign="middle" data-align="center" data-width="20%">ConsumerKey</th>
+            <th data-field="links" data-valign="middle" data-formatter="optionsFormatter" data-align="center"
+                data-width="20%">Options
+            </th>
         </tr>
         </thead>
     </table>
@@ -97,19 +105,27 @@
             </div>
             <div>
                 <div class="pirate-toolbar">
-                    <a id="create-contract-button" class="button button-pirate button-royal button-rounded">创建</a>
+                    <button type="button" class="btn btn-default button-pirate json-logo" title="JSON在线处理">
+                        { }
+                    </button>
+                    <a id="create-contract-button" class="btn button-pirate button-royal button-rounded">创建</a>
                 </div>
             </div>
             <div class="pirate-table-container">
                 <table id="contracts-table" data-toggle="table">
                     <thead>
                     <tr>
-                        <th data-field="name" data-align="center" data-width="10%">名称</th>
-                        <th data-field="url" data-align="center" data-width="20%">地址</th>
-                        <th data-field="request" data-align="center" data-width="20%">请求体</th>
-                        <th data-field="response" data-align="center" data-width="20%">响应体</th>
-                        <th data-field="desc" data-align="center" data-width="20%">描述</th>
-                        <th data-field="links" data-formatter="contractsOptionsFormatter" data-align="center"
+                        <th data-field="name" data-valign="middle" data-align="center" data-width="10%">名称</th>
+                        <th data-field="url" data-valign="middle" data-align="left" data-width="40%">地址</th>
+                        <th data-field="request" data-valign="middle" data-align="center" max-width="10%"
+                            data-formatter="requestAndResponseFormatter">请求体
+                        </th>
+                        <th data-field="response" data-valign="middle" data-align="center" data-width="10%"
+                            data-formatter="requestAndResponseFormatter">响应体
+                        </th>
+                        <th data-field="desc" data-valign="middle" data-align="center" data-width="20%">描述</th>
+                        <th data-field="links" data-valign="middle" data-formatter="contractsOptionsFormatter"
+                            data-align="center"
                             data-width="10%">
                             Options
                         </th>
@@ -194,6 +210,9 @@
                         <div class="col-lg-5">
                             <input type="text" class="form-control" name="request" id="contract-request"/>
                         </div>
+                        <button type="button" class="btn btn-default  json-logo" title="JSON在线处理">
+                            { }
+                        </button>
                     </div>
 
                     <div class="form-group">
@@ -201,6 +220,9 @@
                         <div class="col-lg-5">
                             <input type="text" class="form-control" name="response" id="contract-response"/>
                         </div>
+                        <button type="button" class="btn btn-default json-logo" title="JSON在线处理">
+                            { }
+                        </button>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-3 control-label">描述</label>
@@ -240,6 +262,44 @@
                         <th data-field="consumerKey" data-align="center" data-width="20%">consumerKey</th>
                         <th data-field="isHit" data-align="center" data-width="5%">isHit</th>
                         <th data-field="createTime" data-align="center" data-width="10%">时间</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- missedRecordsModel -->
+<div class="modal fade" id="missedRecordsModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-pirate" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">未命中的记录</h4>
+            </div>
+            <div>
+                <div class="pirate-toolbar">
+                    <input id="missed-record-search-input" class="form-control" placeholder="consumerKey↵"
+                           type="text">
+                </div>
+            </div>
+            <div class="pirate-table-container ">
+                <table id="missedRecords-table" data-toggle="table" >
+                    <thead>
+                    <tr>
+                        <th data-field="url" data-valign="middle" data-align="left" data-width="40%">地址</th>
+                        <th data-field="request" data-valign="middle" data-align="center" data-width="10%"
+                            data-formatter="requestAndResponseFormatter">请求体
+                        </th>
+                        <th data-field="response" data-valign="middle" data-align="center" data-width="10%"
+                            data-formatter="requestAndResponseFormatter">响应体
+                        </th>
+                        <th data-field="consumerKey" data-valign="middle" data-align="center" data-width="20%">
+                            consumerKey
+                        </th>
+                        <th data-field="createTime" data-valign="middle" data-align="center" data-width="10%">时间</th>
                     </tr>
                     </thead>
                 </table>
