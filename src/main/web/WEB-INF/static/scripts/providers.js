@@ -5,6 +5,7 @@
 var Providers = {
     init: function () {
         Providers.bindCreateButton();
+        Providers.bindSearchEvent();
         Providers.setValidator();
         Providers.loadProviders();
         Providers.bindProvidersRefreshButton();
@@ -19,6 +20,8 @@ var Providers = {
                 var providers = _data.providers;
                 $('#table').bootstrapTable('load', providers);
                 $('#table').bootstrapTable('hideLoading');
+                var missedRecordUrl = Racoon.getLink(_data.links, "missedRecords");
+                Providers.bindMissedRecordsButton(missedRecordUrl);
             }
         })
     },
@@ -29,10 +32,37 @@ var Providers = {
             Providers.bindCreateProviderButton(GlobalConfig.entrance);
         });
     },
+    bindMissedRecordsButton: function (_link) {
+        $("#missed-record-button").unbind();
+        $("#missed-record-button").click(function () {
+            Records.openMissedRecords(_link);
+        });
+    },
     bindProvidersRefreshButton: function () {
         $("#providers-refresh-button").unbind();
         $("#providers-refresh-button").click(function () {
             Providers.loadProviders();
+        });
+    },
+    bindSearchEvent: function () {
+        $('#providers-search-input').val("");
+        $('#providers-search-input').unbind();
+        $('#providers-search-input').bind("change", function () {
+            var consumerKeyOrName = $('#providers-search-input').val();
+            if (consumerKeyOrName == "name/consumerKey↵") return;
+            Providers.searchByKeyword(consumerKeyOrName);
+        });
+    },
+    searchByKeyword: function (_consumerKeyOrName) {
+        $('#records-table').bootstrapTable('showLoading');
+        Racoon.restful({
+            url: GlobalConfig.entrance,
+            data: {keyword: _consumerKeyOrName},
+            success: function (_data) {
+                var providers = _data.providers;
+                $('#table').bootstrapTable('load', providers);
+                $('#table').bootstrapTable('hideLoading');
+            }
         });
     },
     setValidator: function () {
@@ -93,7 +123,7 @@ var Providers = {
         Racoon.restful({
             url: _link,
             type: _type,
-            data: provider,
+            data: JSON.stringify(provider),
             success: function () {
                 Providers.loadProviders();
                 $('#createOrUpdateProvidersModel').modal('hide');
@@ -120,7 +150,7 @@ function openContractsModal(_link) {
     Contracts.init(_link);
 }
 
-function openProviderUpdateModal(_link) {
+functianjia; ion; openProviderUpdateModal(_link); {
     Racoon.restful({
         url: _link,
         success: function (_data) {
