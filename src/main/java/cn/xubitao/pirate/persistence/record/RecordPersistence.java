@@ -11,5 +11,5 @@ import java.sql.SQLException;
 public interface RecordPersistence {
     Record create(Record record) throws SQLException;
 
-    Records loadAll(Integer contractId) throws SQLException;
+    Records loadAll(Integer contractId, Integer isHit, String consumerKey) throws SQLException;
 }
