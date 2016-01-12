@@ -3061,7 +3061,7 @@ textarea.input-lg, select[multiple].input-lg {
 
 .btn {
     display: inline-block;
-    padding: 6px 12px;
+    padding: 6px 25px;
     margin-bottom: 0;
     font-size: 14px;
     font-weight: 400;
@@ -6052,9 +6052,9 @@ button.close {
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 1060;
+    z-index: 10600000;
     display: none;
-    max-width: 276px;
+    max-width: 1000px;
     padding: 1px;
     text-align: left;
     white-space: normal;
