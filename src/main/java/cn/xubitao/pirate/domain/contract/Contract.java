@@ -1,5 +1,6 @@
 package cn.xubitao.pirate.domain.contract;
 
+import cn.xubitao.pirate.domain.provider.Provider;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -22,6 +23,8 @@ public class Contract {
     private String desc;
     @DatabaseField(canBeNull = false)
     private Integer providerId;
+    @DatabaseField(canBeNull = false, foreign = true, columnName = "providerId")
+    private Provider provider;
     @DatabaseField(defaultValue = "0")
     private Integer deleteStatus;
 
@@ -87,5 +90,13 @@ public class Contract {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public Provider getProvider() {
+        return provider;
+    }
+
+    public void setProvider(Provider provider) {
+        this.provider = provider;
     }
 }
