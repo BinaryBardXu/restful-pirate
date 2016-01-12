@@ -150,7 +150,7 @@ function openContractsModal(_link) {
     Contracts.init(_link);
 }
 
-functianjia; ion; openProviderUpdateModal(_link); {
+function openProviderUpdateModal(_link) {
     Racoon.restful({
         url: _link,
         success: function (_data) {
