@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * Created by xubitao on 12/25/15.
  */
-public interface ContractPersistence {
+public interface ContractsPersistence {
     Contract create(Contract contract) throws SQLException;
 
     Contract findById(Integer id) throws SQLException;
