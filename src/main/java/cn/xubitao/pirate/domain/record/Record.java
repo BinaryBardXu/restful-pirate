@@ -11,7 +11,7 @@ public class Record {
     @DatabaseField(generatedId = true)
     private Integer id;
     @DatabaseField(canBeNull = false)
-    private String url;
+    private String server;
     @DatabaseField(canBeNull = false)
     private String request;
     @DatabaseField
@@ -35,12 +35,12 @@ public class Record {
         this.id = id;
     }
 
-    public String getUrl() {
-        return url;
+    public String getServer() {
+        return server;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setServer(String server) {
+        this.server = server;
     }
 
     public String getRequest() {
