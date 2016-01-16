@@ -20,6 +20,7 @@ public class Contracts {
     private ContractsPersistence contractsPersistence;
     @Autowired
     private ContractPersistence contractPersistence;
+    private List<Contract> contracts;
 
     public List<Contract> getContracts() {
         return contracts;
@@ -28,8 +29,6 @@ public class Contracts {
     public void setContracts(List<Contract> contracts) {
         this.contracts = contracts;
     }
-
-    private List<Contract> contracts;
 
     public Contract create(final Contract contract) throws Exception {
         Map conditions = ImmutableMap.of("deleteStatus", 0, "name", contract.getName(), "providerId", contract.getProvider().getId());
