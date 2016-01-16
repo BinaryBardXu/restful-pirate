@@ -31,6 +31,7 @@ public class ProviderResourceAssembler extends DolphinAssembler {
         providerResource.setName(provider.getName());
         providerResource.setVersion(provider.getVersion());
         providerResource.setConsumerKey(provider.getConsumerKey());
+        providerResource.setContractsCount(provider.getContractsCount());
         Link contractLink = linkTo(methodOn(ContractsController.class).loadAll(provider.getId())).withRel("contracts");
         providerResource.add(linkTo(methodOn(ProvidersController.class).findById(provider.getId())).withSelfRel());
         providerResource.add(contractLink);
