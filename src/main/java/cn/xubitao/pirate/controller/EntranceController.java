@@ -1,7 +1,7 @@
 package cn.xubitao.pirate.controller;
 
 import cn.xubitao.dolphin.foundation.response.Response;
-import cn.xubitao.pirate.assmbler.EntranceEntranceAssembler;
+import cn.xubitao.pirate.assmbler.EntranceResourceAssembler;
 import cn.xubitao.pirate.resource.EntranceResource;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.http.HttpEntity;
@@ -17,6 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class EntranceController {
     @RequestMapping(method = RequestMethod.GET)
     public HttpEntity<ResourceSupport> enter() throws Exception {
-        return Response.build(new EntranceResource(), new EntranceEntranceAssembler());
+        return Response.build(new EntranceResource(), new EntranceResourceAssembler());
     }
 }
