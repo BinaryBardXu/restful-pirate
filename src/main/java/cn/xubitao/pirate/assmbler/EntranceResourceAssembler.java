@@ -15,10 +15,10 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 /**
  * Created by xubitao on 12/30/15.
  */
-public class EntranceEntranceAssembler extends DolphinAssembler {
+public class EntranceResourceAssembler extends DolphinAssembler {
     public static final int MISSED = 0;
 
-    public EntranceEntranceAssembler() {
+    public EntranceResourceAssembler() {
         super(EntranceController.class, RestResource.class);
     }
 
