@@ -7,7 +7,7 @@ import cn.xubitao.dolphin.foundation.resource.RestResource;
  */
 public class RecordResource extends RestResource {
 
-    private String url;
+    private String server;
     private String request;
     private String response;
     private String consumerKey;
@@ -15,12 +15,12 @@ public class RecordResource extends RestResource {
     private Integer isHit;
     private String createTime;
 
-    public String getUrl() {
-        return url;
+    public String getServer() {
+        return server;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setServer(String server) {
+        this.server = server;
     }
 
     public String getRequest() {
