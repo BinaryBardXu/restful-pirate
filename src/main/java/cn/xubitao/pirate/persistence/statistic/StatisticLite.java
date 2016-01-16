@@ -44,21 +44,18 @@ public class StatisticLite implements StatisticPersistence {
         return recordDAO;
     }
 
-    @Override
     public long countProviders() throws SQLException {
         QueryBuilder queryBuilder = getProviderDAO().queryBuilder();
         queryBuilder.where().eq("deleteStatus", 0);
         return queryBuilder.countOf();
     }
 
-    @Override
     public long countContracts() throws SQLException {
         QueryBuilder queryBuilder = getContractDAO().queryBuilder();
         queryBuilder.where().eq("deleteStatus", 0);
         return queryBuilder.countOf();
     }
 
-    @Override
     public long countRecords(Integer isHit) throws SQLException {
         QueryBuilder<Record, Integer> queryBuilder = getRecordDAO().queryBuilder();
         Where where = queryBuilder.where();
