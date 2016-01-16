@@ -2,6 +2,7 @@ package cn.xubitao.pirate.assmbler.record;
 
 import cn.xubitao.dolphin.foundation.assmbler.DolphinAssembler;
 import cn.xubitao.dolphin.foundation.resource.RestResource;
+import cn.xubitao.pirate.controller.EntranceController;
 import cn.xubitao.pirate.controller.RecordsController;
 import cn.xubitao.pirate.domain.record.Records;
 import cn.xubitao.pirate.resource.record.RecordsResource;
@@ -28,11 +29,14 @@ public class RecordsResourceAssembler extends DolphinAssembler {
         RecordsResource recordsResource = new RecordsResource();
 
         Link recordsLink = linkTo(methodOn(RecordsController.class).loadAll(null, null, null)).withRel("records");
+        Link entranceLink = linkTo(EntranceController.class).withRel("entrance");
+
         if (records == null) {
             return RestResource.link(recordsLink);
         }
         List<ResourceSupport> contractResources = buildResources(records.getRecords(), new RecordResourceAssembler(), pathVariables);
         recordsResource.setRecords(contractResources);
+        recordsResource.add(entranceLink);
         recordsResource.add(recordsLink);
         recordsResource.add(linkTo(methodOn(RecordsController.class).loadAll((Integer) pathVariables[0], (Integer) pathVariables[1], (String) pathVariables[2])).withSelfRel());
         return recordsResource;
