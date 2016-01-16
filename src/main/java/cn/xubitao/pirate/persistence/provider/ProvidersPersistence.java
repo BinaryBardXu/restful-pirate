@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * Created by xubitao on 12/25/15.
  */
-public interface ProviderPersistence {
+public interface ProvidersPersistence {
     Provider create(Provider provider) throws SQLException;
 
     Provider findById(Integer id) throws SQLException;
