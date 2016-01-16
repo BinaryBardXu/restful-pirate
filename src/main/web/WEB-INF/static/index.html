@@ -2,6 +2,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
     <title>Pirate Contract Testing</title>
+    <link rel="shortcut icon" href="images/favicon.ico"/>
+    <link rel="bookmark" href="images/favicon.ico"/>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="bootstrap/css/bootstrap-table.css">
     <link rel="stylesheet" href="bootstrap/css/font-awesome.min.css">
@@ -15,16 +17,19 @@
     <script src="bootstrap/js/bootstrap-table.js"></script>
     <script src="bootstrap/js/buttons.js"></script>
     <script src="validator/js/bootstrapValidator.js"></script>
+    <script src="highcharts/highcharts.js"></script>
     <script src="scripts/GlobalConfig.js"></script>
     <script src="scripts/racoon.js"></script>
+    <script src="scripts/entrance.js"></script>
     <script src="scripts/providers.js"></script>
     <script src="scripts/contracts.js"></script>
     <script src="scripts/records.js"></script>
+    <script src="scripts/statistics.js"></script>
 </head>
 <script>
     $(function () {
         Racoon.isFirefoxBrowser();
-        Providers.init();
+        Entrance.init();
     });
 
 </script>
@@ -41,6 +46,11 @@
 
 <div class="container pirate-container">
     <div id="toolbar">
+        <div class="pirate-button">
+            <button id="stats-button" class="btn btn-default pirate-button" type="button" title="统计">
+                <i class="glyphicon glyphicon-stats"></i>
+            </button>
+        </div>
         <div class="pirate-button">
             <button id="missed-record-button" class="btn btn-default pirate-button" type="button" title="未命中的记录">
                 <i class="glyphicon glyphicon-screenshot"></i>
@@ -116,14 +126,16 @@
                     <thead>
                     <tr>
                         <th data-field="name" data-valign="middle" data-align="center" data-width="10%">名称</th>
-                        <th data-field="url" data-valign="middle" data-align="left" data-width="40%">地址</th>
+                        <th data-field="server" data-valign="middle" data-align="left" data-width="40%">服务</th>
                         <th data-field="request" data-valign="middle" data-align="center" max-width="10%"
                             data-formatter="requestAndResponseFormatter">请求体
+                        </th>
+                        <th data-field="excludeFields" data-valign="middle" data-align="center" data-width="15%">排除的字段
                         </th>
                         <th data-field="response" data-valign="middle" data-align="center" data-width="10%"
                             data-formatter="requestAndResponseFormatter">响应体
                         </th>
-                        <th data-field="desc" data-valign="middle" data-align="center" data-width="20%">描述</th>
+                        <th data-field="desc" data-valign="middle" data-align="center" data-width="15%">描述</th>
                         <th data-field="links" data-valign="middle" data-formatter="contractsOptionsFormatter"
                             data-align="center"
                             data-width="10%">
@@ -138,7 +150,8 @@
 </div>
 <!-- createProvidersModel -->
 
-<div class="modal fade" id="createOrUpdateProvidersModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="createOrUpdateProvidersModel" data-backdrop="static" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel">
     <div class="modal-dialog modal-pirate-middle" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -181,7 +194,8 @@
     </div>
 </div>
 <!-- createContractsModel -->
-<div class="modal fade" id="createOrUpdateContractsModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="createOrUpdateContractsModel" data-backdrop="static" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel">
     <div class="modal-dialog modal-pirate-middle" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -199,9 +213,9 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-lg-3 control-label">URL</label>
+                        <label class="col-lg-3 control-label">服务</label>
                         <div class="col-lg-5">
-                            <input type="text" class="form-control" name="url" id="contract-url"/>
+                            <input type="text" class="form-control" name="server" id="contract-server"/>
                         </div>
                     </div>
 
@@ -213,6 +227,14 @@
                         <button type="button" class="btn btn-default  json-logo" title="JSON在线处理">
                             { }
                         </button>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">排除的字段</label>
+                        <div class="col-lg-5">
+                            <input type="text" class="form-control" name="excludeFields"
+                                   id="contract-excludeFields" placeholder="多个时半角逗号隔开"/>
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -256,12 +278,20 @@
                 <table id="records-table" data-toggle="table">
                     <thead>
                     <tr>
-                        <th data-field="url" data-align="center" data-width="20%">地址</th>
-                        <th data-field="request" data-align="center" data-width="20%">请求体</th>
-                        <th data-field="response" data-align="center" data-width="25%">响应体</th>
-                        <th data-field="consumerKey" data-align="center" data-width="20%">consumerKey</th>
-                        <th data-field="isHit" data-align="center" data-width="5%">isHit</th>
-                        <th data-field="createTime" data-align="center" data-width="10%">时间</th>
+                        <th data-field="server" data-align="left" data-valign="middle" data-width="40%">服务</th>
+                        <th data-field="request" data-align="center" data-valign="middle" data-width="10%"
+                            data-formatter="requestAndResponseFormatter">请求体
+                        </th>
+                        <th data-field="response" data-align="center" data-valign="middle" data-width="10%"
+                            data-formatter="requestAndResponseFormatter">响应体
+                        </th>
+                        <th data-field="consumerKey" data-align="center" data-valign="middle" data-width="10%">
+                            consumerKey
+                        </th>
+                        <th data-field="isHit" data-align="center" data-valign="middle" data-width="10%"
+                            data-formatter="hitFormatter">命中
+                        </th>
+                        <th data-field="createTime" data-align="center" data-valign="middle" data-width="20%">时间</th>
                     </tr>
                     </thead>
                 </table>
@@ -286,10 +316,10 @@
                 </div>
             </div>
             <div class="pirate-table-container ">
-                <table id="missedRecords-table" data-toggle="table" >
+                <table id="missedRecords-table" data-toggle="table">
                     <thead>
                     <tr>
-                        <th data-field="url" data-valign="middle" data-align="left" data-width="40%">地址</th>
+                        <th data-field="server" data-valign="middle" data-align="left" data-width="40%">服务</th>
                         <th data-field="request" data-valign="middle" data-align="center" data-width="10%"
                             data-formatter="requestAndResponseFormatter">请求体
                         </th>
@@ -299,10 +329,67 @@
                         <th data-field="consumerKey" data-valign="middle" data-align="center" data-width="20%">
                             consumerKey
                         </th>
+                        <th data-field="isHit" data-align="center" data-valign="middle" data-width="10%"
+                            data-formatter="hitFormatter">命中
+                        </th>
+
                         <th data-field="createTime" data-valign="middle" data-align="center" data-width="10%">时间</th>
                     </tr>
                     </thead>
                 </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- statisticsModel -->
+<div class="modal fade" id="statisticsModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-pirate-statistics" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Statistics</h4>
+            </div>
+
+            <div class="pirate-statistics-container ">
+                <div class="statistics-item">
+                    <div class="statistics-item-ico"><span id="statistics-providers"
+                                                           class="glyphicon glyphicon-cloud "></span></div>
+                    <div class="statistics-item-desc">Providers总数</div>
+                    <div id="statistics-providers-count" class="statistics-item-count">加载中</div>
+                </div>
+
+                <div class="statistics-item">
+                    <div class="statistics-item-ico"><span id="statistics-contracts"
+                                                           class="glyphicon glyphicon-book"></span></div>
+                    <div class="statistics-item-desc">契约份数</div>
+                    <div id="statistics-contracts-count" class="statistics-item-count">加载中</div>
+                </div>
+
+                <div class="statistics-item">
+                    <div class="statistics-item-ico"><span id="statistics-records"
+                                                           class="glyphicon glyphicon-list"></span></div>
+                    <div class="statistics-item-desc">记录次数</div>
+                    <div id="statistics-records-count" class="statistics-item-count">加载中</div>
+                </div>
+
+                <div class="statistics-item">
+                    <div class="statistics-item-ico"><span id="statistics-hit-records"
+                                                           class="glyphicon glyphicon-ok"></span></div>
+                    <div class="statistics-item-desc">命中</div>
+                    <div id="statistics-hit-records-count" class="statistics-item-count">加载中</div>
+                </div>
+
+                <div class="statistics-item">
+                    <div class="statistics-item-ico"><span id="statistics-missed-records"
+                                                           class="glyphicon glyphicon-remove"></span></div>
+                    <div class="statistics-item-desc">未命中</div>
+                    <div id="statistics-missed-records-count" class="statistics-item-count">加载中</div>
+                </div>
+                <div id="statistics-chart">
+                    <div id="container"></div>
+                </div>
             </div>
         </div>
     </div>
