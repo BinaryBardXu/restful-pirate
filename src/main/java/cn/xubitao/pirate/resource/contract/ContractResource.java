@@ -14,6 +14,7 @@ public class ContractResource extends RestResource {
     private String server;
     private Integer providerId;
     private String excludeFields;
+    private long recordsCount;
 
     public String getName() {
         return name;
@@ -69,5 +70,13 @@ public class ContractResource extends RestResource {
 
     public void setExcludeFields(String excludeFields) {
         this.excludeFields = excludeFields;
+    }
+
+    public long getRecordsCount() {
+        return recordsCount;
+    }
+
+    public void setRecordsCount(long recordsCount) {
+        this.recordsCount = recordsCount;
     }
 }
