@@ -11,8 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class PirateMatcher implements Matcher {
     public boolean match(Contract contract, Record record) {
-        if (!contract.getUrl().equals(record.getUrl())) return false;
-        if (!People.compare(contract.getRequest(), record.getRequest())) return false;
-        return People.compare(contract.getResponse(), record.getResponse());
+        if (!contract.getServer().equals(record.getServer())) return false;
+        return People.compare(contract.getRequest(), record.getRequest(), contract.getExcludeFields());
     }
 }
