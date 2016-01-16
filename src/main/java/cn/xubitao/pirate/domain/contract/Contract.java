@@ -1,14 +1,19 @@
 package cn.xubitao.pirate.domain.contract;
 
 import cn.xubitao.pirate.domain.provider.Provider;
+import cn.xubitao.pirate.persistence.contract.ContractPersistence;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
+
+import java.sql.SQLException;
 
 /**
  * Created by xubitao on 1/6/16.
  */
 @DatabaseTable(tableName = "contract")
 public class Contract {
+    private ContractPersistence contractPersistence;
+
     @DatabaseField(generatedId = true)
     private Integer id;
 
@@ -35,6 +40,8 @@ public class Contract {
 
     @DatabaseField(canBeNull = false, foreign = true, columnName = "providerId")
     private Provider provider;
+
+    private long recordsCount;
 
     public Integer getId() {
         return id;
@@ -106,5 +113,21 @@ public class Contract {
 
     public void setProvider(Provider provider) {
         this.provider = provider;
+    }
+
+    public long getRecordsCount() {
+        return recordsCount;
+    }
+
+    public void setRecordsCount(long recordsCount) {
+        this.recordsCount = recordsCount;
+    }
+
+    public void setContractPersistence(ContractPersistence contractPersistence) {
+        this.contractPersistence = contractPersistence;
+    }
+
+    public void countRecords() throws SQLException {
+        this.recordsCount = contractPersistence.countRecords(id);
     }
 }
