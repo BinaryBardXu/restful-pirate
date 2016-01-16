@@ -6,9 +6,6 @@ import cn.xubitao.pirate.domain.contract.Contracts;
 import cn.xubitao.pirate.domain.provider.Provider;
 import com.google.common.collect.ImmutableMap;
 import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.dao.GenericRawResults;
-import com.j256.ormlite.dao.RawRowMapper;
-import com.j256.ormlite.stmt.ColumnArg;
 import com.j256.ormlite.stmt.QueryBuilder;
 import org.springframework.stereotype.Service;
 
@@ -21,28 +18,28 @@ import java.util.Map;
  * Created by xubitao on 12/25/15.
  */
 @Service
-public class ContractLite implements ContractPersistence {
+public class ContractsLite implements ContractsPersistence {
     @Resource
     private Dolphin dolphin;
-    private Dao<Contract, Integer> projectDAO;
+    private Dao<Contract, Integer> contractDAO;
 
     public Contract create(Contract contract) throws SQLException {
-        getProjectDAO().create(contract);
+        getContractDAO().create(contract);
         return contract;
     }
 
     public Contract findById(Integer id) throws SQLException {
         Map conditions = ImmutableMap.of("id", id, "deleteStatus", 0);
-        List<Contract> result = getProjectDAO().queryForFieldValues(conditions);
+        List<Contract> result = getContractDAO().queryForFieldValues(conditions);
         return result.size() > 0 ? result.get(0) : null;
     }
 
     public List<Contract> findByConditions(Map conditions) throws SQLException {
-        return getProjectDAO().queryForFieldValues(conditions);
+        return getContractDAO().queryForFieldValues(conditions);
     }
 
     public List<Contract> loadByConsumerKey(String consumerKey) throws SQLException {
-        QueryBuilder<Contract, Integer> queryBuilder = getProjectDAO().queryBuilder();
+        QueryBuilder<Contract, Integer> queryBuilder = getContractDAO().queryBuilder();
         queryBuilder.where().eq("deleteStatus", 0);
         QueryBuilder<Provider, Integer> providerQueryBuilder = getProviderDAO().queryBuilder();
         providerQueryBuilder.where().eq("consumerKey", consumerKey).and().eq("deleteStatus", 0);
@@ -50,31 +47,32 @@ public class ContractLite implements ContractPersistence {
     }
 
     public Contracts loadAll(Integer providerId) throws SQLException {
-        Map conditions = ImmutableMap.of("deleteStatus", 0, "providerId", providerId);
+        QueryBuilder<Contract, Integer> queryBuilder = getContractDAO().queryBuilder();
+        queryBuilder.where().eq("deleteStatus", 0).and().eq("providerId", providerId);
         Contracts Contracts = new Contracts();
-        Contracts.setContracts(getProjectDAO().queryForFieldValues(conditions));
+        Contracts.setContracts(queryBuilder.orderBy("id", false).query());
         return Contracts;
     }
 
     public Contract update(Contract contract, Integer id) throws Exception {
         contract.setId(id);
-        getProjectDAO().update(contract);
+        getContractDAO().update(contract);
         return findById(id);
     }
 
     public int deleteById(Integer id) throws SQLException {
-        return getProjectDAO().executeRawNoArgs("update Contract set deleteStatus=1 where id=" + id);
+        return getContractDAO().executeRawNoArgs("update Contract set deleteStatus=1 where id=" + id);
     }
 
     public int deleteByProviderId(Integer providerId) throws SQLException {
-        return getProjectDAO().executeRawNoArgs("update Contract set deleteStatus=1 where providerId=" + providerId);
+        return getContractDAO().executeRawNoArgs("update Contract set deleteStatus=1 where providerId=" + providerId);
     }
 
-    public Dao<Contract, Integer> getProjectDAO() {
-        if (projectDAO == null) {
-            projectDAO = dolphin.lite(Contract.class);
+    public Dao<Contract, Integer> getContractDAO() {
+        if (contractDAO == null) {
+            contractDAO = dolphin.lite(Contract.class);
         }
-        return projectDAO;
+        return contractDAO;
     }
 
     public Dao<Provider, Integer> getProviderDAO() {
