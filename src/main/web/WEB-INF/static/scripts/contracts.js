@@ -168,12 +168,12 @@ function openContractUpdateModal(_selfLink, _contractLink) {
         }
     })
 }
-function contractsOptionsFormatter(_links) {
+function contractsOptionsFormatter(_links, _row) {
     var options = $("<div></div>");
     var span = $("<span class='button-dropdown' data-buttons='dropdown'></span>");
     var button = "<button class='button button-rounded'><i class='fa fa-bars'></i> 操作 </button>";
     var ul = $("<ul class='button-dropdown-list'></ul>");
-    var recordsLink = $("<li><a class='pirate-link' onclick='openRecordsModal(\"" + Racoon.getLink(_links, "records") + "\")'>记录</a></li>");
+    var recordsLink = $("<li><a class='pirate-link' onclick='openRecordsModal(\"" + Racoon.getLink(_links, "records") + "\")'>记录 <span class='badge'>" + _row.recordsCount + "</span></a></li>");
     var updateLink = $("<li><a class='pirate-link' onclick='openContractUpdateModal(\"" + Racoon.getLink(_links, "self") + "\",\"" + Racoon.getLink(_links, "contracts") + "\")'>更新</a></li>");
     var deleteLink = $("<li><a class='pirate-link' onclick='openConfirmDeleteContractModal(\"" + Racoon.getLink(_links, "self") + "\",\"" + Racoon.getLink(_links, "contracts") + "\")'>删除</a></li>"
     );
