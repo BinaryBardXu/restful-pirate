@@ -2,7 +2,6 @@ package cn.xubitao.pirate.controller;
 
 import cn.xubitao.dolphin.foundation.resource.RestResource;
 import cn.xubitao.dolphin.foundation.response.Response;
-import cn.xubitao.pirate.assmbler.contract.ContractResourceAssembler;
 import cn.xubitao.pirate.assmbler.provider.ProviderResourceAssembler;
 import cn.xubitao.pirate.assmbler.provider.ProvidersResourceAssembler;
 import cn.xubitao.pirate.domain.provider.Provider;
