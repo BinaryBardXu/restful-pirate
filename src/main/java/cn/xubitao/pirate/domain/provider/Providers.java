@@ -2,8 +2,8 @@ package cn.xubitao.pirate.domain.provider;
 
 import cn.xubitao.dolphin.foundation.exceptions.ClientException;
 import cn.xubitao.pirate.domain.contract.Contracts;
-import cn.xubitao.pirate.persistence.contract.ContractPersistence;
 import cn.xubitao.pirate.persistence.provider.ProviderPersistence;
+import cn.xubitao.pirate.persistence.provider.ProvidersPersistence;
 import com.google.common.collect.ImmutableMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +17,8 @@ import java.util.Map;
  */
 @Service
 public class Providers {
+    @Autowired
+    private ProvidersPersistence providersPersistence;
     @Autowired
     private ProviderPersistence providerPersistence;
     @Autowired
@@ -34,28 +36,36 @@ public class Providers {
 
     public Provider create(final Provider provider) throws Exception {
         Map conditions = ImmutableMap.of("name", provider.getName(), "version", provider.getVersion());
-        List<Provider> providerList = providerPersistence.findByConditions(conditions);
+        List<Provider> providerList = providersPersistence.findByConditions(conditions);
         if (providerList.size() > 0) {
             throw new ClientException("Provider已经存在,请核实你的数据.");
         }
-        return providerPersistence.create(provider);
+        return providersPersistence.create(provider);
     }
 
     public Provider findById(Integer id) throws SQLException {
-        return providerPersistence.findById(id);
+        Provider provider = providersPersistence.findById(id);
+        provider.setProviderPersistence(providerPersistence);
+        provider.countContracts();
+        return provider;
     }
 
     public Providers loadAll(String keyword) throws SQLException {
-        return providerPersistence.loadAll(keyword);
+        Providers providers = providersPersistence.loadAll(keyword);
+        for (Provider provider : providers.getProviders()) {
+            provider.setProviderPersistence(providerPersistence);
+            provider.countContracts();
+        }
+        return providers;
     }
 
     public Provider update(Provider provider, Integer id) throws SQLException {
-        providerPersistence.update(provider, id);
-        return providerPersistence.findById(id);
+        providersPersistence.update(provider, id);
+        return providersPersistence.findById(id);
     }
 
     public int deleteById(Integer id) throws SQLException {
-        int deleteResult = providerPersistence.deleteById(id);
+        int deleteResult = providersPersistence.deleteById(id);
         contracts.deleteByProviderId(id);
         return deleteResult;
     }
