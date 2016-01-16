@@ -1,4 +1,4 @@
-package cn.xubitao.pirate;
+package cn.xubitao.pirate.assmbler;
 
 import cn.xubitao.dolphin.foundation.assmbler.DolphinAssembler;
 import cn.xubitao.dolphin.foundation.resource.RestResource;
