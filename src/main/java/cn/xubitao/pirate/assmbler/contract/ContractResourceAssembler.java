@@ -32,7 +32,6 @@ public class ContractResourceAssembler extends DolphinAssembler {
         contractResource.setName(contract.getName());
         contractResource.setRequest(contract.getRequest());
         contractResource.setResponse(contract.getResponse());
-        contractResource.setProviderId(contract.getProviderId());
         contractResource.setDesc(contract.getDesc());
         contractResource.setServer(contract.getServer());
         contractResource.setExcludeFields(contract.getExcludeFields());
