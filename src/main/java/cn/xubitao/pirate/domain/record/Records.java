@@ -25,6 +25,7 @@ public class Records {
     private Contracts contracts;
     @Autowired
     private Matcher matcher;
+    private List<Record> Records;
 
     public List<Record> getRecords() {
         return Records;
@@ -33,8 +34,6 @@ public class Records {
     public void setRecords(List<Record> Records) {
         this.Records = Records;
     }
-
-    private List<Record> Records;
 
     public Record create(final Record record) throws Exception {
         List<Contract> contractList = contracts.loadByConsumerKey(record.getConsumerKey());
