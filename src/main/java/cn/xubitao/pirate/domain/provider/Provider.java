@@ -3,8 +3,6 @@ package cn.xubitao.pirate.domain.provider;
 import cn.xubitao.pirate.persistence.provider.ProviderPersistence;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 
@@ -13,6 +11,7 @@ import java.sql.SQLException;
  */
 @DatabaseTable(tableName = "provider")
 public class Provider {
+    private ProviderPersistence providerPersistence;
     @DatabaseField(generatedId = true)
     private Integer id;
 
@@ -21,11 +20,14 @@ public class Provider {
 
     @DatabaseField(canBeNull = false)
     private String version;
+
     @DatabaseField(canBeNull = false)
     private String consumerKey;
 
     @DatabaseField(defaultValue = "0")
     private Integer deleteStatus;
+
+    private long contractsCount;
 
     public Integer getId() {
         return id;
@@ -65,5 +67,21 @@ public class Provider {
 
     public void setConsumerKey(String consumerKey) {
         this.consumerKey = consumerKey;
+    }
+
+    public long getContractsCount() {
+        return contractsCount;
+    }
+
+    public void setContractsCount(Integer contractsCount) {
+        this.contractsCount = contractsCount;
+    }
+
+    public void countContracts() throws SQLException {
+        this.contractsCount = providerPersistence.countContract(id);
+    }
+
+    public void setProviderPersistence(ProviderPersistence providerPersistence) {
+        this.providerPersistence = providerPersistence;
     }
 }
