@@ -1331,12 +1331,96 @@ h1[id] {
     float: right;
     margin-right: 20px;
 }
+
 .pirate-button {
     float: right;
     margin-left: 5px;
     height: 34px;
 }
 
-.json-logo{
+.json-logo {
     font-weight: 900;
+}
+
+.pirate-hit {
+    color: green;
+}
+
+.pirate-missed {
+    color: red;
+}
+
+.statistics-item {
+    width: 18%;
+    background: #FFF none repeat scroll 0% 0%;
+    height: 100px;
+    margin: 1%;
+    padding: 2px;
+    float: left;
+}
+
+.statistics-item-ico {
+    float: left;
+    width: 30%;
+    height: 100%;
+    text-align: center;
+    line-height: -moz-block-height;
+    font-size: 30px;
+}
+
+.statistics-item-ico span {
+    line-height: -moz-block-height;
+    display: inline;
+}
+
+.statistics-item-count {
+    float: right;
+    clear: right;
+    width: 55%;
+    text-align: right;
+    font-size: 23px;
+    padding-right: 15px;
+    font-weight: 700;
+}
+
+.statistics-item-desc {
+    float: right;
+    width: 55%;
+    padding-right: 15px;
+    text-align: right;
+    padding-top: 10px;
+    color: gray;
+}
+
+.pirate-statistics-container {
+    background-color: #ECEAEA;
+    padding: 5px;
+    height: 100%;
+}
+
+#statistics-providers {
+    color: #563D7C;
+}
+
+#statistics-contracts {
+    color: #1C75BF;
+}
+
+#statistics-missed-records {
+    color: red;
+}
+
+#statistics-hit-records {
+    color: green;
+}
+
+#statistics-chart {
+    width: 100%;
+    height: 80%;
+    margin: 1%;
+    float: left;
+}
+
+#container {
+
 }
