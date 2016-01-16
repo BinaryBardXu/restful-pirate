@@ -23,6 +23,7 @@ public class Providers {
     private ProviderPersistence providerPersistence;
     @Autowired
     private Contracts contracts;
+    private List<Provider> providers;
 
     public List<Provider> getProviders() {
         return providers;
@@ -31,8 +32,6 @@ public class Providers {
     public void setProviders(List<Provider> providers) {
         this.providers = providers;
     }
-
-    private List<Provider> providers;
 
     public Provider create(final Provider provider) throws Exception {
         Map conditions = ImmutableMap.of("name", provider.getName(), "version", provider.getVersion());
