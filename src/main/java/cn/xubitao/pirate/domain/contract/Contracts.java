@@ -1,6 +1,7 @@
 package cn.xubitao.pirate.domain.contract;
 
 import cn.xubitao.dolphin.foundation.exceptions.ClientException;
+import cn.xubitao.pirate.persistence.contract.ContractPersistence;
 import cn.xubitao.pirate.persistence.contract.ContractsPersistence;
 import com.google.common.collect.ImmutableMap;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ import java.util.Map;
 public class Contracts {
     @Autowired
     private ContractsPersistence contractsPersistence;
+    @Autowired
+    private ContractPersistence contractPersistence;
 
     public List<Contract> getContracts() {
         return contracts;
@@ -42,7 +45,12 @@ public class Contracts {
     }
 
     public Contracts loadAll(Integer providerId) throws SQLException {
-        return contractsPersistence.loadAll(providerId);
+        Contracts contracts = contractsPersistence.loadAll(providerId);
+        for (Contract contract : contracts.getContracts()) {
+            contract.setContractPersistence(contractPersistence);
+            contract.countRecords();
+        }
+        return contracts;
     }
 
     public Contract update(Contract contract, Integer id) throws Exception {
