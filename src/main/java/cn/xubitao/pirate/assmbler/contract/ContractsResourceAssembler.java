@@ -1,41 +1,39 @@
-package cn.xubitao.pirate.assmbler.provider;
+package cn.xubitao.pirate.assmbler.contract;
 
 import cn.xubitao.dolphin.foundation.assmbler.DolphinAssembler;
 import cn.xubitao.dolphin.foundation.resource.RestResource;
 import cn.xubitao.pirate.controller.ContractsController;
-import cn.xubitao.pirate.controller.ProvidersController;
-import cn.xubitao.pirate.domain.provider.Provider;
-import cn.xubitao.pirate.resource.provider.ProviderResource;
+import cn.xubitao.pirate.domain.contract.Contracts;
+import cn.xubitao.pirate.resource.contract.ContractsResource;
 import org.springframework.hateoas.Link;
+import org.springframework.hateoas.ResourceSupport;
+
+import java.util.List;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 /**
- * Created by xubitao on 12/30/15.
+ * Created by xubitao on 1/1/16.
  */
-public class ProviderResourceAssembler extends DolphinAssembler {
-
-    public ProviderResourceAssembler() {
-        super(ProvidersController.class, RestResource.class);
+public class ContractsResourceAssembler extends DolphinAssembler {
+    public ContractsResourceAssembler() {
+        super(ContractsController.class, RestResource.class);
     }
 
     @Override
     public RestResource toRestResource(Object domain, Object... pathVariables) throws Exception {
-        Provider provider = (Provider) domain;
-        ProviderResource providerResource = new ProviderResource();
-        Link providersLink = linkTo(ProvidersController.class).withRel("providers");
-        if (domain == null) {
-            return RestResource.link(providersLink);
+        this.pathVariables = pathVariables;
+        Contracts contracts = (Contracts) domain;
+        ContractsResource contractsResource = new ContractsResource();
+
+        Link contractsLink = linkTo(methodOn(ContractsController.class).loadAll((Integer) pathVariables[0])).withRel("contracts");
+        if (contracts == null) {
+            return RestResource.link(contractsLink);
         }
-        providerResource.setName(provider.getName());
-        providerResource.setVersion(provider.getVersion());
-        providerResource.setConsumerKey(provider.getConsumerKey());
-        providerResource.setContractsCount(provider.getContractsCount());
-        Link contractLink = linkTo(methodOn(ContractsController.class).loadAll(provider.getId())).withRel("contracts");
-        providerResource.add(linkTo(methodOn(ProvidersController.class).findById(provider.getId())).withSelfRel());
-        providerResource.add(contractLink);
-        providerResource.add(providersLink);
-        return providerResource;
+        List<ResourceSupport> contractResources = buildResources(contracts.getContracts(), new ContractResourceAssembler(), pathVariables);
+        contractsResource.setContracts(contractResources);
+        contractsResource.add(linkTo(methodOn(ContractsController.class).loadAll((Integer) pathVariables[0])).withSelfRel());
+        return contractsResource;
     }
 }
