@@ -5934,6 +5934,14 @@ button.close {
         margin-top: 5%;
     }
 }
+
+@media (min-width: 500px) {
+    .modal-pirate-statistics {
+        width: 60%;
+        margin-top: 5%;
+        height: 50%;
+    }
+}
 .tooltip {
     position: absolute;
     z-index: 1070;
