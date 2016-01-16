@@ -28,7 +28,7 @@ public class RecordResourceAssembler extends DolphinAssembler {
         if (domain == null) {
             return RestResource.link(recordsLink);
         }
-        recordResource.setUrl(record.getUrl());
+        recordResource.setServer(record.getServer());
         recordResource.setRequest(record.getRequest());
         recordResource.setResponse(record.getResponse());
         recordResource.setConsumerKey(record.getConsumerKey());
