@@ -4,7 +4,7 @@ import cn.xubitao.dolphin.foundation.date.DateUtil;
 import cn.xubitao.pirate.domain.contract.Contract;
 import cn.xubitao.pirate.domain.contract.Contracts;
 import cn.xubitao.pirate.domain.record.matcher.Matcher;
-import cn.xubitao.pirate.persistence.record.RecordPersistence;
+import cn.xubitao.pirate.persistence.record.RecordsPersistence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +18,9 @@ import java.util.List;
 public class Records {
     public static final int IS_HIT = 1;
     public static final int NOT_EXIST = -1;
+    private static final Integer MISSED = 0;
     @Autowired
-    private RecordPersistence recordPersistence;
+    private RecordsPersistence recordsPersistence;
     @Autowired
     private Contracts contracts;
     @Autowired
@@ -41,15 +42,16 @@ public class Records {
         for (Contract contract : contractList) {
             if (!matcher.match(contract, record)) continue;
             record.setContractId(contract.getId());
+            record.setResponse(contract.getResponse());
             record.setIsHit(IS_HIT);
-            return recordPersistence.create(record);
+            return recordsPersistence.create(record);
         }
+        record.setIsHit(MISSED);
         record.setContractId(NOT_EXIST);
-        recordPersistence.create(record);
-        return recordPersistence.create(record);
+        return recordsPersistence.create(record);
     }
 
     public Records loadAll(Integer contractId, Integer isHit, String consumerKey) throws SQLException {
-        return recordPersistence.loadAll(contractId, isHit, consumerKey);
+        return recordsPersistence.loadAll(contractId, isHit, consumerKey);
     }
 }
