@@ -11,22 +11,30 @@ import com.j256.ormlite.table.DatabaseTable;
 public class Contract {
     @DatabaseField(generatedId = true)
     private Integer id;
+
     @DatabaseField(canBeNull = false)
     private String request;
+
     @DatabaseField(canBeNull = false)
     private String response;
+
     @DatabaseField(canBeNull = false)
     private String name;
+
     @DatabaseField(canBeNull = false)
-    private String url;
+    private String server;
+
     @DatabaseField
     private String desc;
-    @DatabaseField(canBeNull = false)
-    private Integer providerId;
-    @DatabaseField(canBeNull = false, foreign = true, columnName = "providerId")
-    private Provider provider;
+
+    @DatabaseField(defaultValue = "")
+    private String excludeFields;
+
     @DatabaseField(defaultValue = "0")
     private Integer deleteStatus;
+
+    @DatabaseField(canBeNull = false, foreign = true, columnName = "providerId")
+    private Provider provider;
 
     public Integer getId() {
         return id;
@@ -50,14 +58,6 @@ public class Contract {
 
     public void setDesc(String desc) {
         this.desc = desc;
-    }
-
-    public Integer getProviderId() {
-        return providerId;
-    }
-
-    public void setProviderId(Integer providerId) {
-        this.providerId = providerId;
     }
 
     public String getRequest() {
@@ -84,12 +84,20 @@ public class Contract {
         this.deleteStatus = deleteStatus;
     }
 
-    public String getUrl() {
-        return url;
+    public String getServer() {
+        return server;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setServer(String server) {
+        this.server = server;
+    }
+
+    public String getExcludeFields() {
+        return excludeFields;
+    }
+
+    public void setExcludeFields(String excludeFields) {
+        this.excludeFields = excludeFields;
     }
 
     public Provider getProvider() {
