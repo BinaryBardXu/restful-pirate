@@ -4,8 +4,13 @@
 
 var Records = {
     init: function (_link) {
-        Records.loadRecords(_link);
-        $('#recordsModel').modal();
+        Records.bindMissedRecordsButton(_link);
+    },
+    bindMissedRecordsButton: function (_link) {
+        $("#missed-record-button").unbind();
+        $("#missed-record-button").click(function () {
+            Records.openMissedRecords(_link);
+        });
     },
     loadRecords: function (_link) {
         $('#records-table').bootstrapTable('showLoading');
@@ -16,6 +21,7 @@ var Records = {
                 $('#records-table').bootstrapTable('load', contracts);
                 $('#records-table').bootstrapTable('hideLoading');
                 $('[data-toggle="popover"]').popover();
+                $("#recordsModel").modal();
             }
         });
     },
@@ -70,36 +76,10 @@ var Records = {
         });
     }
 };
-function openConfirmDeleteContractModal(_selfLink, _contractsLink) {
-    $('#modal-body').html("确定要删除?");
-    $('#delete-button').unbind();
-    $('#delete-button').click(function () {
-        Racoon.restful({
-            url: _selfLink,
-            type: 'DELETE',
-            success: function () {
-                $('#confirmDeleteModel').modal('hide');
-                Records.loadRecords(_contractsLink);
-            }
-        })
-    });
-    $('#confirmDeleteModel').modal();
-}
-function dddFormatter(_links) {
-    var options = $("<div></div>");
-    var span = $("<span class='button-dropdown' data-buttons='dropdown'></span>");
-    var button = "<button class='button button-rounded'><i class='fa fa-bars'></i> 操作 </button>";
-    var ul = $("<ul class='button-dropdown-list'></ul>");
-    var recordsLink = $("<li><a class='pirate-link' onclick='openContractUpdateModal(\"" + Racoon.getLink(_links, "self") + "\",\"" + Racoon.getLink(_links, "records") + "\")'>记录</a></li>");
-    var updateLink = $("<li><a class='pirate-link' onclick='openContractUpdateModal(\"" + Racoon.getLink(_links, "self") + "\",\"" + Racoon.getLink(_links, "contracts") + "\")'>更新</a></li>");
-    var deleteLink = $("<li><a class='pirate-link' onclick='openConfirmDeleteContractModal(\"" + Racoon.getLink(_links, "self") + "\",\"" + Racoon.getLink(_links, "contracts") + "\")'>删除</a></li>"
-    );
-    ul.append(recordsLink);
-    ul.append(updateLink);
-    ul.append(deleteLink);
 
-    span.append(button);
-    span.append(ul);
-    options.append(span);
-    return options.html();
+function hitFormatter(_hit) {
+    if (_hit == 1) {
+        return "<span class='glyphicon glyphicon-ok-sign pirate-hit' ></span>";
+    }
+    return "<span class='glyphicon glyphicon-remove-sign pirate-missed' ></span>";
 }

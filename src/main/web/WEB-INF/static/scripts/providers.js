@@ -3,16 +3,19 @@
  */
 
 var Providers = {
-    init: function () {
+    url: "",
+    init: function (_link) {
+        Providers.url = _link;
+        Providers.loadProviders();
+
         Providers.bindCreateButton();
         Providers.bindSearchEvent();
         Providers.setValidator();
-        Providers.loadProviders();
         Providers.bindProvidersRefreshButton();
     },
     loadProviders: function () {
         Racoon.restful({
-            url: GlobalConfig.entrance,
+            url: Providers.url,
             before: function () {
                 $('#table').bootstrapTable('showLoading');
             },
@@ -20,8 +23,6 @@ var Providers = {
                 var providers = _data.providers;
                 $('#table').bootstrapTable('load', providers);
                 $('#table').bootstrapTable('hideLoading');
-                var missedRecordUrl = Racoon.getLink(_data.links, "missedRecords");
-                Providers.bindMissedRecordsButton(missedRecordUrl);
             }
         })
     },
@@ -30,12 +31,6 @@ var Providers = {
         $("#create-provider-button").click(function () {
             $('#provider-modal-title').html("创建Provider");
             Providers.bindCreateProviderButton(GlobalConfig.entrance);
-        });
-    },
-    bindMissedRecordsButton: function (_link) {
-        $("#missed-record-button").unbind();
-        $("#missed-record-button").click(function () {
-            Records.openMissedRecords(_link);
         });
     },
     bindProvidersRefreshButton: function () {
@@ -56,7 +51,7 @@ var Providers = {
     searchByKeyword: function (_consumerKeyOrName) {
         $('#records-table').bootstrapTable('showLoading');
         Racoon.restful({
-            url: GlobalConfig.entrance,
+            url: Providers.url,
             data: {keyword: _consumerKeyOrName},
             success: function (_data) {
                 var providers = _data.providers;
@@ -93,7 +88,7 @@ var Providers = {
             }
         });
     },
-    bindCreateProviderButton: function (_link) {
+    bindCreateProviderButton: function () {
         $('#create-provider-form').data('bootstrapValidator').resetForm(true);
         $('#createOrUpdateProvidersModel').modal();
         $("#provider-resetBtn"). unbind();
@@ -102,7 +97,7 @@ var Providers = {
         });
         $("#provider-save-button"). unbind();
         $("#provider-save-button").click(function () {
-            Providers.create(_link);
+            Providers.create(Providers.url);
         });
     },
     create: function (_link) {
@@ -167,12 +162,12 @@ function openProviderUpdateModal(_link) {
         }
     })
 }
-function optionsFormatter(_links) {
+function optionsFormatter(_links, _row) {
     var options = $("<div></div>");
     var span = $("<span class='button-dropdown' data-buttons='dropdown'></span>");
     var button = "<button class='button button-rounded'><i class='fa fa-bars'></i> 操作 </button>";
     var ul = $("<ul class='button-dropdown-list'></ul>");
-    var contractLink = $("<li><a class='pirate-link' onclick='openContractsModal(\"" + Racoon.getLink(_links, "contracts") + "\")'>契约</a></li>");
+    var contractLink = $("<li><a class='pirate-link' onclick='openContractsModal(\"" + Racoon.getLink(_links, "contracts") + "\")'>契约 <span class='badge'>" + _row.contractsCount + "</span></a></li>");
     var updateLink = $("<li><a class='pirate-link' onclick='openProviderUpdateModal(\"" + Racoon.getLink(_links, "self") + "\")'>更新</a></li>");
     var deleteLink = $("<li><a class='pirate-link' onclick='openConfirmDeleteModal(\"" + Racoon.getLink(_links, "self") + "\")'>删除</a></li>");
     ul.append(contractLink);
