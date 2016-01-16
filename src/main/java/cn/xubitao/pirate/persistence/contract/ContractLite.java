@@ -28,6 +28,5 @@ public class ContractLite implements ContractPersistence {
     public long countRecords(Integer id) throws SQLException {
         QueryBuilder queryBuilder = getRecordDAO().queryBuilder();
         return queryBuilder.where().eq("contractId", id).and().eq("deleteStatus", 0).countOf();
-
     }
 }
