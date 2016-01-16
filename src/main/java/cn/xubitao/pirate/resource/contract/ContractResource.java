@@ -28,16 +28,16 @@ public class ContractResource extends RestResource {
         return desc;
     }
 
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
     public String getServer() {
         return server;
     }
 
     public void setServer(String server) {
         this.server = server;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
     }
 
     public Integer getProviderId() {
