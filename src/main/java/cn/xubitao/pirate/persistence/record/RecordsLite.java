@@ -15,17 +15,17 @@ import java.sql.SQLException;
  * Created by xubitao on 12/25/15.
  */
 @Service
-public class RecordLite implements RecordPersistence {
+public class RecordsLite implements RecordsPersistence {
     @Resource
     private Dolphin dolphin;
-    private Dao<Record, Integer> projectDAO;
+    private Dao<Record, Integer> recordDAO;
 
     public Record create(Record record) throws SQLException {
-        return getProjectDAO().createIfNotExists(record);
+        return getRecordDAO().createIfNotExists(record);
     }
 
     public Records loadAll(Integer contractId, Integer isHit, String consumerKey) throws SQLException {
-        QueryBuilder<Record, Integer> queryBuilder = getProjectDAO().queryBuilder();
+        QueryBuilder<Record, Integer> queryBuilder = getRecordDAO().queryBuilder();
         Where where = queryBuilder.where();
         where.eq("deleteStatus", 0);
         if (contractId != null) {
@@ -44,10 +44,10 @@ public class RecordLite implements RecordPersistence {
         return records;
     }
 
-    public Dao<Record, Integer> getProjectDAO() {
-        if (projectDAO == null) {
-            projectDAO = dolphin.lite(Record.class);
+    public Dao<Record, Integer> getRecordDAO() {
+        if (recordDAO == null) {
+            recordDAO = dolphin.lite(Record.class);
         }
-        return projectDAO;
+        return recordDAO;
     }
 }
