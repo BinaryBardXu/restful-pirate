@@ -2,7 +2,7 @@
 契约测试解决方案。
 
 入口：
-```http://localhost:8080/entrance
+```http://localhost:8080/entrance```
 
 ```
     {
