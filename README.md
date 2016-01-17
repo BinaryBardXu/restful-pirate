@@ -1,6 +1,9 @@
 ##restful-pirate
 契约测试解决方案。
-
+pirate采用spring-hateoas目前数据库采用SQLLITE.使用时需要在pirate.properities中配置sqllite.dbpath, 比如：
+``` 
+sqllite.dbpath=/Users/xubitao/Documents/products/Pirate/sqllite/pirate.db
+```
 API入口：http://localhost:8080/entrance
 
 ```
