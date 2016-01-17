@@ -15,7 +15,7 @@ pirate技术上采用spring-hateoas，数据库采用SQLLITE.目前，pirate只�
 sqllite.dbpath=/Users/xubitao/Documents/products/Pirate/sqllite/pirate.db
 ```
 
-3、在scripts中的GlobalConfig里配置entrance地址
+3、在scripts中的GlobalConfig里配置entrance地址， 比如：
 
 ![](https://github.com/xubitao/readme/blob/master/src/main/java/cn/xubitao/readme/images/globalConfig_entrance.png?raw=true)  
 
