@@ -3,7 +3,10 @@
 pirate采用spring-hateoas目前数据库采用SQLLITE.
 
 ##安装方法
-1、下载[dolphin](https://github.com/xubitao/dolphin).pirate中的众多依赖都在dolphin，所以请务必先下载dolphin，并install到本地。
+1、下载[dolphin](https://github.com/xubitao/dolphin).
+
+    pirate中的众多依赖都在dolphin，所以请务必先下载dolphin，并install到本地。
+
 2、配置pirate.properities中的sqllite.dbpath, 比如：
 ```
 sqllite.dbpath=/Users/xubitao/Documents/products/Pirate/sqllite/pirate.db
