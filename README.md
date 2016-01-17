@@ -2,7 +2,8 @@
 契约测试解决方案。
 
 入口：
-```http://localhost:8080/entrance```
+http://localhost:8080/entrance
+
 ```
     {
         "description": "这里是契约测试平台的入口，请参照links选择你的操作。",
