@@ -1,4 +1,4 @@
-# restful-pirate
+##restful-pirate
 契约测试解决方案。
 
 API入口：http://localhost:8080/entrance
@@ -28,3 +28,6 @@ API入口：http://localhost:8080/entrance
     }
 ```
 
+页面入口：http://localhost:8080/static/index.html
+
+![](https://github.com/xubitao/readme/blob/master/src/main/java/cn/xubitao/readme/images/index.png?raw=true)  
