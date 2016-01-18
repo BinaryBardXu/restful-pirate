@@ -4481,6 +4481,47 @@
         }
     };
 }(window.jQuery));
+
+(function ($) {
+    $.fn.bootstrapValidator.i18n.notJSON = $.extend($.fn.bootstrapValidator.i18n.notJSON || {}, {
+        'default': '这不是一个有效的JSON格式'
+    });
+
+    $.fn.bootstrapValidator.validators.notJSON = {
+        enableByHtml5: function ($field) {
+            var required = $field.attr('required') + '';
+            return ('required' === required || 'true' === required);
+        },
+
+        /**
+         * Check if input value is empty or not
+         *
+         * @param {BootstrapValidator} validator The validator plugin instance
+         * @param {jQuery} $field Field element
+         * @param {Object} options
+         * @returns {Boolean}
+         */
+        validate: function (validator, $field, options) {
+            try {
+                var json = $field.val();
+                // begin formatting...
+                if (typeof json !== 'string') {
+                    // make sure we start with the JSON as a string
+                    json = JSON.stringify(json);
+                } else {
+                    // is already a string, so parse and re-stringify in order to remove extra whitespace
+                    json = JSON.parse(json);
+                    json = JSON.stringify(json);
+                }
+            } catch (e) {
+                return false;
+            }
+
+            return true;
+        }
+    };
+}(window.jQuery));
+
 (function ($) {
     $.fn.bootstrapValidator.i18n.numeric = $.extend($.fn.bootstrapValidator.i18n.numeric || {}, {
         'default': 'Please enter a valid float number'
