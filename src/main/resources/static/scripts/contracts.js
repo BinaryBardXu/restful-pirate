@@ -60,9 +60,7 @@ var Contracts = {
                         notEmpty: {
                             message: '请求体不可以为空'
                         },
-                        notJSON: {
-
-                        }
+                        notJSON: {}
                     }
                 },
                 response: {
@@ -70,9 +68,7 @@ var Contracts = {
                         notEmpty: {
                             message: '响应体不可以为空'
                         },
-                        notJSON: {
-
-                        }
+                        notJSON: {}
                     }
                 },
                 desc: {}
