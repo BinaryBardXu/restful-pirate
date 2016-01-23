@@ -3,13 +3,11 @@ package cn.xubitao.pirate.domain.contract;
 import cn.xubitao.dolphin.foundation.exceptions.ClientException;
 import cn.xubitao.pirate.persistence.contract.ContractPersistence;
 import cn.xubitao.pirate.persistence.contract.ContractsPersistence;
-import com.google.common.collect.ImmutableMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by xubitao on 12/25/15.
@@ -31,12 +29,12 @@ public class Contracts {
     }
 
     public Contract create(final Contract contract) throws Exception {
-        Map conditions = ImmutableMap.of("deleteStatus", 0, "name", contract.getName(), "providerId", contract.getProvider().getId());
-        List<Contract> ContractList = contractsPersistence.findByConditions(conditions);
+        List<Contract> ContractList = contractsPersistence.findByConditions(contract);
         if (ContractList.size() > 0) {
             throw new ClientException("Contract已经存在,请核实你的数据.");
         }
-        return contractsPersistence.create(contract);
+        contractsPersistence.create(contract);
+        return contractsPersistence.findById(contract.getId());
     }
 
     public Contract findById(Integer id) throws SQLException {
@@ -44,7 +42,8 @@ public class Contracts {
     }
 
     public Contracts loadAll(Integer providerId) throws SQLException {
-        Contracts contracts = contractsPersistence.loadAll(providerId);
+        Contracts contracts = new Contracts();
+        contracts.setContracts(contractsPersistence.loadAll(providerId));
         for (Contract contract : contracts.getContracts()) {
             contract.setContractPersistence(contractPersistence);
             contract.countRecords();
@@ -52,13 +51,13 @@ public class Contracts {
         return contracts;
     }
 
-    public Contract update(Contract contract, Integer id) throws Exception {
-        Map conditions = ImmutableMap.of("deleteStatus", 0, "name", contract.getName());
-        List<Contract> contracts = contractsPersistence.findByConditions(conditions);
-        if (contracts.size() > 0 && contracts.get(0).getId() != id) {
+    public Contract update(Contract contract) throws Exception {
+        Boolean isRedundancy = contractsPersistence.checkRedundancy(contract);
+        if (isRedundancy) {
             throw new ClientException("Contract已经存在,请核实你的数据.");
         }
-        return contractsPersistence.update(contract, id);
+        contractsPersistence.update(contract);
+        return contractsPersistence.findById(contract.getId());
     }
 
     public int deleteById(Integer id) throws SQLException {
