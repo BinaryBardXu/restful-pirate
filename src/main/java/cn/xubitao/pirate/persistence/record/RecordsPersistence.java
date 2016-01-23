@@ -1,15 +1,17 @@
 package cn.xubitao.pirate.persistence.record;
 
 import cn.xubitao.pirate.domain.record.Record;
-import cn.xubitao.pirate.domain.record.Records;
+import org.springframework.stereotype.Repository;
 
-import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by xubitao on 12/25/15.
  */
+@Repository
 public interface RecordsPersistence {
-    Record create(Record record) throws SQLException;
+    Record create(Record record);
 
-    Records loadAll(Integer contractId, Integer isHit, String consumerKey) throws SQLException;
+    List<Record> loadAll(Map record);
 }
