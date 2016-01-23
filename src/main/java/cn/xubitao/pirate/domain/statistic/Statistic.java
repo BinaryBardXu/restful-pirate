@@ -4,7 +4,6 @@ import cn.xubitao.pirate.persistence.statistic.StatisticPersistence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -89,7 +88,7 @@ public class Statistic {
         this.missedRecordsCount = missedRecordsCount;
     }
 
-    public Statistic load() throws SQLException {
+    public Statistic load() {
         this.providerCount = statisticPersistence.countProviders();
         this.contractsCount = statisticPersistence.countContracts();
         this.recordsCount = statisticPersistence.countRecords(null);
