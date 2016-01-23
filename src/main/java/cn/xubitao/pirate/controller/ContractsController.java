@@ -6,7 +6,6 @@ import cn.xubitao.pirate.assmbler.contract.ContractResourceAssembler;
 import cn.xubitao.pirate.assmbler.contract.ContractsResourceAssembler;
 import cn.xubitao.pirate.domain.contract.Contract;
 import cn.xubitao.pirate.domain.contract.Contracts;
-import cn.xubitao.pirate.domain.provider.Provider;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.http.HttpEntity;
@@ -40,10 +39,9 @@ public class ContractsController {
 
     @RequestMapping(value = "/providers/{providerId}/contracts/{id}", method = RequestMethod.PUT)
     public HttpEntity<ResourceSupport> update(@RequestBody Contract contract, @PathVariable Integer providerId, @PathVariable Integer id) throws Exception {
-        Provider provider = new Provider();
-        provider.setId(providerId);
-        contract.setProvider(provider);
-        Contract updatedContract = contracts.update(contract, id);
+        contract.setId(id);
+        contract.setProviderId(providerId);
+        Contract updatedContract = contracts.update(contract);
         return Response.build(updatedContract, new ContractResourceAssembler(), providerId);
     }
 
@@ -56,9 +54,7 @@ public class ContractsController {
 
     @RequestMapping(value = "/providers/{providerId}/contracts", method = RequestMethod.POST)
     public ResponseEntity create(@PathVariable Integer providerId, @RequestBody Contract contract) throws Exception {
-        Provider provider = new Provider();
-        provider.setId(providerId);
-        contract.setProvider(provider);
+        contract.setProviderId(providerId);
         Contract savedContract = contracts.create(contract);
         ContractResourceAssembler contractResourceAssembler = new ContractResourceAssembler();
         RestResource contractResource = contractResourceAssembler.toResource(savedContract);
