@@ -32,11 +32,11 @@ public class ContractResourceAssembler extends DolphinAssembler {
         contractResource.setName(contract.getName());
         contractResource.setRequest(contract.getRequest());
         contractResource.setResponse(contract.getResponse());
-        contractResource.setDesc(contract.getDesc());
+        contractResource.setDesc(contract.getDescription());
         contractResource.setServer(contract.getServer());
         contractResource.setExcludeFields(contract.getExcludeFields());
         contractResource.setRecordsCount(contract.getRecordsCount());
-        contractResource.add(linkTo(methodOn(ContractsController.class).findById(contract.getProvider().getId(), contract.getId())).withSelfRel());
+        contractResource.add(linkTo(methodOn(ContractsController.class).findById(contract.getProviderId(), contract.getId())).withSelfRel());
         contractResource.add(linkTo(methodOn(RecordsController.class).loadAll(contract.getId(), null, null)).withRel("records"));
 
         contractResource.add(contractsLink);
