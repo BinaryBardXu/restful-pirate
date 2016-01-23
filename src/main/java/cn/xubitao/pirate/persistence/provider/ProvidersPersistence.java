@@ -1,25 +1,25 @@
 package cn.xubitao.pirate.persistence.provider;
 
 import cn.xubitao.pirate.domain.provider.Provider;
-import cn.xubitao.pirate.domain.provider.Providers;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
-import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by xubitao on 12/25/15.
  */
+@Repository
 public interface ProvidersPersistence {
-    Provider create(Provider provider) throws SQLException;
+    Integer create(Provider provider);
 
-    Provider findById(Integer id) throws SQLException;
+    Provider findById(@Param("id") Integer id);
 
-    Providers loadAll(String keyword) throws SQLException;
+    List<Provider> loadAll(@Param("keyword") String keyword);
 
-    int update(Provider provider, Integer id) throws SQLException;
+    Integer update(Provider provider);
 
-    int deleteById(Integer id) throws SQLException;
+    Integer deleteById(@Param("id") Integer id);
 
-    List<Provider> findByConditions(Map fieldValues) throws SQLException;
+    List<Provider> findByConditions(Provider fieldValues);
 }
