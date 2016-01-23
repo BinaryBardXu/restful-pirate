@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xubitao.pirate.persistence.contract.ContractsPersistence">
+
+    <insert id="create" parameterType="cn.xubitao.pirate.domain.contract.Contract">
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+            SELECT @@IDENTITY
+        </selectKey>
+        INSERT INTO
+        contract(name,response,request,providerId,description,server,excludeFields) VALUES (#{name},#{response},
+        #{request}, #{providerId}, #{description}, #{server}, #{excludeFields})
+    </insert>
+
+    <update id="update" parameterType="cn.xubitao.pirate.domain.contract.Contract" flushCache="true">
+        UPDATE  contract SET
+
+        name=#{name},
+        response=#{response},
+        request= #{request},
+        description= #{description},
+        server= #{server},
+        excludeFields= #{excludeFields}
+
+        WHERE id=#{id}
+    </update>
+
+
+    <delete id="deleteByProviderId" parameterType="java.lang.Integer" flushCache="true">
+        UPDATE provider SET deleteStatus=1 WHERE id=#{providerId}
+    </delete>
+
+    <select id="findByConditions" parameterType="cn.xubitao.pirate.domain.contract.Contract"
+            resultType="cn.xubitao.pirate.domain.contract.Contract">
+        SELECT * FROM contract WHERE deleteStatus=0
+        <if test="name !=null">
+            AND name = #{name}
+        </if>
+        <if test="providerId !=null">
+            AND providerId = #{providerId}
+        </if>
+    </select>
+
+    <select id="checkRedundancy" parameterType="cn.xubitao.pirate.domain.contract.Contract"
+            resultType="java.lang.Boolean">
+        SELECT CASE WHEN(SELECT COUNT(*) FROM contract WHERE deleteStatus=0 AND id!=#{id}
+        <if test="name !=null">
+            AND name = #{name}
+        </if>
+        )>0 THEN 'true' ELSE 'false' END;
+    </select>
+
+    <select id="loadByConsumerKey" parameterType="java.lang.String"
+            resultType="cn.xubitao.pirate.domain.contract.Contract">
+        SELECT * FROM contract WHERE deleteStatus=0
+        <if test="consumerKey !=null">
+            AND consumerKey = #{consumerKey}
+        </if>
+    </select>
+
+    <select id="loadAll" parameterType="java.lang.Integer" resultType="cn.xubitao.pirate.domain.contract.Contract">
+        SELECT * FROM contract WHERE deleteStatus=0
+        <if test="providerId !=null">
+            AND providerId=#{providerId}
+        </if>
+    </select>
+
+    <select id="findById" parameterType="java.lang.Integer" resultType="cn.xubitao.pirate.domain.contract.Contract">
+        SELECT * FROM contract WHERE deleteStatus=0 and id= #{id}
+    </select>
+
+    <delete id="deleteById" parameterType="java.lang.Integer" flushCache="true">
+        UPDATE contract SET deleteStatus=1 WHERE id=#{id}
+    </delete>
+
+</mapper>

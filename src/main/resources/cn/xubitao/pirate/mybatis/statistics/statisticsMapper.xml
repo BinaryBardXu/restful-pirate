@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xubitao.pirate.persistence.statistic.StatisticPersistence">
+
+    <select id="countProviders" resultType="java.lang.Integer">
+        SELECT count(*) FROM provider WHERE deleteStatus=0
+    </select>
+
+    <select id="countContracts" resultType="java.lang.Integer">
+        SELECT count(*) FROM contract WHERE deleteStatus=0
+    </select>
+
+    <select id="countRecords" resultType="java.lang.Integer">
+        SELECT count(*) FROM record WHERE deleteStatus=0
+        <if test="isHit !=null">
+            AND isHit = #{isHit}
+        </if>
+    </select>
+
+</mapper>

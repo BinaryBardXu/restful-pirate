@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xubitao.pirate.persistence.provider.ProvidersPersistence">
+
+    <insert id="create" parameterType="cn.xubitao.pirate.domain.provider.Provider">
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+            SELECT @@IDENTITY
+        </selectKey>
+
+        insert into
+        provider(name,version,consumerKey) values (#{name}, #{version}, #{consumerKey})
+    </insert>
+
+    <update id="update" parameterType="cn.xubitao.pirate.domain.provider.Provider" flushCache="true">
+        UPDATE  provider SET name=#{name},version=#{version},consumerKey= #{consumerKey} WHERE id=#{id}
+    </update>
+
+
+    <delete id="deleteById" parameterType="java.lang.Integer" flushCache="true">
+        UPDATE provider SET deleteStatus=1 WHERE id=#{id}
+    </delete>
+
+    <select id="findByConditions" parameterType="cn.xubitao.pirate.domain.provider.Provider"
+            resultType="cn.xubitao.pirate.domain.provider.Provider">
+        SELECT * FROM provider WHERE deleteStatus=0
+        <if test="name !=null">
+            AND name = #{name}
+        </if>
+        <if test="version !=null">
+            AND version = #{version}
+        </if>
+    </select>
+
+    <select id="loadAll" parameterType="java.lang.String" resultType="cn.xubitao.pirate.domain.provider.Provider">
+        SELECT * FROM provider WHERE deleteStatus=0
+        <if test="keyword !=null">
+            AND consumerKey LIKE concat('%',#{keyword},'%')
+        </if>
+    </select>
+
+    <select id="findById" parameterType="java.lang.Integer" resultType="cn.xubitao.pirate.domain.provider.Provider">
+        SELECT * FROM provider WHERE deleteStatus=0 and id= #{id}
+    </select>
+
+</mapper>
