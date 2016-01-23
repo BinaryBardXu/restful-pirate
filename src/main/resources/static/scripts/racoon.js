@@ -50,12 +50,11 @@ var Racoon = {
         });
     },
     getLink: function (_links, _rel) {
-        for (var index in _links) {
-            var link = _links[index];
-            if (link.rel == _rel) {
-                return link.href;
-            }
+        var item = _links[_rel];
+        if (item == undefined) {
+            return undefined;
         }
+        return item.href;
     },
     isFirefoxBrowser: function () {
         var Sys = {};
