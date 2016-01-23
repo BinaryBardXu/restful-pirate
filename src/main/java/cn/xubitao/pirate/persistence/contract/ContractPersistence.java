@@ -1,10 +1,12 @@
 package cn.xubitao.pirate.persistence.contract;
 
-import java.sql.SQLException;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 /**
  * Created by xubitao on 1/16/16.
  */
+@Repository
 public interface ContractPersistence {
-    long countRecords(Integer id) throws SQLException;
+    Integer countRecords(@Param("id") Integer id);
 }
