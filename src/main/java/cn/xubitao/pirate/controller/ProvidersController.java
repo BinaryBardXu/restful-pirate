@@ -39,7 +39,8 @@ public class ProvidersController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public HttpEntity<ResourceSupport> update(@RequestBody Provider provider, @PathVariable Integer id) throws Exception {
-        Provider updatedProvider = providers.update(provider, id);
+        provider.setId(id);
+        Provider updatedProvider = providers.update(provider);
         return Response.build(updatedProvider, new ProviderResourceAssembler());
     }
 
@@ -54,7 +55,7 @@ public class ProvidersController {
     public ResponseEntity create(@RequestBody Provider provider) throws Exception {
         Provider savedProvider = providers.create(provider);
         ProviderResourceAssembler providerResourceAssembler = new ProviderResourceAssembler();
-        RestResource providerResource = providerResourceAssembler.toResource(savedProvider);
+        RestResource providerResource = providerResourceAssembler.toRestResource(savedProvider);
         return Response.created(providerResource);
     }
 }
