@@ -1,32 +1,19 @@
 package cn.xubitao.pirate.domain.provider;
 
 import cn.xubitao.pirate.persistence.provider.ProviderPersistence;
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.table.DatabaseTable;
 
 import java.sql.SQLException;
 
 /**
  * Created by xubitao on 12/25/15.
  */
-@DatabaseTable(tableName = "provider")
 public class Provider {
     private ProviderPersistence providerPersistence;
-    @DatabaseField(generatedId = true)
     private Integer id;
-
-    @DatabaseField(columnName = "name", canBeNull = false)
     private String name;
-
-    @DatabaseField(canBeNull = false)
     private String version;
-
-    @DatabaseField(canBeNull = false)
     private String consumerKey;
-
-    @DatabaseField(defaultValue = "0")
     private Integer deleteStatus;
-
     private long contractsCount;
 
     public Integer getId() {
