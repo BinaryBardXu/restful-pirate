@@ -1,45 +1,32 @@
 package cn.xubitao.pirate.domain.contract;
 
-import cn.xubitao.pirate.domain.provider.Provider;
 import cn.xubitao.pirate.persistence.contract.ContractPersistence;
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.table.DatabaseTable;
 
 import java.sql.SQLException;
 
 /**
  * Created by xubitao on 1/6/16.
  */
-@DatabaseTable(tableName = "contract")
 public class Contract {
     private ContractPersistence contractPersistence;
 
-    @DatabaseField(generatedId = true)
     private Integer id;
 
-    @DatabaseField(canBeNull = false)
     private String request;
 
-    @DatabaseField(canBeNull = false)
     private String response;
 
-    @DatabaseField(canBeNull = false)
     private String name;
 
-    @DatabaseField(canBeNull = false)
     private String server;
 
-    @DatabaseField
-    private String desc;
+    private String description;
 
-    @DatabaseField(defaultValue = "")
     private String excludeFields;
 
-    @DatabaseField(defaultValue = "0")
     private Integer deleteStatus;
 
-    @DatabaseField(canBeNull = false, foreign = true, columnName = "providerId")
-    private Provider provider;
+    private Integer providerId;
 
     private long recordsCount;
 
@@ -59,12 +46,12 @@ public class Contract {
         this.name = name;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getRequest() {
@@ -107,14 +94,6 @@ public class Contract {
         this.excludeFields = excludeFields;
     }
 
-    public Provider getProvider() {
-        return provider;
-    }
-
-    public void setProvider(Provider provider) {
-        this.provider = provider;
-    }
-
     public long getRecordsCount() {
         return recordsCount;
     }
@@ -129,5 +108,13 @@ public class Contract {
 
     public void countRecords() throws SQLException {
         this.recordsCount = contractPersistence.countRecords(id);
+    }
+
+    public Integer getProviderId() {
+        return providerId;
+    }
+
+    public void setProviderId(Integer providerId) {
+        this.providerId = providerId;
     }
 }
