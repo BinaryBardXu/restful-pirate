@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by xubitao on 12/25/15.
@@ -50,7 +51,10 @@ public class Records {
         return recordsPersistence.create(record);
     }
 
-    public Records loadAll(Integer contractId, Integer isHit, String consumerKey) throws SQLException {
-        return recordsPersistence.loadAll(contractId, isHit, consumerKey);
+    public Records loadAll(Map conditions) throws SQLException {
+        List<Record> recordList = recordsPersistence.loadAll(conditions);
+        Records records = new Records();
+        records.setRecords(recordList);
+        return records;
     }
 }
