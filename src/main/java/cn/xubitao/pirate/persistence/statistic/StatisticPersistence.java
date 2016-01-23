@@ -1,14 +1,16 @@
 package cn.xubitao.pirate.persistence.statistic;
 
-import java.sql.SQLException;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 /**
  * Created by xubitao on 12/25/15.
  */
+@Repository
 public interface StatisticPersistence {
-    long countProviders() throws SQLException;
+    Integer countProviders();
 
-    long countContracts() throws SQLException;
+    Integer countContracts();
 
-    long countRecords(Integer isHit) throws SQLException;
+    Integer countRecords(@Param("isHit") Integer isHit);
 }
