@@ -59,6 +59,9 @@ var Contracts = {
                     validators: {
                         notEmpty: {
                             message: '请求体不可以为空'
+                        },
+                        notJSON: {
+
                         }
                     }
                 },
@@ -66,6 +69,9 @@ var Contracts = {
                     validators: {
                         notEmpty: {
                             message: '响应体不可以为空'
+                        },
+                        notJSON: {
+
                         }
                     }
                 },
@@ -124,7 +130,7 @@ var Contracts = {
         contract.server = $('#contract-server').val();
         contract.request = $('#contract-request').val();
         contract.response = $('#contract-response').val();
-        contract.desc = $('#contract-desc').val();
+        contract.description = $('#contract-description').val();
         contract.excludeFields = $('#contract-excludeFields').val();
 
         Racoon.restful({
@@ -157,7 +163,7 @@ function openContractUpdateModal(_selfLink, _contractLink) {
             $('#contract-server').val(contract.server);
             $('#contract-request').val(contract.request);
             $('#contract-response').val(contract.response);
-            $('#contract-desc').val(contract.desc);
+            $('#contract-description').val(contract.description);
             $('#contract-excludeFields').val(contract.excludeFields);
 
             $("#contract-save-button").unbind();
