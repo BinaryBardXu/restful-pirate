@@ -1,29 +1,32 @@
 package cn.xubitao.pirate.persistence.contract;
 
 import cn.xubitao.pirate.domain.contract.Contract;
-import cn.xubitao.pirate.domain.contract.Contracts;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
-import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by xubitao on 12/25/15.
  */
+
+@Repository
 public interface ContractsPersistence {
-    Contract create(Contract contract) throws SQLException;
+    Integer create(Contract contract);
 
-    Contract findById(Integer id) throws SQLException;
+    Contract findById(@Param("id") Integer id);
 
-    Contracts loadAll(Integer providerId) throws SQLException;
+    List<Contract> loadAll(@Param("providerId") Integer providerId);
 
-    Contract update(Contract Contract, Integer id) throws Exception;
+    Integer update(Contract contract);
 
-    int deleteById(Integer id) throws SQLException;
+    Integer deleteById(@Param("id") Integer id);
 
-    int deleteByProviderId(Integer providerId) throws SQLException;
+    Boolean checkRedundancy(Contract contract);
 
-    List<Contract> findByConditions(Map fieldValues) throws SQLException;
+    Integer deleteByProviderId(@Param("providerId") Integer providerId);
 
-    List<Contract> loadByConsumerKey(String consumerKey) throws SQLException;
+    List<Contract> findByConditions(Contract contract);
+
+    List<Contract> loadByConsumerKey(String consumerKey);
 }
