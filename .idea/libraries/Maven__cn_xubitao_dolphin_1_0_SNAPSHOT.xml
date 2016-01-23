@@ -8,6 +8,8 @@
     </JAVADOC>
     <SOURCES>
       <root url="jar://$MAVEN_REPOSITORY$/cn/xubitao/dolphin/1.0-SNAPSHOT/dolphin-1.0-SNAPSHOT-sources.jar!/" />
+      <root url="file://$PROJECT_DIR$/../dolphin/src/main/java" />
+      <root url="file://$PROJECT_DIR$/../dolphin/src/test/java" />
     </SOURCES>
   </library>
 </component>
