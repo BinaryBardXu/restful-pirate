@@ -3,7 +3,7 @@ package cn.xubitao.pirate.resource;
 import cn.xubitao.dolphin.foundation.resource.RestResource;
 
 /**
- * Created by 15031046 on 2016/1/15.
+ * Created by xubitao on 2016/1/15.
  */
 public class EntranceResource extends RestResource {
     private String description;
