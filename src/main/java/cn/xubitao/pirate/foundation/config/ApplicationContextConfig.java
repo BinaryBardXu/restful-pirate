@@ -1,7 +1,7 @@
 package cn.xubitao.pirate.foundation.config;
 
-import cn.xubitao.dolphin.sqllite.Dolphin;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
 import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
@@ -20,20 +20,17 @@ import java.util.concurrent.TimeUnit;
 @Configuration
 @PropertySources(value = {@PropertySource("pirate.properties"), @PropertySource("log4j.properties")})
 public class ApplicationContextConfig implements ApplicationContextAware {
-    @Override
+    @Value("${http.port}")
+    private int port;
+
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         ((AnnotationConfigEmbeddedWebApplicationContext) applicationContext).scan("cn.xubitao");
     }
 
     @Bean
-    public Dolphin dolphin() {
-        return new Dolphin();
-    }
-
-    @Bean
     public EmbeddedServletContainerFactory servletContainer() {
         TomcatEmbeddedServletContainerFactory factory = new TomcatEmbeddedServletContainerFactory();
-        factory.setPort(8080);
+        factory.setPort(port);
         factory.setSessionTimeout(50, TimeUnit.MINUTES);
         return factory;
     }
