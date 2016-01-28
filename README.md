@@ -27,26 +27,27 @@ http://localhost:8080/entrance
 ```
     {
         "description": "这里是契约测试平台的入口，请参照links选择你的操作。",
-        "links":
-        [
+        "_links":
+        {
+            "self":
             {
-                "rel": "self",
                 "href": "http://localhost:8080/entrance"
             },
+            "providers":
             {
-                "rel": "providers",
                 "href": "http://localhost:8080/providers"
             },
+            "missedRecords":
             {
-                "rel": "missedRecords",
                 "href": "http://localhost:8080/records?isHit=0"
             },
+            "statistic":
             {
-                "rel": "statistic",
                 "href": "http://localhost:8080/statistic"
             }
-        ]
+        }
     }
+
 ```
 
 ##页面入口
