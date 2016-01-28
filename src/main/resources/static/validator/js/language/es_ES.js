@@ -1,4 +1,4 @@
-(function($) {
+(function ($) {
     /**
      * Spanish language package
      * Translated by @vadail
@@ -36,7 +36,7 @@
             'default': 'Por favor introduce un valor distinto'
         },
         digits: {
-             'default': 'Por favor introduce sólo dígitos'
+            'default': 'Por favor introduce sólo dígitos'
         },
         ean: {
             'default': 'Por favor introduce un número EAN válido'

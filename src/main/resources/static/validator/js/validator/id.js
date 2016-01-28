@@ -1,4 +1,4 @@
-(function($) {
+(function ($) {
     $.fn.bootstrapValidator.i18n.id = $.extend($.fn.bootstrapValidator.i18n.id || {}, {
         'default': 'Please enter a valid identification number',
         countryNotSupported: 'The country code %s is not supported',
@@ -59,7 +59,7 @@
          *      - A callback function that returns the country code
          * @returns {Boolean|Object}
          */
-        validate: function(validator, $field, options) {
+        validate: function (validator, $field, options) {
             var value = $field.val();
             if (value === '') {
                 return true;
@@ -74,16 +74,19 @@
             }
 
             if ($.inArray(country, this.COUNTRY_CODES) === -1) {
-                return { valid: false, message: $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.id.countryNotSupported, country) };
+                return {
+                    valid: false,
+                    message: $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.id.countryNotSupported, country)
+                };
             }
 
-            var method  = ['_', country.toLowerCase()].join('');
+            var method = ['_', country.toLowerCase()].join('');
             return this[method](value)
-                    ? true
-                    : {
-                        valid: false,
-                        message: $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.id.country, $.fn.bootstrapValidator.i18n.id.countries[country.toUpperCase()])
-                    };
+                ? true
+                : {
+                valid: false,
+                message: $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.id.country, $.fn.bootstrapValidator.i18n.id.countries[country.toUpperCase()])
+            };
         },
 
         /**
@@ -99,15 +102,15 @@
          * @param {String} countryCode The ISO country code, can be BA, MK, ME, RS, SI
          * @returns {Boolean}
          */
-        _validateJMBG: function(value, countryCode) {
+        _validateJMBG: function (value, countryCode) {
             if (!/^\d{13}$/.test(value)) {
                 return false;
             }
-            var day   = parseInt(value.substr(0, 2), 10),
+            var day = parseInt(value.substr(0, 2), 10),
                 month = parseInt(value.substr(2, 2), 10),
-                year  = parseInt(value.substr(4, 3), 10),
-                rr    = parseInt(value.substr(7, 2), 10),
-                k     = parseInt(value.substr(12, 1), 10);
+                year = parseInt(value.substr(4, 3), 10),
+                rr = parseInt(value.substr(7, 2), 10),
+                k = parseInt(value.substr(12, 1), 10);
 
             // Validate date of birth
             // FIXME: Validate the year of birth
@@ -154,23 +157,23 @@
             }
         },
 
-        _ba: function(value) {
+        _ba: function (value) {
             return this._validateJMBG(value, 'BA');
         },
-        _mk: function(value) {
+        _mk: function (value) {
             return this._validateJMBG(value, 'MK');
         },
-        _me: function(value) {
+        _me: function (value) {
             return this._validateJMBG(value, 'ME');
         },
-        _rs: function(value) {
+        _rs: function (value) {
             return this._validateJMBG(value, 'RS');
         },
 
         /**
          * Examples: 0101006500006
          */
-        _si: function(value) {
+        _si: function (value) {
             return this._validateJMBG(value, 'SI');
         },
 
@@ -184,15 +187,15 @@
          * @param {String} value The ID
          * @returns {Boolean}
          */
-        _bg: function(value) {
+        _bg: function (value) {
             if (!/^\d{10}$/.test(value) && !/^\d{6}\s\d{3}\s\d{1}$/.test(value)) {
                 return false;
             }
             value = value.replace(/\s/g, '');
             // Check the birth date
-            var year  = parseInt(value.substr(0, 2), 10) + 1900,
+            var year = parseInt(value.substr(0, 2), 10) + 1900,
                 month = parseInt(value.substr(2, 2), 10),
-                day   = parseInt(value.substr(4, 2), 10);
+                day = parseInt(value.substr(4, 2), 10);
             if (month > 40) {
                 year += 100;
                 month -= 40;
@@ -205,7 +208,7 @@
                 return false;
             }
 
-            var sum    = 0,
+            var sum = 0,
                 weight = [2, 4, 8, 5, 10, 9, 7, 3, 6];
             for (var i = 0; i < 9; i++) {
                 sum += parseInt(value.charAt(i), 10) * weight[i];
@@ -224,7 +227,7 @@
          * @param {String} value The ID
          * @returns {Boolean}
          */
-        _br: function(value) {
+        _br: function (value) {
             if (/^1{11}|2{11}|3{11}|4{11}|5{11}|6{11}|7{11}|8{11}|9{11}|0{11}$/.test(value)) {
                 return false;
             }
@@ -267,13 +270,13 @@
          * @param {String} value The ID
          * @returns {Boolean}
          */
-        _ch: function(value) {
+        _ch: function (value) {
             if (!/^756[\.]{0,1}[0-9]{4}[\.]{0,1}[0-9]{4}[\.]{0,1}[0-9]{2}$/.test(value)) {
                 return false;
             }
             value = value.replace(/\D/g, '').substr(3);
             var length = value.length,
-                sum    = 0,
+                sum = 0,
                 weight = (length === 8) ? [3, 1] : [1, 3];
             for (var i = 0; i < length - 1; i++) {
                 sum += parseInt(value.charAt(i), 10) * weight[i % 2];
@@ -292,7 +295,7 @@
          * @param {String} value The ID
          * @returns {Boolean}
          */
-        _cl: function(value) {
+        _cl: function (value) {
             if (!/^\d{7,8}[-]{0,1}[0-9K]$/i.test(value)) {
                 return false;
             }
@@ -300,7 +303,7 @@
             while (value.length < 9) {
                 value = '0' + value;
             }
-            var sum    = 0,
+            var sum = 0,
                 weight = [3, 2, 7, 6, 5, 4, 3, 2];
             for (var i = 0; i < 8; i++) {
                 sum += parseInt(value.charAt(i), 10) * weight[i];
@@ -323,13 +326,13 @@
          * @param {String} value The ID
          * @returns {Boolean}
          */
-        _cz: function(value) {
+        _cz: function (value) {
             if (!/^\d{9,10}$/.test(value)) {
                 return false;
             }
-            var year  = 1900 + parseInt(value.substr(0, 2), 10),
+            var year = 1900 + parseInt(value.substr(0, 2), 10),
                 month = parseInt(value.substr(2, 2), 10) % 50 % 20,
-                day   = parseInt(value.substr(4, 2), 10);
+                day = parseInt(value.substr(4, 2), 10);
             if (value.length === 9) {
                 if (year >= 1980) {
                     year -= 100;
@@ -367,14 +370,14 @@
          * @param {String} value The ID
          * @returns {Boolean}
          */
-        _dk: function(value) {
+        _dk: function (value) {
             if (!/^[0-9]{6}[-]{0,1}[0-9]{4}$/.test(value)) {
                 return false;
             }
             value = value.replace(/-/g, '');
-            var day   = parseInt(value.substr(0, 2), 10),
+            var day = parseInt(value.substr(0, 2), 10),
                 month = parseInt(value.substr(2, 2), 10),
-                year  = parseInt(value.substr(4, 2), 10);
+                year = parseInt(value.substr(4, 2), 10);
 
             switch (true) {
                 case ('5678'.indexOf(value.charAt(6)) !== -1 && year >= 58):
@@ -401,7 +404,7 @@
          * @param {String} value The ID
          * @returns {Boolean}
          */
-        _ee: function(value) {
+        _ee: function (value) {
             // Use the same format as Lithuanian Personal Code
             return this._lt(value);
         },
@@ -418,7 +421,7 @@
          * @param {String} value The ID
          * @returns {Boolean}
          */
-        _es: function(value) {
+        _es: function (value) {
             if (!/^[0-9A-Z]{8}[-]{0,1}[0-9A-Z]$/.test(value)                    // DNI
                 && !/^[XYZ][-]{0,1}[0-9]{7}[-]{0,1}[0-9A-Z]$/.test(value)) {    // NIE
                 return false;
@@ -445,13 +448,13 @@
          * @param {String} value The ID
          * @returns {Boolean}
          */
-        _fi: function(value) {
+        _fi: function (value) {
             if (!/^[0-9]{6}[-+A][0-9]{3}[0-9ABCDEFHJKLMNPRSTUVWXY]$/.test(value)) {
                 return false;
             }
-            var day       = parseInt(value.substr(0, 2), 10),
-                month     = parseInt(value.substr(2, 2), 10),
-                year      = parseInt(value.substr(4, 2), 10),
+            var day = parseInt(value.substr(0, 2), 10),
+                month = parseInt(value.substr(2, 2), 10),
+                year = parseInt(value.substr(4, 2), 10),
                 centuries = {
                     '+': 1800,
                     '-': 1900,
@@ -481,7 +484,7 @@
          * @param {String} value The ID
          * @returns {Boolean}
          */
-        _hr: function(value) {
+        _hr: function (value) {
             if (!/^[0-9]{11}$/.test(value)) {
                 return false;
             }
@@ -498,17 +501,17 @@
          * @param {String} value The ID
          * @returns {Boolean}
          */
-        _ie: function(value) {
+        _ie: function (value) {
             if (!/^\d{7}[A-W][AHWTX]?$/.test(value)) {
                 return false;
             }
 
-            var getCheckDigit = function(value) {
+            var getCheckDigit = function (value) {
                 while (value.length < 7) {
                     value = '0' + value;
                 }
                 var alphabet = 'WABCDEFGHIJKLMNOPQRSTUV',
-                    sum      = 0;
+                    sum = 0;
                 for (var i = 0; i < 7; i++) {
                     sum += parseInt(value.charAt(i), 10) * (8 - i);
                 }
@@ -535,14 +538,14 @@
          * @param {String} value The ID
          * @returns {Boolean}
          */
-        _is: function(value) {
+        _is: function (value) {
             if (!/^[0-9]{6}[-]{0,1}[0-9]{4}$/.test(value)) {
                 return false;
             }
             value = value.replace(/-/g, '');
-            var day     = parseInt(value.substr(0, 2), 10),
-                month   = parseInt(value.substr(2, 2), 10),
-                year    = parseInt(value.substr(4, 2), 10),
+            var day = parseInt(value.substr(0, 2), 10),
+                month = parseInt(value.substr(2, 2), 10),
+                year = parseInt(value.substr(4, 2), 10),
                 century = parseInt(value.charAt(9), 10);
 
             year = (century === 9) ? (1900 + year) : ((20 + century) * 100 + year);
@@ -550,7 +553,7 @@
                 return false;
             }
             // Validate the check digit
-            var sum    = 0,
+            var sum = 0,
                 weight = [3, 2, 7, 6, 5, 4, 3, 2];
             for (var i = 0; i < 8; i++) {
                 sum += parseInt(value.charAt(i), 10) * weight[i];
@@ -570,14 +573,14 @@
          * @param {String} value The ID
          * @returns {Boolean}
          */
-        _lt: function(value) {
+        _lt: function (value) {
             if (!/^[0-9]{11}$/.test(value)) {
                 return false;
             }
-            var gender  = parseInt(value.charAt(0), 10),
-                year    = parseInt(value.substr(1, 2), 10),
-                month   = parseInt(value.substr(3, 2), 10),
-                day     = parseInt(value.substr(5, 2), 10),
+            var gender = parseInt(value.charAt(0), 10),
+                year = parseInt(value.substr(1, 2), 10),
+                month = parseInt(value.substr(3, 2), 10),
+                day = parseInt(value.substr(5, 2), 10),
                 century = (gender % 2 === 0) ? (17 + gender / 2) : (17 + (gender + 1) / 2);
             year = century * 100 + year;
             if (!$.fn.bootstrapValidator.helpers.date(year, month, day, true)) {
@@ -585,7 +588,7 @@
             }
 
             // Validate the check digit
-            var sum    = 0,
+            var sum = 0,
                 weight = [1, 2, 3, 4, 5, 6, 7, 8, 9, 1];
             for (var i = 0; i < 10; i++) {
                 sum += parseInt(value.charAt(i), 10) * weight[i];
@@ -596,7 +599,7 @@
             }
 
             // Re-calculate the check digit
-            sum    = 0;
+            sum = 0;
             weight = [3, 4, 5, 6, 7, 8, 9, 1, 2, 3];
             for (i = 0; i < 10; i++) {
                 sum += parseInt(value.charAt(i), 10) * weight[i];
@@ -618,15 +621,15 @@
          * @param {String} value The ID
          * @returns {Boolean}
          */
-        _lv: function(value) {
+        _lv: function (value) {
             if (!/^[0-9]{6}[-]{0,1}[0-9]{5}$/.test(value)) {
                 return false;
             }
             value = value.replace(/\D/g, '');
             // Check birth date
-            var day   = parseInt(value.substr(0, 2), 10),
+            var day = parseInt(value.substr(0, 2), 10),
                 month = parseInt(value.substr(2, 2), 10),
-                year  = parseInt(value.substr(4, 2), 10);
+                year = parseInt(value.substr(4, 2), 10);
             year = year + 1800 + parseInt(value.charAt(6), 10) * 100;
 
             if (!$.fn.bootstrapValidator.helpers.date(year, month, day, true)) {
@@ -634,7 +637,7 @@
             }
 
             // Check personal code
-            var sum    = 0,
+            var sum = 0,
                 weight = [10, 5, 8, 4, 2, 1, 6, 3, 7, 9];
             for (var i = 0; i < 10; i++) {
                 sum += parseInt(value.charAt(i), 10) * weight[i];
@@ -653,7 +656,7 @@
          * @param {String} value The ID
          * @returns {Boolean}
          */
-        _nl: function(value) {
+        _nl: function (value) {
             while (value.length < 9) {
                 value = '0' + value;
             }
@@ -664,7 +667,7 @@
             if (parseInt(value, 10) === 0) {
                 return false;
             }
-            var sum    = 0,
+            var sum = 0,
                 length = value.length;
             for (var i = 0; i < length - 1; i++) {
                 sum += (9 - i) * parseInt(value.charAt(i), 10);
@@ -686,7 +689,7 @@
          * @param {String} value The ID
          * @returns {Boolean}
          */
-        _ro: function(value) {
+        _ro: function (value) {
             if (!/^[0-9]{13}$/.test(value)) {
                 return false;
             }
@@ -696,10 +699,10 @@
             }
 
             // Determine the date of birth
-            var year      = parseInt(value.substr(1, 2), 10),
-                month     = parseInt(value.substr(3, 2), 10),
-                day       = parseInt(value.substr(5, 2), 10),
-                // The year of date is determined base on the gender
+            var year = parseInt(value.substr(1, 2), 10),
+                month = parseInt(value.substr(3, 2), 10),
+                day = parseInt(value.substr(5, 2), 10),
+            // The year of date is determined base on the gender
                 centuries = {
                     '1': 1900,  // Male born between 1900 and 1999
                     '2': 1900,  // Female born between 1900 and 1999
@@ -719,7 +722,7 @@
             }
 
             // Validate the check digit
-            var sum    = 0,
+            var sum = 0,
                 weight = [2, 7, 9, 1, 4, 6, 3, 5, 8, 2, 7, 9],
                 length = value.length;
             for (var i = 0; i < length - 1; i++) {
@@ -742,15 +745,15 @@
          * @param {String} value The ID
          * @returns {Boolean}
          */
-        _se: function(value) {
+        _se: function (value) {
             if (!/^[0-9]{10}$/.test(value) && !/^[0-9]{6}[-|+][0-9]{4}$/.test(value)) {
                 return false;
             }
             value = value.replace(/[^0-9]/g, '');
 
-            var year  = parseInt(value.substr(0, 2), 10) + 1900,
+            var year = parseInt(value.substr(0, 2), 10) + 1900,
                 month = parseInt(value.substr(2, 2), 10),
-                day   = parseInt(value.substr(4, 2), 10);
+                day = parseInt(value.substr(4, 2), 10);
             if (!$.fn.bootstrapValidator.helpers.date(year, month, day)) {
                 return false;
             }
@@ -768,7 +771,7 @@
          * @param {String} value The ID
          * @returns {Boolean}
          */
-        _sk: function(value) {
+        _sk: function (value) {
             // Slovakia uses the same format as Czech Republic
             return this._cz(value);
         },
@@ -780,7 +783,7 @@
          * @param {String} value The ID
          * @returns {Boolean}
          */
-        _sm: function(value) {
+        _sm: function (value) {
             return /^\d{5}$/.test(value);
         },
 
@@ -794,14 +797,14 @@
          * @param {String} value The ID
          * @returns {Boolean}
          */
-        _za: function(value) {
+        _za: function (value) {
             if (!/^[0-9]{10}[0|1][8|9][0-9]$/.test(value)) {
                 return false;
             }
-            var year        = parseInt(value.substr(0, 2), 10),
+            var year = parseInt(value.substr(0, 2), 10),
                 currentYear = new Date().getFullYear() % 100,
-                month       = parseInt(value.substr(2, 2), 10),
-                day         = parseInt(value.substr(4, 2), 10);
+                month = parseInt(value.substr(2, 2), 10),
+                day = parseInt(value.substr(4, 2), 10);
             year = (year >= currentYear) ? (year + 1900) : (year + 2000);
 
             if (!$.fn.bootstrapValidator.helpers.date(year, month, day)) {

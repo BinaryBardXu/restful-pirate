@@ -1,4 +1,4 @@
-(function($) {
+(function ($) {
     $.fn.bootstrapValidator.i18n.stringLength = $.extend($.fn.bootstrapValidator.i18n.stringLength || {}, {
         'default': 'Please enter a value with valid length',
         less: 'Please enter less than %s characters',
@@ -13,7 +13,7 @@
             max: 'max'
         },
 
-        enableByHtml5: function($field) {
+        enableByHtml5: function ($field) {
             var maxLength = $field.attr('maxlength');
             if (maxLength) {
                 return {
@@ -42,15 +42,15 @@
          * - message: The invalid message
          * @returns {Object}
          */
-        validate: function(validator, $field, options) {
+        validate: function (validator, $field, options) {
             var value = $field.val();
             if (value === '') {
                 return true;
             }
 
-            var min     = $.isNumeric(options.min) ? options.min : validator.getDynamicOption($field, options.min),
-                max     = $.isNumeric(options.max) ? options.max : validator.getDynamicOption($field, options.max),
-                length  = value.length,
+            var min = $.isNumeric(options.min) ? options.min : validator.getDynamicOption($field, options.min),
+                max = $.isNumeric(options.max) ? options.max : validator.getDynamicOption($field, options.max),
+                length = value.length,
                 isValid = true,
                 message = options.message || $.fn.bootstrapValidator.i18n.stringLength['default'];
 
@@ -75,7 +75,7 @@
                     break;
             }
 
-            return { valid: isValid, message: message };
+            return {valid: isValid, message: message};
         }
     };
 }(window.jQuery));

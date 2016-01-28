@@ -1,4 +1,4 @@
-(function($) {
+(function ($) {
     $.fn.bootstrapValidator.i18n.date = $.extend($.fn.bootstrapValidator.i18n.date || {}, {
         'default': 'Please enter a valid date'
     });
@@ -28,7 +28,7 @@
          * ii) date, time and A (indicating AM or PM)
          * @returns {Boolean}
          */
-        validate: function(validator, $field, options) {
+        validate: function (validator, $field, options) {
             var value = $field.val();
             if (value === '') {
                 return true;
@@ -36,13 +36,13 @@
 
             options.format = options.format || 'MM/DD/YYYY';
 
-            var formats    = options.format.split(' '),
+            var formats = options.format.split(' '),
                 dateFormat = formats[0],
                 timeFormat = (formats.length > 1) ? formats[1] : null,
-                amOrPm     = (formats.length > 2) ? formats[2] : null,
-                sections   = value.split(' '),
-                date       = sections[0],
-                time       = (sections.length > 1) ? sections[1] : null;
+                amOrPm = (formats.length > 2) ? formats[2] : null,
+                sections = value.split(' '),
+                date = sections[0],
+                time = (sections.length > 1) ? sections[1] : null;
 
             if (formats.length !== sections.length) {
                 return false;
@@ -58,15 +58,15 @@
             }
 
             // Determine the date
-            date       = date.split(separator);
+            date = date.split(separator);
             dateFormat = dateFormat.split(separator);
             if (date.length !== dateFormat.length) {
                 return false;
             }
 
-            var year  = date[$.inArray('YYYY', dateFormat)],
+            var year = date[$.inArray('YYYY', dateFormat)],
                 month = date[$.inArray('MM', dateFormat)],
-                day   = date[$.inArray('DD', dateFormat)];
+                day = date[$.inArray('DD', dateFormat)];
 
             if (!year || !month || !day) {
                 return false;
@@ -76,13 +76,13 @@
             var minutes = null, hours = null, seconds = null;
             if (timeFormat) {
                 timeFormat = timeFormat.split(':');
-                time       = time.split(':');
+                time = time.split(':');
 
                 if (timeFormat.length !== time.length) {
                     return false;
                 }
 
-                hours   = time.length > 0 ? time[0] : null;
+                hours = time.length > 0 ? time[0] : null;
                 minutes = time.length > 1 ? time[1] : null;
                 seconds = time.length > 2 ? time[2] : null;
 

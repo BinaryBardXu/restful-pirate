@@ -1,10 +1,10 @@
-(function($) {
+(function ($) {
     $.fn.bootstrapValidator.i18n.integer = $.extend($.fn.bootstrapValidator.i18n.integer || {}, {
         'default': 'Please enter a valid number'
     });
 
     $.fn.bootstrapValidator.validators.integer = {
-        enableByHtml5: function($field) {
+        enableByHtml5: function ($field) {
             return ('number' === $field.attr('type')) && ($field.attr('step') === undefined || $field.attr('step') % 1 === 0);
         },
 
@@ -17,7 +17,7 @@
          * - message: The invalid message
          * @returns {Boolean}
          */
-        validate: function(validator, $field, options) {
+        validate: function (validator, $field, options) {
             var value = $field.val();
             if (value === '') {
                 return true;

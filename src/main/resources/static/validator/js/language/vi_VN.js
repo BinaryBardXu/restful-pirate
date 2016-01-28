@@ -1,4 +1,4 @@
-(function($) {
+(function ($) {
     /**
      * Vietnamese language package
      * Translated by @nghuuphuoc
@@ -36,7 +36,7 @@
             'default': 'Vui lòng nhập một giá trị khác'
         },
         digits: {
-             'default': 'Vui lòng chỉ nhập số'
+            'default': 'Vui lòng chỉ nhập số'
         },
         ean: {
             'default': 'Vui lòng nhập số EAN hợp lệ'

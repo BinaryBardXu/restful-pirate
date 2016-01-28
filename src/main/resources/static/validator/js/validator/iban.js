@@ -1,4 +1,4 @@
-(function($) {
+(function ($) {
     $.fn.bootstrapValidator.i18n.iban = $.extend($.fn.bootstrapValidator.i18n.iban || {}, {
         'default': 'Please enter a valid IBAN number',
         countryNotSupported: 'The country code %s is not supported',
@@ -192,7 +192,7 @@
          *      - A callback function that returns the country code
          * @returns {Boolean|Object}
          */
-        validate: function(validator, $field, options) {
+        validate: function (validator, $field, options) {
             var value = $field.val();
             if (value === '') {
                 return true;
@@ -222,16 +222,16 @@
             }
 
             value = value.substr(4) + value.substr(0, 4);
-            value = $.map(value.split(''), function(n) {
+            value = $.map(value.split(''), function (n) {
                 var code = n.charCodeAt(0);
                 return (code >= 'A'.charCodeAt(0) && code <= 'Z'.charCodeAt(0))
-                        // Replace A, B, C, ..., Z with 10, 11, ..., 35
-                        ? (code - 'A'.charCodeAt(0) + 10)
-                        : n;
+                    // Replace A, B, C, ..., Z with 10, 11, ..., 35
+                    ? (code - 'A'.charCodeAt(0) + 10)
+                    : n;
             });
             value = value.join('');
 
-            var temp   = parseInt(value.substr(0, 1), 10),
+            var temp = parseInt(value.substr(0, 1), 10),
                 length = value.length;
             for (var i = 1; i < length; ++i) {
                 temp = (temp * 10 + parseInt(value.substr(i, 1), 10)) % 97;

@@ -1,4 +1,4 @@
-(function($) {
+(function ($) {
     /**
      * Chilean Spanish language package
      * Translated by @marceloampuerop6
@@ -36,7 +36,7 @@
             'default': 'Por favor ingrese un valor distinto'
         },
         digits: {
-             'default': 'Por favor ingrese sólo dígitos'
+            'default': 'Por favor ingrese sólo dígitos'
         },
         ean: {
             'default': 'Por favor ingrese un número EAN válido'

@@ -1,4 +1,4 @@
-(function($) {
+(function ($) {
     /**
      * Simplified Chinese language package
      * Translated by @tureki
@@ -36,7 +36,7 @@
             'default': '請輸入不一樣的值'
         },
         digits: {
-             'default': '只能輸入數字'
+            'default': '只能輸入數字'
         },
         ean: {
             'default': '請輸入有效的EAN'

@@ -1,4 +1,4 @@
-(function($) {
+(function ($) {
     $.fn.bootstrapValidator.i18n.file = $.extend($.fn.bootstrapValidator.i18n.file || {}, {
         'default': 'Please choose a valid file'
     });
@@ -23,7 +23,7 @@
          * - type: The allowed MIME type, separated by a comma
          * @returns {Boolean}
          */
-        validate: function(validator, $field, options) {
+        validate: function (validator, $field, options) {
             var value = $field.val();
             if (value === '') {
                 return true;
@@ -31,8 +31,8 @@
 
             var ext,
                 extensions = options.extension ? options.extension.toLowerCase().split(',') : null,
-                types      = options.type      ? options.type.toLowerCase().split(',')      : null,
-                html5      = (window.File && window.FileList && window.FileReader);
+                types = options.type ? options.type.toLowerCase().split(',') : null,
+                html5 = (window.File && window.FileList && window.FileReader);
 
             if (html5) {
                 // Get FileList instance

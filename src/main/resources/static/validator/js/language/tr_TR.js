@@ -1,4 +1,4 @@
-(function($) {
+(function ($) {
     /**
      * Turkish language package
      * Translated By @CeRBeR666
@@ -36,7 +36,7 @@
             'default': 'Lütfen farklı bir değer giriniz'
         },
         digits: {
-             'default': 'Lütfen sadece sayı giriniz'
+            'default': 'Lütfen sadece sayı giriniz'
         },
         ean: {
             'default': 'Lütfen geçerli bir EAN numarası giriniz'

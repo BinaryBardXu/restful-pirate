@@ -1,4 +1,4 @@
-(function($) {
+(function ($) {
     /**
      * French language package
      * Translated by @dlucazeau

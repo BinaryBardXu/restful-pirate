@@ -1,4 +1,4 @@
-(function($) {
+(function ($) {
     $.fn.bootstrapValidator.i18n.numeric = $.extend($.fn.bootstrapValidator.i18n.numeric || {}, {
         'default': 'Please enter a valid float number'
     });
@@ -9,7 +9,7 @@
             separator: 'separator'
         },
 
-        enableByHtml5: function($field) {
+        enableByHtml5: function ($field) {
             return ('number' === $field.attr('type')) && ($field.attr('step') !== undefined) && ($field.attr('step') % 1 !== 0);
         },
 
@@ -23,7 +23,7 @@
          * - separator: The decimal separator. Can be "." (default), ","
          * @returns {Boolean}
          */
-        validate: function(validator, $field, options) {
+        validate: function (validator, $field, options) {
             var value = $field.val();
             if (value === '') {
                 return true;

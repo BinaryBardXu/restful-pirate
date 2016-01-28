@@ -1,4 +1,4 @@
-(function($) {
+(function ($) {
     $.fn.bootstrapValidator.i18n.between = $.extend($.fn.bootstrapValidator.i18n.between || {}, {
         'default': 'Please enter a value between %s and %s',
         notInclusive: 'Please enter a value between %s and %s strictly'
@@ -12,7 +12,7 @@
             inclusive: 'inclusive'
         },
 
-        enableByHtml5: function($field) {
+        enableByHtml5: function ($field) {
             if ('range' === $field.attr('type')) {
                 return {
                     min: $field.attr('min'),
@@ -42,7 +42,7 @@
          * - message: The invalid message
          * @returns {Boolean|Object}
          */
-        validate: function(validator, $field, options) {
+        validate: function (validator, $field, options) {
             var value = $field.val();
             if (value === '') {
                 return true;
@@ -52,15 +52,15 @@
                 max = $.isNumeric(options.max) ? options.max : validator.getDynamicOption($field, options.max);
 
             value = parseFloat(value);
-			return (options.inclusive === true || options.inclusive === undefined)
-                    ? {
-                        valid: value >= min && value <= max,
-                        message: $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.between['default'], [min, max])
-                    }
-                    : {
-                        valid: value > min  && value <  max,
-                        message: $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.between.notInclusive, [min, max])
-                    };
+            return (options.inclusive === true || options.inclusive === undefined)
+                ? {
+                valid: value >= min && value <= max,
+                message: $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.between['default'], [min, max])
+            }
+                : {
+                valid: value > min && value < max,
+                message: $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.between.notInclusive, [min, max])
+            };
         }
     };
 }(window.jQuery));

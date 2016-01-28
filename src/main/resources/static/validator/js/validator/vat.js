@@ -1,4 +1,4 @@
-(function($) {
+(function ($) {
     $.fn.bootstrapValidator.i18n.vat = $.extend($.fn.bootstrapValidator.i18n.vat || {}, {
         'default': 'Please enter a valid VAT number',
         countryNotSupported: 'The country code %s is not supported',
@@ -66,7 +66,7 @@
          *      - A callback function that returns the country code
          * @returns {Boolean|Object}
          */
-        validate: function(validator, $field, options) {
+        validate: function (validator, $field, options) {
             var value = $field.val();
             if (value === '') {
                 return true;
@@ -87,13 +87,13 @@
                 };
             }
 
-            var method  = ['_', country.toLowerCase()].join('');
+            var method = ['_', country.toLowerCase()].join('');
             return this[method](value)
                 ? true
                 : {
-                    valid: false,
-                    message: $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.vat.country, $.fn.bootstrapValidator.i18n.vat.countries[country.toUpperCase()])
-                };
+                valid: false,
+                message: $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.vat.country, $.fn.bootstrapValidator.i18n.vat.countries[country.toUpperCase()])
+            };
         },
 
         // VAT validators
@@ -107,15 +107,15 @@
          * @param {String} value VAT number
          * @returns {Boolean}
          */
-        _at: function(value) {
+        _at: function (value) {
             if (!/^ATU[0-9]{8}$/.test(value)) {
                 return false;
             }
 
             value = value.substr(3);
-            var sum    = 0,
+            var sum = 0,
                 weight = [1, 2, 1, 2, 1, 2, 1],
-                temp   = 0;
+                temp = 0;
 
             for (var i = 0; i < 7; i++) {
                 temp = parseInt(value.charAt(i), 10) * weight[i];
@@ -142,7 +142,7 @@
          * @param {String} value VAT number
          * @returns {Boolean}
          */
-        _be: function(value) {
+        _be: function (value) {
             if (!/^BE[0]{0,1}[0-9]{9}$/.test(value)) {
                 return false;
             }
@@ -172,7 +172,7 @@
          * @param {String} value VAT number
          * @returns {Boolean}
          */
-        _bg: function(value) {
+        _bg: function (value) {
             if (!/^BG[0-9]{9,10}$/.test(value)) {
                 return false;
             }
@@ -198,11 +198,11 @@
             // Physical persons, foreigners and others
             else if (value.length === 10) {
                 // Validate Bulgarian national identification numbers
-                var egn = function(value) {
+                var egn = function (value) {
                         // Check the birth date
-                        var year  = parseInt(value.substr(0, 2), 10) + 1900,
+                        var year = parseInt(value.substr(0, 2), 10) + 1900,
                             month = parseInt(value.substr(2, 2), 10),
-                            day   = parseInt(value.substr(4, 2), 10);
+                            day = parseInt(value.substr(4, 2), 10);
                         if (month > 40) {
                             year += 100;
                             month -= 40;
@@ -215,7 +215,7 @@
                             return false;
                         }
 
-                        var sum    = 0,
+                        var sum = 0,
                             weight = [2, 4, 8, 5, 10, 9, 7, 3, 6];
                         for (var i = 0; i < 9; i++) {
                             sum += parseInt(value.charAt(i), 10) * weight[i];
@@ -223,9 +223,9 @@
                         sum = (sum % 11) % 10;
                         return (sum + '' === value.substr(9, 1));
                     },
-                    // Validate Bulgarian personal number of a foreigner
-                    pnf = function(value) {
-                        var sum    = 0,
+                // Validate Bulgarian personal number of a foreigner
+                    pnf = function (value) {
+                        var sum = 0,
                             weight = [21, 19, 17, 13, 11, 9, 7, 3, 1];
                         for (var i = 0; i < 9; i++) {
                             sum += parseInt(value.charAt(i), 10) * weight[i];
@@ -233,9 +233,9 @@
                         sum = sum % 10;
                         return (sum + '' === value.substr(9, 1));
                     },
-                    // Finally, consider it as a VAT number
-                    vat = function(value) {
-                        var sum    = 0,
+                // Finally, consider it as a VAT number
+                    vat = function (value) {
+                        var sum = 0,
                             weight = [4, 3, 2, 7, 6, 5, 4, 3, 2];
                         for (var i = 0; i < 9; i++) {
                             sum += parseInt(value.charAt(i), 10) * weight[i];
@@ -261,13 +261,13 @@
          * @param {String} value VAT number
          * @returns {Boolean}
          */
-        _ch: function(value) {
+        _ch: function (value) {
             if (!/^CHE[0-9]{9}(MWST)?$/.test(value)) {
                 return false;
             }
 
             value = value.substr(3);
-            var sum    = 0,
+            var sum = 0,
                 weight = [5, 4, 3, 2, 7, 6, 5, 4];
             for (var i = 0; i < 8; i++) {
                 sum += parseInt(value.charAt(i), 10) * weight[i];
@@ -293,7 +293,7 @@
          * @param {String} value VAT number
          * @returns {Boolean}
          */
-        _cy: function(value) {
+        _cy: function (value) {
             if (!/^CY[0-5|9]{1}[0-9]{7}[A-Z]{1}$/.test(value)) {
                 return false;
             }
@@ -306,9 +306,9 @@
             }
 
             // Extract the next digit and multiply by the counter.
-            var sum         = 0,
+            var sum = 0,
                 translation = {
-                    '0': 1,  '1': 0,  '2': 5,  '3': 7,  '4': 9,
+                    '0': 1, '1': 0, '2': 5, '3': 7, '4': 9,
                     '5': 13, '6': 15, '7': 17, '8': 19, '9': 21
                 };
             for (var i = 0; i < 8; i++) {
@@ -337,7 +337,7 @@
          * @param {String} value VAT number
          * @returns {Boolean}
          */
-        _cz: function(value) {
+        _cz: function (value) {
             if (!/^CZ[0-9]{8,10}$/.test(value)) {
                 return false;
             }
@@ -345,7 +345,7 @@
             value = value.substr(2);
 
             var sum = 0,
-                i   = 0;
+                i = 0;
             if (value.length === 8) {
                 // Do not allow to start with '9'
                 if (value.charAt(0) + '' === '9') {
@@ -382,9 +382,9 @@
                 return (sum + '' === value.substr(8, 1));
             } else if (value.length === 9 || value.length === 10) {
                 // Validate Czech birth number (Rodné číslo), which is also national identifier
-                var year  = 1900 + parseInt(value.substr(0, 2), 10),
+                var year = 1900 + parseInt(value.substr(0, 2), 10),
                     month = parseInt(value.substr(2, 2), 10) % 50 % 20,
-                    day   = parseInt(value.substr(4, 2), 10);
+                    day = parseInt(value.substr(4, 2), 10);
                 if (value.length === 9) {
                     if (year >= 1980) {
                         year -= 100;
@@ -424,7 +424,7 @@
          * @param {String} value VAT number
          * @returns {Boolean}
          */
-        _de: function(value) {
+        _de: function (value) {
             if (!/^DE[0-9]{9}$/.test(value)) {
                 return false;
             }
@@ -442,13 +442,13 @@
          * @param {String} value VAT number
          * @returns {Boolean}
          */
-        _dk: function(value) {
+        _dk: function (value) {
             if (!/^DK[0-9]{8}$/.test(value)) {
                 return false;
             }
 
             value = value.substr(2);
-            var sum    = 0,
+            var sum = 0,
                 weight = [2, 7, 6, 5, 4, 3, 2, 1];
             for (var i = 0; i < 8; i++) {
                 sum += parseInt(value.charAt(i), 10) * weight[i];
@@ -466,13 +466,13 @@
          * @param {String} value VAT number
          * @returns {Boolean}
          */
-        _ee: function(value) {
+        _ee: function (value) {
             if (!/^EE[0-9]{9}$/.test(value)) {
                 return false;
             }
 
             value = value.substr(2);
-            var sum    = 0,
+            var sum = 0,
                 weight = [3, 7, 1, 3, 7, 1, 3, 7, 1];
 
             for (var i = 0; i < 9; i++) {
@@ -496,24 +496,24 @@
          * @param {String} value VAT number
          * @returns {Boolean}
          */
-        _es: function(value) {
+        _es: function (value) {
             if (!/^ES[0-9A-Z][0-9]{7}[0-9A-Z]$/.test(value)) {
                 return false;
             }
 
             value = value.substr(2);
-            var dni = function(value) {
+            var dni = function (value) {
                     var check = parseInt(value.substr(0, 8), 10);
                     check = 'TRWAGMYFPDXBNJZSQVHLCKE'[check % 23];
                     return (check + '' === value.substr(8, 1));
                 },
-                nie = function(value) {
+                nie = function (value) {
                     var check = ['XYZ'.indexOf(value.charAt(0)), value.substr(1)].join('');
                     check = parseInt(check, 10);
                     check = 'TRWAGMYFPDXBNJZSQVHLCKE'[check % 23];
                     return (check + '' === value.substr(8, 1));
                 },
-                cif = function(value) {
+                cif = function (value) {
                     var first = value.charAt(0), check;
                     if ('KLM'.indexOf(first) !== -1) {
                         // K: Spanish younger than 14 year old
@@ -523,9 +523,9 @@
                         check = 'TRWAGMYFPDXBNJZSQVHLCKE'[check % 23];
                         return (check + '' === value.substr(8, 1));
                     } else if ('ABCDEFGHJNPQRSUVW'.indexOf(first) !== -1) {
-                        var sum    = 0,
+                        var sum = 0,
                             weight = [2, 1, 2, 1, 2, 1, 2],
-                            temp   = 0;
+                            temp = 0;
 
                         for (var i = 0; i < 7; i++) {
                             temp = parseInt(value.charAt(i + 1), 10) * weight[i];
@@ -560,13 +560,13 @@
          * @param {String} value VAT number
          * @returns {Boolean}
          */
-        _fi: function(value) {
+        _fi: function (value) {
             if (!/^FI[0-9]{8}$/.test(value)) {
                 return false;
             }
 
             value = value.substr(2);
-            var sum    = 0,
+            var sum = 0,
                 weight = [7, 9, 10, 5, 8, 4, 2, 1];
 
             for (var i = 0; i < 8; i++) {
@@ -587,14 +587,14 @@
          * @param {String} value VAT number
          * @returns {Boolean}
          */
-        _fr: function(value) {
+        _fr: function (value) {
             if (!/^FR[0-9A-Z]{2}[0-9]{9}$/.test(value)) {
                 return false;
             }
 
             value = value.substr(2);
 
-			if (!$.fn.bootstrapValidator.helpers.luhn(value.substr(2))) {
+            if (!$.fn.bootstrapValidator.helpers.luhn(value.substr(2))) {
                 return false;
             }
 
@@ -624,31 +624,29 @@
          * @param {String} value VAT number
          * @returns {Boolean}
          */
-        _gb: function(value) {
+        _gb: function (value) {
             if (!/^GB[0-9]{9}$/.test(value)             /* Standard */
                 && !/^GB[0-9]{12}$/.test(value)         /* Branches */
                 && !/^GBGD[0-9]{3}$/.test(value)        /* Government department */
                 && !/^GBHA[0-9]{3}$/.test(value)        /* Health authority */
-                && !/^GB(GD|HA)8888[0-9]{5}$/.test(value))
-            {
+                && !/^GB(GD|HA)8888[0-9]{5}$/.test(value)) {
                 return false;
             }
 
             value = value.substr(2);
             var length = value.length;
             if (length === 5) {
-                var firstTwo  = value.substr(0, 2),
+                var firstTwo = value.substr(0, 2),
                     lastThree = parseInt(value.substr(2), 10);
                 return ('GD' === firstTwo && lastThree < 500) || ('HA' === firstTwo && lastThree >= 500);
             } else if (length === 11 && ('GD8888' === value.substr(0, 6) || 'HA8888' === value.substr(0, 6))) {
                 if (('GD' === value.substr(0, 2) && parseInt(value.substr(6, 3), 10) >= 500)
-                    || ('HA' === value.substr(0, 2) && parseInt(value.substr(6, 3), 10) < 500))
-                {
+                    || ('HA' === value.substr(0, 2) && parseInt(value.substr(6, 3), 10) < 500)) {
                     return false;
                 }
                 return (parseInt(value.substr(6, 3), 10) % 97 === parseInt(value.substr(9, 2), 10));
             } else if (length === 9 || length === 12) {
-                var sum    = 0,
+                var sum = 0,
                     weight = [8, 7, 6, 5, 4, 3, 2, 10, 1];
                 for (var i = 0; i < 9; i++) {
                     sum += parseInt(value.charAt(i), 10) * weight[i];
@@ -674,7 +672,7 @@
          * @param {String} value VAT number
          * @returns {Boolean}
          */
-        _gr: function(value) {
+        _gr: function (value) {
             if (!/^GR[0-9]{9}$/.test(value)) {
                 return false;
             }
@@ -684,7 +682,7 @@
                 value = '0' + value;
             }
 
-            var sum    = 0,
+            var sum = 0,
                 weight = [256, 128, 64, 32, 16, 8, 4, 2];
             for (var i = 0; i < 8; i++) {
                 sum += parseInt(value.charAt(i), 10) * weight[i];
@@ -695,7 +693,7 @@
         },
 
         // EL is traditionally prefix of Greek VAT numbers
-        _el: function(value) {
+        _el: function (value) {
             if (!/^EL[0-9]{9}$/.test(value)) {
                 return false;
             }
@@ -713,13 +711,13 @@
          * @param {String} value VAT number
          * @returns {Boolean}
          */
-        _hu: function(value) {
+        _hu: function (value) {
             if (!/^HU[0-9]{8}$/.test(value)) {
                 return false;
             }
 
             value = value.substr(2);
-            var sum    = 0,
+            var sum = 0,
                 weight = [9, 7, 3, 1, 9, 7, 3, 1];
 
             for (var i = 0; i < 8; i++) {
@@ -738,7 +736,7 @@
          * @param {String} value VAT number
          * @returns {Boolean}
          */
-        _hr: function(value) {
+        _hr: function (value) {
             if (!/^HR[0-9]{11}$/.test(value)) {
                 return false;
             }
@@ -756,18 +754,18 @@
          * @param {String} value VAT number
          * @returns {Boolean}
          */
-        _ie: function(value) {
+        _ie: function (value) {
             if (!/^IE[0-9]{1}[0-9A-Z\*\+]{1}[0-9]{5}[A-Z]{1,2}$/.test(value)) {
                 return false;
             }
 
             value = value.substr(2);
-            var getCheckDigit = function(value) {
+            var getCheckDigit = function (value) {
                 while (value.length < 7) {
                     value = '0' + value;
                 }
                 var alphabet = 'WABCDEFGHIJKLMNOPQRSTUV',
-                    sum      = 0;
+                    sum = 0;
                 for (var i = 0; i < 7; i++) {
                     sum += parseInt(value.charAt(i), 10) * (8 - i);
                 }
@@ -800,7 +798,7 @@
          * @param {String} value VAT number
          * @returns {Boolean}
          */
-        _it: function(value) {
+        _it: function (value) {
             if (!/^IT[0-9]{11}$/.test(value)) {
                 return false;
             }
@@ -831,14 +829,14 @@
          * @param {String} value VAT number
          * @returns {Boolean}
          */
-        _lt: function(value) {
+        _lt: function (value) {
             if (!/^LT([0-9]{7}1[0-9]{1}|[0-9]{10}1[0-9]{1})$/.test(value)) {
                 return false;
             }
 
             value = value.substr(2);
             var length = value.length,
-                sum    = 0,
+                sum = 0,
                 i;
             for (i = 0; i < length - 1; i++) {
                 sum += parseInt(value.charAt(i), 10) * (1 + i % 9);
@@ -863,7 +861,7 @@
          * @param {String} value VAT number
          * @returns {Boolean}
          */
-        _lu: function(value) {
+        _lu: function (value) {
             if (!/^LU[0-9]{8}$/.test(value)) {
                 return false;
             }
@@ -881,20 +879,20 @@
          * @param {String} value VAT number
          * @returns {Boolean}
          */
-        _lv: function(value) {
+        _lv: function (value) {
             if (!/^LV[0-9]{11}$/.test(value)) {
                 return false;
             }
 
             value = value.substr(2);
-            var first  = parseInt(value.charAt(0), 10),
-                sum    = 0,
+            var first = parseInt(value.charAt(0), 10),
+                sum = 0,
                 weight = [],
                 i,
                 length = value.length;
             if (first > 3) {
                 // Legal entity
-                sum    = 0;
+                sum = 0;
                 weight = [9, 1, 4, 8, 3, 10, 2, 5, 7, 6, 1];
                 for (i = 0; i < length; i++) {
                     sum += parseInt(value.charAt(i), 10) * weight[i];
@@ -903,9 +901,9 @@
                 return (sum === 3);
             } else {
                 // Check birth date
-                var day   = parseInt(value.substr(0, 2), 10),
+                var day = parseInt(value.substr(0, 2), 10),
                     month = parseInt(value.substr(2, 2), 10),
-                    year  = parseInt(value.substr(4, 2), 10);
+                    year = parseInt(value.substr(4, 2), 10);
                 year = year + 1800 + parseInt(value.charAt(6), 10) * 100;
 
                 if (!$.fn.bootstrapValidator.helpers.date(year, month, day)) {
@@ -913,7 +911,7 @@
                 }
 
                 // Check personal code
-                sum    = 0;
+                sum = 0;
                 weight = [10, 5, 8, 4, 2, 1, 6, 3, 7, 9];
                 for (i = 0; i < length - 1; i++) {
                     sum += parseInt(value.charAt(i), 10) * weight[i];
@@ -932,13 +930,13 @@
          * @param {String} value VAT number
          * @returns {Boolean}
          */
-        _mt: function(value) {
+        _mt: function (value) {
             if (!/^MT[0-9]{8}$/.test(value)) {
                 return false;
             }
 
             value = value.substr(2);
-            var sum    = 0,
+            var sum = 0,
                 weight = [3, 4, 6, 7, 8, 9, 10, 1];
 
             for (var i = 0; i < 8; i++) {
@@ -957,12 +955,12 @@
          * @param {String} value VAT number
          * @returns {Boolean}
          */
-        _nl: function(value) {
+        _nl: function (value) {
             if (!/^NL[0-9]{9}B[0-9]{2}$/.test(value)) {
-               return false;
+                return false;
             }
             value = value.substr(2);
-            var sum    = 0,
+            var sum = 0,
                 weight = [9, 8, 7, 6, 5, 4, 3, 2];
             for (var i = 0; i < 8; i++) {
                 sum += parseInt(value.charAt(i), 10) * weight[i];
@@ -982,12 +980,12 @@
          * @param {String} value VAT number
          * @returns {Boolean}
          */
-        _no: function(value) {
+        _no: function (value) {
             if (!/^NO[0-9]{9}$/.test(value)) {
-               return false;
+                return false;
             }
             value = value.substr(2);
-            var sum    = 0,
+            var sum = 0,
                 weight = [3, 2, 7, 6, 5, 4, 3, 2];
             for (var i = 0; i < 8; i++) {
                 sum += parseInt(value.charAt(i), 10) * weight[i];
@@ -1009,13 +1007,13 @@
          * @param {String} value VAT number
          * @returns {Boolean}
          */
-        _pl: function(value) {
+        _pl: function (value) {
             if (!/^PL[0-9]{10}$/.test(value)) {
                 return false;
             }
 
             value = value.substr(2);
-            var sum    = 0,
+            var sum = 0,
                 weight = [6, 5, 7, 2, 3, 4, 5, 6, 7, -1];
 
             for (var i = 0; i < 10; i++) {
@@ -1034,13 +1032,13 @@
          * @param {String} value VAT number
          * @returns {Boolean}
          */
-        _pt: function(value) {
+        _pt: function (value) {
             if (!/^PT[0-9]{9}$/.test(value)) {
                 return false;
             }
 
             value = value.substr(2);
-            var sum    = 0,
+            var sum = 0,
                 weight = [9, 8, 7, 6, 5, 4, 3, 2];
 
             for (var i = 0; i < 8; i++) {
@@ -1062,7 +1060,7 @@
          * @param {String} value VAT number
          * @returns {Boolean}
          */
-        _ro: function(value) {
+        _ro: function (value) {
             if (!/^RO[1-9][0-9]{1,9}$/.test(value)) {
                 return false;
             }
@@ -1070,7 +1068,7 @@
 
             var length = value.length,
                 weight = [7, 5, 3, 2, 1, 7, 5, 3, 2].slice(10 - length),
-                sum    = 0;
+                sum = 0;
             for (var i = 0; i < length - 1; i++) {
                 sum += parseInt(value.charAt(i), 10) * weight[i];
             }
@@ -1085,7 +1083,7 @@
          * @param {String} value VAT number
          * @returns {Boolean}
          */
-        _ru: function(value) {
+        _ru: function (value) {
             if (!/^RU([0-9]{9}|[0-9]{12})$/.test(value)) {
                 return false;
             }
@@ -1093,7 +1091,7 @@
             value = value.substr(2);
             var i = 0;
             if (value.length === 10) {
-                var sum    = 0,
+                var sum = 0,
                     weight = [2, 4, 10, 3, 5, 9, 4, 6, 8, 0];
                 for (i = 0; i < 10; i++) {
                     sum += parseInt(value.charAt(i), 10) * weight[i];
@@ -1105,9 +1103,9 @@
 
                 return (sum + '' === value.substr(9, 1));
             } else if (value.length === 12) {
-                var sum1    = 0,
+                var sum1 = 0,
                     weight1 = [7, 2, 4, 10, 3, 5, 9, 4, 6, 8, 0],
-                    sum2    = 0,
+                    sum2 = 0,
                     weight2 = [3, 7, 2, 4, 10, 3, 5, 9, 4, 6, 8, 0];
 
                 for (i = 0; i < 11; i++) {
@@ -1135,13 +1133,13 @@
          * @param {String} value VAT number
          * @returns {Boolean}
          */
-        _rs: function(value) {
+        _rs: function (value) {
             if (!/^RS[0-9]{9}$/.test(value)) {
                 return false;
             }
 
             value = value.substr(2);
-            var sum  = 10,
+            var sum = 10,
                 temp = 0;
             for (var i = 0; i < 8; i++) {
                 temp = (parseInt(value.charAt(i), 10) + sum) % 10;
@@ -1163,7 +1161,7 @@
          * @param {String} value VAT number
          * @returns {Boolean}
          */
-        _se: function(value) {
+        _se: function (value) {
             if (!/^SE[0-9]{10}01$/.test(value)) {
                 return false;
             }
@@ -1181,13 +1179,13 @@
          * @param {String} value VAT number
          * @returns {Boolean}
          */
-        _si: function(value) {
+        _si: function (value) {
             if (!/^SI[0-9]{8}$/.test(value)) {
                 return false;
             }
 
             value = value.substr(2);
-            var sum    = 0,
+            var sum = 0,
                 weight = [8, 7, 6, 5, 4, 3, 2];
 
             for (var i = 0; i < 7; i++) {
@@ -1209,7 +1207,7 @@
          * @param {String} value VAT number
          * @returns {Boolean}
          */
-        _sk: function(value) {
+        _sk: function (value) {
             if (!/^SK[1-9][0-9][(2-4)|(6-9)][0-9]{7}$/.test(value)) {
                 return false;
             }

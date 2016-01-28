@@ -1,4 +1,4 @@
-(function($) {
+(function ($) {
     $.fn.bootstrapValidator.i18n.regexp = $.extend($.fn.bootstrapValidator.i18n.regexp || {}, {
         'default': 'Please enter a value matching the pattern'
     });
@@ -9,7 +9,7 @@
             regexp: 'regexp'
         },
 
-        enableByHtml5: function($field) {
+        enableByHtml5: function ($field) {
             var pattern = $field.attr('pattern');
             if (pattern) {
                 return {
@@ -29,7 +29,7 @@
          * - regexp: The regular expression you need to check
          * @returns {Boolean}
          */
-        validate: function(validator, $field, options) {
+        validate: function (validator, $field, options) {
             var value = $field.val();
             if (value === '') {
                 return true;

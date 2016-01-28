@@ -1,4 +1,4 @@
-(function($) {
+(function ($) {
     $.fn.bootstrapValidator.i18n.meid = $.extend($.fn.bootstrapValidator.i18n.meid || {}, {
         'default': 'Please enter a valid MEID number'
     });
@@ -17,7 +17,7 @@
          * - message: The invalid message
          * @returns {Boolean}
          */
-        validate: function(validator, $field, options) {
+        validate: function (validator, $field, options) {
             var value = $field.val();
             if (value === '') {
                 return true;
@@ -60,10 +60,10 @@
 
                     // If the last digit of the calc is 0, the check digit is 0
                     return (sum % 10 === 0)
-                            ? (cd === '0')
-                            // Subtract it from the next highest 10s number (64 goes to 70) and subtract the sum
-                            // Double it and turn it into a hex char
-                            : (cd === ((Math.floor((sum + 10) / 10) * 10 - sum) * 2).toString(16));
+                        ? (cd === '0')
+                        // Subtract it from the next highest 10s number (64 goes to 70) and subtract the sum
+                        // Double it and turn it into a hex char
+                        : (cd === ((Math.floor((sum + 10) / 10) * 10 - sum) * 2).toString(16));
 
                 // 14 digit hex representation (no check digit)
                 case /^[0-9A-F]{14}$/i.test(value):

@@ -1,4 +1,4 @@
-(function($) {
+(function ($) {
     $.fn.bootstrapValidator.i18n.isin = $.extend($.fn.bootstrapValidator.i18n.isin || {}, {
         'default': 'Please enter a valid ISIN number'
     });
@@ -21,7 +21,7 @@
          * - message: The invalid message
          * @returns {Boolean}
          */
-        validate: function(validator, $field, options) {
+        validate: function (validator, $field, options) {
             var value = $field.val();
             if (value === '') {
                 return true;
@@ -34,7 +34,7 @@
             }
 
             var converted = '',
-                length    = value.length;
+                length = value.length;
             // Convert letters to number
             for (var i = 0; i < length - 1; i++) {
                 var c = value.charCodeAt(i);
@@ -42,8 +42,8 @@
             }
 
             var digits = '',
-                n      = converted.length,
-                group  = (n % 2 !== 0) ? 0 : 1;
+                n = converted.length,
+                group = (n % 2 !== 0) ? 0 : 1;
             for (i = 0; i < n; i++) {
                 digits += (parseInt(converted[i], 10) * ((i % 2) === group ? 2 : 1) + '');
             }

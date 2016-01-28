@@ -1,4 +1,4 @@
-(function($) {
+(function ($) {
     $.fn.bootstrapValidator.i18n.lessThan = $.extend($.fn.bootstrapValidator.i18n.lessThan || {}, {
         'default': 'Please enter a value less than or equal to %s',
         notInclusive: 'Please enter a value less than %s'
@@ -11,7 +11,7 @@
             inclusive: 'inclusive'
         },
 
-        enableByHtml5: function($field) {
+        enableByHtml5: function ($field) {
             var max = $field.attr('max');
             if (max) {
                 return {
@@ -38,7 +38,7 @@
          * - message: The invalid message
          * @returns {Boolean|Object}
          */
-        validate: function(validator, $field, options) {
+        validate: function (validator, $field, options) {
             var value = $field.val();
             if (value === '') {
                 return true;
@@ -48,14 +48,14 @@
 
             value = parseFloat(value);
             return (options.inclusive === true || options.inclusive === undefined)
-                    ? {
-                        valid: value <= compareTo,
-                        message: $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.lessThan['default'], compareTo)
-                    }
-                    : {
-                        valid: value < compareTo,
-                        message: $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.lessThan.notInclusive, compareTo)
-                    };
+                ? {
+                valid: value <= compareTo,
+                message: $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.lessThan['default'], compareTo)
+            }
+                : {
+                valid: value < compareTo,
+                message: $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.lessThan.notInclusive, compareTo)
+            };
         }
     };
 }(window.jQuery));

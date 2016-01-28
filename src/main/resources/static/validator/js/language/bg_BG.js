@@ -1,4 +1,4 @@
-(function($) {
+(function ($) {
     /**
      * Bulgarian language package
      * Translated by @mraiur
@@ -36,7 +36,7 @@
             'default': 'Моля, въведете различна стойност'
         },
         digits: {
-             'default': 'Моля, въведете само цифри'
+            'default': 'Моля, въведете само цифри'
         },
         ean: {
             'default': 'Моля, въведете валиден EAN номер'

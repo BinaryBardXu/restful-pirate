@@ -1,4 +1,4 @@
-(function($) {
+(function ($) {
     $.fn.bootstrapValidator.i18n.remote = $.extend($.fn.bootstrapValidator.i18n.remote || {}, {
         'default': 'Please enter a valid value'
     });
@@ -26,7 +26,7 @@
          * - message: The invalid message
          * @returns {Boolean|Deferred}
          */
-        validate: function(validator, $field, options) {
+        validate: function (validator, $field, options) {
             var value = $field.val();
             if (value === '') {
                 return true;
@@ -34,7 +34,7 @@
 
             var name = $field.attr('data-bv-field'),
                 data = options.data || {},
-                url  = options.url,
+                url = options.url,
                 type = options.type || 'POST';
 
             // Support dynamic data
@@ -56,11 +56,11 @@
                 dataType: 'json',
                 data: data
             });
-            xhr.then(function(response) {
+            xhr.then(function (response) {
                 dfd.resolve($field, 'remote', response.valid === true || response.valid === 'true', response.message ? response.message : null);
             });
 
-            dfd.fail(function() {
+            dfd.fail(function () {
                 xhr.abort();
             });
 

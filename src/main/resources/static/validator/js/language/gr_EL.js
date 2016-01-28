@@ -1,4 +1,4 @@
-(function($) {
+(function ($) {
     /**
      * Greek language package
      * Translated by @pRieStaKos
@@ -36,7 +36,7 @@
             'default': 'Παρακαλώ εισάγετε μια διαφορετική τιμή'
         },
         digits: {
-             'default': 'Παρακαλώ εισάγετε μόνο ψηφία'
+            'default': 'Παρακαλώ εισάγετε μόνο ψηφία'
         },
         ean: {
             'default': 'Παρακαλώ εισάγετε έναν έγκυρο αριθμό EAN'

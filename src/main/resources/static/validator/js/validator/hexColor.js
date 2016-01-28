@@ -1,10 +1,10 @@
-(function($) {
+(function ($) {
     $.fn.bootstrapValidator.i18n.hexColor = $.extend($.fn.bootstrapValidator.i18n.hexColor || {}, {
         'default': 'Please enter a valid hex color'
     });
 
     $.fn.bootstrapValidator.validators.hexColor = {
-        enableByHtml5: function($field) {
+        enableByHtml5: function ($field) {
             return ('color' === $field.attr('type'));
         },
 
@@ -17,7 +17,7 @@
          * - message: The invalid message
          * @returns {Boolean}
          */
-        validate: function(validator, $field, options) {
+        validate: function (validator, $field, options) {
             var value = $field.val();
             if (value === '') {
                 return true;

@@ -1,10 +1,10 @@
-(function($) {
+(function ($) {
     $.fn.bootstrapValidator.i18n.emailAddress = $.extend($.fn.bootstrapValidator.i18n.emailAddress || {}, {
         'default': 'Please enter a valid email address'
     });
 
     $.fn.bootstrapValidator.validators.emailAddress = {
-        enableByHtml5: function($field) {
+        enableByHtml5: function ($field) {
             return ('email' === $field.attr('type'));
         },
 
@@ -16,7 +16,7 @@
          * @param {Object} [options]
          * @returns {Boolean}
          */
-        validate: function(validator, $field, options) {
+        validate: function (validator, $field, options) {
             var value = $field.val();
             if (value === '') {
                 return true;
