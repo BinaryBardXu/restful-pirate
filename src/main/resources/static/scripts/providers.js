@@ -16,13 +16,10 @@ var Providers = {
     loadProviders: function () {
         Racoon.restful({
             url: Providers.url,
-            before: function () {
-                $('#table').bootstrapTable('showLoading');
-            },
             success: function (_data) {
                 var providers = _data.providers;
-                $('#table').bootstrapTable('load', providers);
-                $('#table').bootstrapTable('hideLoading');
+                $("#providers-table").bootstrapTable('load', providers);
+                $("#providers-table").bootstrapTable('hideLoading');
             }
         })
     },
@@ -55,8 +52,8 @@ var Providers = {
             data: {keyword: _consumerKeyOrName},
             success: function (_data) {
                 var providers = _data.providers;
-                $('#table').bootstrapTable('load', providers);
-                $('#table').bootstrapTable('hideLoading');
+                $("#providers-table").bootstrapTable('load', providers);
+                $("#providers-table").bootstrapTable('hideLoading');
             }
         });
     },
