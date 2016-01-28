@@ -19,13 +19,13 @@ import javax.sql.DataSource;
 
 @MapperScan("cn.xubitao")
 public class DatabaseConfig {
-    @Value("${mysql.driver}")
+    @Value("${jdbc.driver}")
     private String driver;
-    @Value("${mysql.url}")
+    @Value("${jdbc.url}")
     private String url;
-    @Value("${mysql.username}")
+    @Value("${jdbc.username}")
     private String userName;
-    @Value("${mysql.password}")
+    @Value("${jdbc.password}")
     private String password;
 
     @Bean
