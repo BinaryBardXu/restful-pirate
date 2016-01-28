@@ -5,7 +5,7 @@ import cn.xubitao.dolphin.foundation.resource.RestResource;
 import java.util.List;
 
 /**
- * Created by 15031046 on 2016/1/15.
+ * Created by xubitao on 2016/1/15.
  */
 public class StatisticResource extends RestResource {
     private long providersCount;
