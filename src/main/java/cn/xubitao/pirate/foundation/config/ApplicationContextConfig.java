@@ -15,7 +15,7 @@ import org.springframework.context.annotation.PropertySources;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by 15031046 on 2016/1/20.
+ * Created by xubitao on 2016/1/20.
  */
 @Configuration
 @PropertySources(value = {@PropertySource("pirate.properties"), @PropertySource("log4j.properties")})
