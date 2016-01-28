@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="toastr/toastr.min.css">
     <link rel="stylesheet" href="css/pirate.css">
     <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/spinner.css">
     <script src="jquery/jquery.min.js"></script>
     <script src="toastr/toastr.min.js"></script>
     <script src="bootstrap/js/bootstrap.js"></script>
@@ -71,7 +72,7 @@
                                                                  type="text">
         </div>
     </div>
-    <table id="table" data-toggle="table">
+    <table id="providers-table" data-toggle="table">
         <thead>
         <tr>
             <th data-field="name" data-valign="middle" data-align="center" data-width="25%">系统名称</th>
@@ -391,6 +392,64 @@
                     <div id="container"></div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="errorModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel2">错误</h4>
+            </div>
+            <div id="errorMessage" class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="processingModel" tabindex="-1" role="dialog" data-backdrop="static"
+     aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-pirate-processing" role="document">
+        <div class="modal-content">
+            <div id="processingMessage" class="modal-body">
+                <div class="spinner">
+                    <div class="rect1"></div>
+                    <div class="rect2"></div>
+                    <div class="rect3"></div>
+                    <div class="rect4"></div>
+                    <div class="rect5"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="processing">
+    <div id="processing-content">
+        <div class="spinner">
+            <div class="rect1"></div>
+            <div class="rect2"></div>
+            <div class="rect3"></div>
+            <div class="rect4"></div>
+            <div class="rect6"></div>
+            <div class="rect7"></div>
+            <div class="rect8"></div>
+            <div class="rect9"></div>
+            <div class="rect10"></div>
+            <div class="rect11"></div>
+            <div class="rect12"></div>
+            <div class="rect13"></div>
+            <div class="rect14"></div>
+        </div>
+        <a id="stop-ajax-button" class="btn button-royal button-rounded">Abort</a>
+        <div>
+
         </div>
     </div>
 </div>
