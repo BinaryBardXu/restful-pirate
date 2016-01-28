@@ -29,12 +29,16 @@ public class Contracts {
     }
 
     public Contract create(final Contract contract) throws Exception {
-        List<Contract> ContractList = contractsPersistence.findByConditions(contract);
-        if (ContractList.size() > 0) {
-            throw new ClientException("Contract已经存在,请核实你的数据.");
-        }
+        checkRedundancy(contract);
         contractsPersistence.create(contract);
         return contractsPersistence.findById(contract.getId());
+    }
+
+    private void checkRedundancy(Contract contract) throws ClientException {
+        Boolean isRedundancy = contractsPersistence.checkRedundancy(contract);
+        if (isRedundancy) {
+            throw new ClientException("The name '" + contract.getName() + "' is already exist.");
+        }
     }
 
     public Contract findById(Integer id) throws SQLException {
@@ -52,10 +56,7 @@ public class Contracts {
     }
 
     public Contract update(Contract contract) throws Exception {
-        Boolean isRedundancy = contractsPersistence.checkRedundancy(contract);
-        if (isRedundancy) {
-            throw new ClientException("Contract已经存在,请核实你的数据.");
-        }
+        checkRedundancy(contract);
         contractsPersistence.update(contract);
         return contractsPersistence.findById(contract.getId());
     }
