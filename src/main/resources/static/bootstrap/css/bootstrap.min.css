@@ -11,7 +11,7 @@ html {
 
 body {
     margin: 0;
-    height:90%;
+    height: 90%;
 }
 
 article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
@@ -5925,9 +5925,10 @@ button.close {
 @media (min-width: 992px) {
     .modal-pirate {
         width: 90%;
-        height:90%;
+        height: 90%;
     }
 }
+
 @media (min-width: 662px) {
     .modal-pirate-middle {
         width: 60%;
@@ -5942,6 +5943,17 @@ button.close {
         height: 50%;
     }
 }
+
+@media (min-width: 100px) {
+    .modal-pirate-processing {
+        width: 100px;
+        margin: auto;
+        margin-top: 10%;
+        height: 100px;
+        z-index: 10000000000;
+    }
+}
+
 .tooltip {
     position: absolute;
     z-index: 1070;
