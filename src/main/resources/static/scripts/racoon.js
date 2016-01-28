@@ -2,59 +2,58 @@
  * Created by xubitao on 1/2/16.
  */
 
-var host = "http://localhost:8080";
 var Racoon = {
+    currentRequest: null,
     restful: function (_options) {
-        $.ajax({
+        var ok = function (_data) {
+            _options.success(_data);
+
+        };
+        var created = function (_data) {
+            _options.success(_data);
+
+        };
+        var error = function (_XHR, _TS) {
+            alert("cuo");
+            $("#errorMessage").html(_XHR.responseJSON.message);
+            $('#errorModel').modal();
+        };
+
+        var notFound = function (_XHR, _TS) {
+            $("#errorMessage").html(_XHR.responseJSON.message);
+            $('#errorModel').modal();
+
+        };
+        Racoon.currentRequest = $.ajax({
             type: _options.type || HttpType.GET,
             url: _options.url,
             dataType: _options.dataType || "json",
             async: _options.async || true,
             data: _options.data,
             contentType: "application/json",
-            before: function () {
-                if (_options.before != undefined) {
-                    _options.before();
+            beforeSend: function () {
+                if (_options.beforeSend != undefined) {
+                    _options.beforeSend();
+                }
+                else {
+                    $('#processing').show();
                 }
             },
-            success: function (_data) {
-                toastr.clear();
-                toastr.remove();
-                if (this.type == HttpType.GET) {
-                    toastr.success(' 加载成功!');
-                }
-                if (this.type == HttpType.POST) {
-                    toastr.success(' 创建成功!');
-                }
-                if (this.type == HttpType.DELETE) {
-                    toastr.success(' 删除成功!');
-                }
-                if (this.type == HttpType.PUT) {
-                    toastr.success(' 修改成功!');
-                }
-
-                _options.success(_data);
+            statusCode: {
+                200: ok,
+                201: created,
+                400: error,
+                404: notFound,
+                500: error
             },
-            complete: function (XHR, TS) {
-                if (XHR.status == 500) {
-                    var httpErrorModel = $("#httpErrorModel");
-                    if (httpErrorModel.html() == undefined) {
-                        loadErrorModel(XMLHttpRequest.responseJSON.message)
-                    }
-                    $('#errorModel').modal();
-                }
-                if (XHR.status > 200 && XHR.status < 300) {
-                    _options.success();
-                }
+            complete: function () {
+                $('#processing').hide();
             }
         });
     },
+
     getLink: function (_links, _rel) {
-        var item = _links[_rel];
-        if (item == undefined) {
-            return undefined;
-        }
-        return item.href;
+        return _links[_rel].href;
     },
     isFirefoxBrowser: function () {
         var Sys = {};
@@ -67,7 +66,13 @@ var Racoon = {
             window.location.href = "html/pleaseSwitchYourBrowser.html"
         }
     },
-
+    JSONLength: function (obj) {
+        var size = 0, key;
+        for (key in obj) {
+            if (obj.hasOwnProperty(key)) size++;
+        }
+        return size;
+    },
     formatJson: function (json, options) {
         var reg = null,
             formatted = '',
@@ -151,17 +156,3 @@ var Racoon = {
         return formatted;
     }
 };
-
-function loadErrorModel(_message) {
-    Racoon.restful({
-        url: host + "/static/html/errorModel.html",
-        dataType: "html",
-        async: false,
-        success: function (_data) {
-            var errorModel = $(_data);
-            errorModel.find("#errorMessage").html(_message);
-            $("body").append(errorModel);
-            $('#errorModel').modal();
-        }
-    })
-}
