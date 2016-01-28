@@ -14,12 +14,7 @@ pirate技术上采用spring-hateoas，数据库采用SQLLITE(暂定).目前，pi
 ```
 sqllite.dbpath=/Users/xubitao/Documents/products/Pirate/sqllite/pirate.db
 ```
-
-3、在scripts中的GlobalConfig里配置entrance地址， 比如：
-
-![](https://github.com/xubitao/readme/blob/master/src/main/java/cn/xubitao/readme/images/globalConfig_entrance.png?raw=true)  
-
-4、契约平台完整使用时，需要配备相应的客户端，客户端程序暂不提供，目前仅供服务端的学习和研究。
+3、契约平台完整使用时，需要配备相应的客户端，客户端程序暂不提供，目前仅供服务端的学习和研究。
 ## API入口
 ```
 http://localhost:8080/entrance
