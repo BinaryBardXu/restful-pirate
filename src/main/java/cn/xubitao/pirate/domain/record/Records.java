@@ -8,6 +8,7 @@ import cn.xubitao.pirate.persistence.record.RecordsPersistence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +25,7 @@ public class Records {
     private RecordsPersistence recordsPersistence;
     @Autowired
     private Contracts contracts;
-    @Autowired
+    @Resource(name = "pirateMatcher")
     private Matcher matcher;
     private List<Record> Records;
 
@@ -39,16 +40,20 @@ public class Records {
     public Record create(final Record record) throws Exception {
         List<Contract> contractList = contracts.loadByConsumerKey(record.getConsumerKey());
         record.setCreateTime(DateUtil.getNow());
+        boolean isMatched = false;
         for (Contract contract : contractList) {
             if (!matcher.match(contract, record)) continue;
             record.setContractId(contract.getId());
             record.setResponse(contract.getResponse());
             record.setIsHit(IS_HIT);
-            return recordsPersistence.create(record);
+            isMatched = true;
         }
-        record.setIsHit(MISSED);
-        record.setContractId(NOT_EXIST);
-        return recordsPersistence.create(record);
+        if (!isMatched) {
+            record.setIsHit(MISSED);
+            record.setContractId(NOT_EXIST);
+        }
+        recordsPersistence.create(record);
+        return recordsPersistence.findById(record.getId());
     }
 
     public Records loadAll(Map conditions) throws SQLException {
