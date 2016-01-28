@@ -1421,6 +1421,18 @@ h1[id] {
     float: left;
 }
 
-#container {
+#processing {
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background: #FBFBFB none repeat scroll 0% 0%;
+    position: absolute;
+    z-index: 1000000000;
+    opacity: 0.9;
+}
 
+#processing-content {
+    margin: 10% auto;
+    text-align: center;
+    height: 55px;
 }
