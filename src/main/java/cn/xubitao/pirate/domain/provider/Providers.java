@@ -2,7 +2,6 @@ package cn.xubitao.pirate.domain.provider;
 
 import cn.xubitao.dolphin.foundation.exceptions.ClientException;
 import cn.xubitao.pirate.domain.contract.Contracts;
-import cn.xubitao.pirate.foundation.config.exception.NotFoundException;
 import cn.xubitao.pirate.persistence.provider.ProviderPersistence;
 import cn.xubitao.pirate.persistence.provider.ProvidersPersistence;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,14 +40,14 @@ public class Providers {
     private void checkIfProviderIsAlreadyExist(Provider provider) throws SQLException, ClientException {
         List<Provider> providerList = providersPersistence.findByConditions(provider);
         if (providerList.size() > 0) {
-            throw new ClientException("Provider已经存在,请核实你的数据.");
+            throw new ClientException("The name '" + provider.getName() + "' is already exist.");
         }
     }
 
     public Provider findById(Integer id) throws SQLException {
         Provider provider = providersPersistence.findById(id);
         if (provider == null) {
-            throw new NotFoundException();
+            return null;
         }
         provider.setProviderPersistence(providerPersistence);
         provider.countContracts();
