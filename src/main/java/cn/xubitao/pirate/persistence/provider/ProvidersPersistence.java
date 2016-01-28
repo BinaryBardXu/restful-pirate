@@ -11,15 +11,15 @@ import java.util.List;
  */
 @Repository
 public interface ProvidersPersistence {
-    Integer create(Provider provider);
+    Integer create(Provider provider) ;
 
-    Provider findById(@Param("id") Integer id);
+    Provider findById(@Param("id") Integer id) ;
 
     List<Provider> loadAll(@Param("keyword") String keyword);
 
-    Integer update(Provider provider);
+    Integer update(Provider provider) ;
 
-    Integer deleteById(@Param("id") Integer id);
+    Integer deleteById(@Param("id") Integer id) ;
 
-    List<Provider> findByConditions(Provider fieldValues);
+    List<Provider> findByConditions(Provider fieldValues) ;
 }
