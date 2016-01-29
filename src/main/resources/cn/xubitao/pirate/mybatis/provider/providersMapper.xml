@@ -10,11 +10,11 @@
         </selectKey>
 
         insert into
-        provider(name,version,consumerKey) values (#{name}, #{version}, #{consumerKey})
+        provider(name,version) values (#{name}, #{version})
     </insert>
 
     <update id="update" parameterType="cn.xubitao.pirate.domain.provider.Provider" flushCache="true">
-        UPDATE  provider SET name=#{name},version=#{version},consumerKey= #{consumerKey} WHERE id=#{id}
+        UPDATE provider SET name=#{name},version=#{version} WHERE id=#{id}
     </update>
 
 
@@ -22,21 +22,23 @@
         UPDATE provider SET deleteStatus=1 WHERE id=#{id}
     </delete>
 
-    <select id="findByConditions" parameterType="cn.xubitao.pirate.domain.provider.Provider"
-            resultType="cn.xubitao.pirate.domain.provider.Provider">
-        SELECT * FROM provider WHERE deleteStatus=0
+
+    <select id="checkRedundancy" parameterType="cn.xubitao.pirate.domain.provider.Provider"
+            resultType="java.lang.Boolean">
+        SELECT CASE WHEN(SELECT COUNT(*) FROM provider WHERE deleteStatus=0 AND id !=#{id}
         <if test="name !=null">
             AND name = #{name}
         </if>
         <if test="version !=null">
             AND version = #{version}
         </if>
+        )>0 THEN 'true' ELSE 'false' END;
     </select>
 
     <select id="loadAll" parameterType="java.lang.String" resultType="cn.xubitao.pirate.domain.provider.Provider">
         SELECT * FROM provider WHERE deleteStatus=0
         <if test="keyword !=null">
-            AND consumerKey LIKE concat('%',#{keyword},'%')
+            AND name LIKE concat('%',#{keyword},'%')
         </if>
     </select>
 
