@@ -10,8 +10,8 @@
         </selectKey>
 
         insert into
-        record(request,response,contractId,isHit,createTime,consumerKey,server)
-        values (#{request}, #{response}, #{contractId}, #{isHit}, #{createTime}, #{consumerKey}, #{server})
+        record(request,response,contractId,isHit,createTime,server)
+        values (#{request}, #{response}, #{contractId}, #{isHit}, #{createTime}, #{server})
     </insert>
 
 
@@ -22,9 +22,6 @@
         </if>
         <if test="isHit !=null">
             AND isHit = #{isHit}
-        </if>
-        <if test="consumerKey !=null">
-            AND consumerKey LIKE concat('%',#{consumerKey},'%')
         </if>
     </select>
 
