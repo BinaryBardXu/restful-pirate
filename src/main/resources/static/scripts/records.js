@@ -43,16 +43,16 @@ var Records = {
         $('#missed-record-search-input').val("");
         $('#missed-record-search-input').unbind();
         $('#missed-record-search-input').bind("change", function () {
-            var consumerKey = $('#missed-record-search-input').val();
-            if (consumerKey == "consumerKey↵") return;
-            Records.searchByConsumerKey(_recordsLink, consumerKey);
+            var name = $('#missed-record-search-input').val();
+            if (name == "name↵") return;
+            Records.searchByName(_recordsLink, name);
         });
     },
-    searchByConsumerKey: function (_recordsLink, _consumerKey) {
+    searchByName: function (_recordsLink, _name) {
         $('#records-table').bootstrapTable('showLoading');
         Racoon.restful({
             url: _recordsLink,
-            data: {consumerKey: _consumerKey},
+            data: {name: _name},
             success: function (_data) {
                 var contracts = _data.contracts;
                 $('#missedRecords-table').bootstrapTable('load', contracts);
