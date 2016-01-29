@@ -68,7 +68,7 @@
         </div>
 
         <div id="pirate-search" class="pull-right search"><input id="providers-search-input" class="form-control"
-                                                                 placeholder="name/consumerKey↵"
+                                                                 placeholder="name↵"
                                                                  type="text">
         </div>
     </div>
@@ -77,7 +77,6 @@
         <tr>
             <th data-field="name" data-valign="middle" data-align="center" data-width="25%">系统名称</th>
             <th data-field="version" data-valign="middle" data-align="center" data-width="25%">版本号</th>
-            <th data-field="consumerKey" data-valign="middle" data-align="center" data-width="20%">ConsumerKey</th>
             <th data-field="_links" data-valign="middle" data-formatter="optionsFormatter" data-align="center"
                 data-width="20%">Options
             </th>
@@ -173,13 +172,6 @@
                         <label class="col-lg-3 control-label">版本号</label>
                         <div class="col-lg-5">
                             <input type="text" class="form-control" name="version" id="provider-version"/>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-lg-3 control-label">consumerKey</label>
-                        <div class="col-lg-5">
-                            <input type="text" class="form-control" name="consumerKey" id="provider-consumerKey"/>
                         </div>
                     </div>
 
@@ -286,9 +278,6 @@
                         <th data-field="response" data-align="center" data-valign="middle" data-width="10%"
                             data-formatter="requestAndResponseFormatter">响应体
                         </th>
-                        <th data-field="consumerKey" data-align="center" data-valign="middle" data-width="10%">
-                            consumerKey
-                        </th>
                         <th data-field="isHit" data-align="center" data-valign="middle" data-width="10%"
                             data-formatter="hitFormatter">命中
                         </th>
@@ -312,7 +301,7 @@
             </div>
             <div>
                 <div class="pirate-toolbar">
-                    <input id="missed-record-search-input" class="form-control" placeholder="consumerKey↵"
+                    <input id="missed-record-search-input" class="form-control" placeholder="name↵"
                            type="text">
                 </div>
             </div>
@@ -326,9 +315,6 @@
                         </th>
                         <th data-field="response" data-valign="middle" data-align="center" data-width="10%"
                             data-formatter="requestAndResponseFormatter">响应体
-                        </th>
-                        <th data-field="consumerKey" data-valign="middle" data-align="center" data-width="20%">
-                            consumerKey
                         </th>
                         <th data-field="isHit" data-align="center" data-valign="middle" data-width="10%"
                             data-formatter="hitFormatter">命中
