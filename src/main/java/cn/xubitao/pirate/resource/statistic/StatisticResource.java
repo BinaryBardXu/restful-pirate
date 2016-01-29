@@ -3,6 +3,7 @@ package cn.xubitao.pirate.resource.statistic;
 import cn.xubitao.dolphin.foundation.resource.RestResource;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by xubitao on 2016/1/15.
@@ -13,9 +14,9 @@ public class StatisticResource extends RestResource {
     private long recordsCount;
     private long hitRecordsCount;
     private long missedRecordsCount;
-    private List<Integer> records;
-    private List<Integer> hitRecords;
-    private List<Integer> missedRecords;
+    private List<Map> records;
+    private List<Map> hitRecords;
+    private List<Map> missedRecords;
 
     public long getProvidersCount() {
         return providersCount;
@@ -33,27 +34,27 @@ public class StatisticResource extends RestResource {
         this.contractsCount = contractsCount;
     }
 
-    public List<Integer> getRecords() {
+    public List<Map> getRecords() {
         return records;
     }
 
-    public void setRecords(List<Integer> records) {
+    public void setRecords(List<Map> records) {
         this.records = records;
     }
 
-    public List<Integer> getHitRecords() {
+    public List<Map> getHitRecords() {
         return hitRecords;
     }
 
-    public void setHitRecords(List<Integer> hitRecords) {
+    public void setHitRecords(List<Map> hitRecords) {
         this.hitRecords = hitRecords;
     }
 
-    public List<Integer> getMissedRecords() {
+    public List<Map> getMissedRecords() {
         return missedRecords;
     }
 
-    public void setMissedRecords(List<Integer> missedRecords) {
+    public void setMissedRecords(List<Map> missedRecords) {
         this.missedRecords = missedRecords;
     }
 
