@@ -11,8 +11,6 @@ public class ProviderResource extends RestResource {
 
     private String version;
 
-    private String consumerKey;
-
     private long contractsCount;
 
     public String getVersion() {
@@ -29,14 +27,6 @@ public class ProviderResource extends RestResource {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getConsumerKey() {
-        return consumerKey;
-    }
-
-    public void setConsumerKey(String consumerKey) {
-        this.consumerKey = consumerKey;
     }
 
     public long getContractsCount() {
