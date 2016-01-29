@@ -44,18 +44,18 @@
 
     <select id="checkRedundancy" parameterType="cn.xubitao.pirate.domain.contract.Contract"
             resultType="java.lang.Boolean">
-        SELECT CASE WHEN(SELECT COUNT(*) FROM contract WHERE deleteStatus=0 AND id!=#{id}
+        SELECT CASE WHEN(SELECT COUNT(*) FROM contract WHERE deleteStatus=0 AND id !=#{id}
         <if test="name !=null">
             AND name = #{name}
         </if>
         )>0 THEN 'true' ELSE 'false' END;
     </select>
 
-    <select id="loadByConsumerKey" parameterType="java.lang.String"
+    <select id="loadByName" parameterType="java.lang.String"
             resultType="cn.xubitao.pirate.domain.contract.Contract">
         SELECT * FROM contract WHERE deleteStatus=0
-        <if test="consumerKey !=null">
-            AND consumerKey = #{consumerKey}
+        <if test="name !=null">
+            AND name = #{name}
         </if>
     </select>
 
