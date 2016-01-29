@@ -24,10 +24,10 @@ public class RecordsController {
     private Records records;
 
     @RequestMapping(method = RequestMethod.GET)
-    public HttpEntity<ResourceSupport> loadAll(@RequestParam(required = false) Integer contractId, @RequestParam(required = false) Integer isHit, @RequestParam(required = false) String consumerKey) throws Exception {
-        Map conditions = Maps.build("contractId", contractId, "isHit", isHit, "consumerKey", consumerKey);
+    public HttpEntity<ResourceSupport> loadAll(@RequestParam(required = false) Integer contractId, @RequestParam(required = false) Integer isHit, @RequestParam(required = false) String name) throws Exception {
+        Map conditions = Maps.build("contractId", contractId, "isHit", isHit, "name", name);
         Records recordList = records.loadAll(conditions);
-        return Response.build(recordList, new RecordsResourceAssembler(), contractId, isHit, consumerKey);
+        return Response.build(recordList, new RecordsResourceAssembler(), contractId, isHit, name);
     }
 
     @RequestMapping(method = RequestMethod.POST)
