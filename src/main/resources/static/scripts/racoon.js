@@ -14,7 +14,6 @@ var Racoon = {
 
         };
         var error = function (_XHR, _TS) {
-            alert("cuo");
             $("#errorMessage").html(_XHR.responseJSON.message);
             $('#errorModel').modal();
         };
