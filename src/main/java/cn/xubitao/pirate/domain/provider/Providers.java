@@ -32,14 +32,14 @@ public class Providers {
     }
 
     public Provider create(final Provider provider) throws Exception {
-        checkIfProviderIsAlreadyExist(provider);
+        checkRedundancy(provider);
         providersPersistence.create(provider);
         return providersPersistence.findById(provider.getId());
     }
 
-    private void checkIfProviderIsAlreadyExist(Provider provider) throws SQLException, ClientException {
-        List<Provider> providerList = providersPersistence.findByConditions(provider);
-        if (providerList.size() > 0) {
+    private void checkRedundancy(Provider provider) throws SQLException, ClientException {
+        Boolean isRedundancy = providersPersistence.checkRedundancy(provider);
+        if (isRedundancy) {
             throw new ClientException("The name '" + provider.getName() + "' is already exist.");
         }
     }
@@ -65,7 +65,7 @@ public class Providers {
     }
 
     public Provider update(Provider provider) throws SQLException, ClientException {
-        checkIfProviderIsAlreadyExist(provider);
+        checkRedundancy(provider);
         providersPersistence.update(provider);
         return providersPersistence.findById(provider.getId());
     }
