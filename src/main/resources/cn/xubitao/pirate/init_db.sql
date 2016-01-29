@@ -6,7 +6,7 @@ CREATE TABLE contract
     name VARCHAR(50),
     providerId INT(11) NOT NULL,
     description TEXT,
-    deleteStatus INT(11) DEFAULT '0',
+    deleteStatus INT(11) DEFAULT '0' NOT NULL,
     server VARCHAR(200) NOT NULL,
     excludeFields VARCHAR(200)
 );
@@ -15,8 +15,8 @@ CREATE TABLE provider
     id INT(11) PRIMARY KEY NOT NULL,
     name VARCHAR(50),
     version VARCHAR(50),
-    deleteStatus INT(11) DEFAULT '0'
-);
+    deleteStatus INT(11) DEFAULT '0' NOT NULL
+    );
 CREATE TABLE record
 (
     id INT(11) PRIMARY KEY NOT NULL,
@@ -26,6 +26,5 @@ CREATE TABLE record
     deleteStatus INT(11) DEFAULT '0' NOT NULL,
     isHit INT(11) NOT NULL,
     createTime VARCHAR(50),
-    name VARCHAR(50),
     server VARCHAR(200)
 );
