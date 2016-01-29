@@ -10,7 +10,6 @@ public class RecordResource extends RestResource {
     private String server;
     private String request;
     private String response;
-    private String consumerKey;
     private Integer contractId;
     private Integer isHit;
     private String createTime;
@@ -37,14 +36,6 @@ public class RecordResource extends RestResource {
 
     public void setResponse(String response) {
         this.response = response;
-    }
-
-    public String getConsumerKey() {
-        return consumerKey;
-    }
-
-    public void setConsumerKey(String consumerKey) {
-        this.consumerKey = consumerKey;
     }
 
     public Integer getContractId() {
