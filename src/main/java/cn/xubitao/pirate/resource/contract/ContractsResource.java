@@ -15,7 +15,6 @@ public class ContractsResource extends RestResource {
         return contracts;
     }
 
-
     public void setContracts(List<ResourceSupport> contracts) {
         this.contracts = contracts;
     }
