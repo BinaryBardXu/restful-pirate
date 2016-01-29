@@ -15,7 +15,6 @@ public class ProvidersResource extends RestResource {
         return providers;
     }
 
-
     public void setProviders(List<ResourceSupport> providers) {
         this.providers = providers;
     }
