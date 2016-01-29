@@ -34,6 +34,9 @@ public class StatisticResourceAssembler extends DolphinAssembler {
         statisticResource.setRecordsCount(statistic.getRecordsCount());
         statisticResource.setHitRecordsCount(statistic.getHitRecordsCount());
         statisticResource.setMissedRecordsCount(statistic.getMissedRecordsCount());
+        statisticResource.setRecords(statistic.getRecords());
+        statisticResource.setHitRecords(statistic.getHitRecords());
+        statisticResource.setMissedRecords(statistic.getMissedRecords());
 
         statisticResource.add(entranceLink);
         statisticResource.add(selfLink);
