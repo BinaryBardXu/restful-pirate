@@ -10,7 +10,7 @@ public class ContractResource extends RestResource {
     private String request;
     private String response;
     private String name;
-    private String desc;
+    private String description;
     private String server;
     private Integer providerId;
     private String excludeFields;
@@ -24,12 +24,12 @@ public class ContractResource extends RestResource {
         this.name = name;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getServer() {
