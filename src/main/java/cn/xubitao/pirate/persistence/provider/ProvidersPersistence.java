@@ -21,5 +21,5 @@ public interface ProvidersPersistence {
 
     Integer deleteById(@Param("id") Integer id) ;
 
-    List<Provider> findByConditions(Provider fieldValues) ;
+    Boolean checkRedundancy(Provider provider);
 }
