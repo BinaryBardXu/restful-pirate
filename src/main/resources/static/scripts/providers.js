@@ -40,16 +40,16 @@ var Providers = {
         $('#providers-search-input').val("");
         $('#providers-search-input').unbind();
         $('#providers-search-input').bind("change", function () {
-            var consumerKeyOrName = $('#providers-search-input').val();
-            if (consumerKeyOrName == "name/consumerKey↵") return;
-            Providers.searchByKeyword(consumerKeyOrName);
+            var name = $('#providers-search-input').val();
+            if (name == "name↵") return;
+            Providers.searchByKeyword(name);
         });
     },
-    searchByKeyword: function (_consumerKeyOrName) {
+    searchByKeyword: function (_name) {
         $('#records-table').bootstrapTable('showLoading');
         Racoon.restful({
             url: Providers.url,
-            data: {keyword: _consumerKeyOrName},
+            data: {keyword: _name},
             success: function (_data) {
                 var providers = _data.providers;
                 $("#providers-table").bootstrapTable('load', providers);
@@ -72,13 +72,6 @@ var Providers = {
                     validators: {
                         notEmpty: {
                             message: 'Provider的版本号不可以为空'
-                        }
-                    }
-                },
-                consumerKey: {
-                    validators: {
-                        notEmpty: {
-                            message: 'consumerKey不可以为空'
                         }
                     }
                 }
@@ -111,7 +104,6 @@ var Providers = {
         var provider = {};
         provider.name = $('#provider-name').val();
         provider.version = $('#provider-version').val();
-        provider.consumerKey = $('#provider-consumerKey').val();
         Racoon.restful({
             url: _link,
             type: _type,
@@ -150,7 +142,6 @@ function openProviderUpdateModal(_link) {
             $('#provider-modal-title').html("更新" + provider.name);
             $('#provider-name').val(provider.name);
             $('#provider-version').val(provider.version);
-            $('#provider-consumerKey').val(provider.consumerKey);
             $("#provider-save-button"). unbind();
             $('#createOrUpdateProvidersModel').modal();
             $("#provider-save-button").click(function () {
