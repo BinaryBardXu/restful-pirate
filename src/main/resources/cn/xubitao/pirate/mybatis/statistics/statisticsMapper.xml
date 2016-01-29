@@ -17,6 +17,12 @@
         <if test="isHit !=null">
             AND isHit = #{isHit}
         </if>
+        <if test="createTime !=null">
+            <![CDATA[
+            AND DATE_FORMAT(createTime, '%Y-%m-%d') =  DATE_FORMAT(#{createTime}, '%Y-%m-%d')
+            ]]>
+        </if>
+
     </select>
 
 </mapper>
