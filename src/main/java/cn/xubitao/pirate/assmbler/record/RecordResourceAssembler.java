@@ -31,7 +31,6 @@ public class RecordResourceAssembler extends DolphinAssembler {
         recordResource.setServer(record.getServer());
         recordResource.setRequest(record.getRequest());
         recordResource.setResponse(record.getResponse());
-        recordResource.setConsumerKey(record.getConsumerKey());
         recordResource.setIsHit(record.getIsHit());
         recordResource.setContractId(record.getContractId());
         recordResource.setCreateTime(record.getCreateTime());
