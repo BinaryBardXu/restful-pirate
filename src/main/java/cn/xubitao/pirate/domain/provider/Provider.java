@@ -12,7 +12,6 @@ public class Provider {
     private Integer id;
     private String name;
     private String version;
-    private String consumerKey;
     private Integer deleteStatus;
     private long contractsCount;
 
@@ -46,14 +45,6 @@ public class Provider {
 
     public void setDeleteStatus(Integer deleteStatus) {
         this.deleteStatus = deleteStatus;
-    }
-
-    public String getConsumerKey() {
-        return consumerKey;
-    }
-
-    public void setConsumerKey(String consumerKey) {
-        this.consumerKey = consumerKey;
     }
 
     public long getContractsCount() {
