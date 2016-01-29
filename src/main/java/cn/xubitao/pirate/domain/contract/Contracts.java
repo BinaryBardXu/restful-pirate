@@ -69,7 +69,7 @@ public class Contracts {
         return contractsPersistence.deleteByProviderId(providerId);
     }
 
-    public List<Contract> loadByConsumerKey(String consumerKey) throws SQLException {
-        return contractsPersistence.loadByConsumerKey(consumerKey);
+    public List<Contract> loadByName(String name) throws SQLException {
+        return contractsPersistence.loadByName(name);
     }
 }
