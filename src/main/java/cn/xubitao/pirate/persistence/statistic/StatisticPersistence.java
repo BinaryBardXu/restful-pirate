@@ -1,6 +1,6 @@
 package cn.xubitao.pirate.persistence.statistic;
 
-import org.apache.ibatis.annotations.Param;
+import cn.xubitao.pirate.domain.record.Record;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -12,5 +12,5 @@ public interface StatisticPersistence {
 
     Integer countContracts();
 
-    Integer countRecords(@Param("isHit") Integer isHit);
+    Integer countRecords(Record record);
 }
