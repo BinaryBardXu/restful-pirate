@@ -28,5 +28,5 @@ public interface ContractsPersistence {
 
     List<Contract> findByConditions(Contract contract);
 
-    List<Contract> loadByConsumerKey(@Param("consumerKey") String consumerKey);
+    List<Contract> loadByName(@Param("name") String name);
 }
