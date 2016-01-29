@@ -33,7 +33,7 @@ var Records = {
                 var contracts = _data.contracts;
                 $('#missedRecords-table').bootstrapTable('load', contracts);
                 $('#missedRecords-table').bootstrapTable('hideLoading');
-                var recordsLink = Racoon.getLink(_data.links, "records");
+                var recordsLink = Racoon.getLink(_data._links, "records");
                 Records.bindSearchEvent(recordsLink);
                 $('[data-toggle="popover"]').popover();
             }
