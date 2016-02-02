@@ -26,7 +26,7 @@ public class EntranceResourceAssembler extends DolphinAssembler {
     public RestResource toRestResource(Object domain, Object... pathVariables) throws Exception {
         this.pathVariables = pathVariables;
         EntranceResource entranceResource = new EntranceResource();
-        entranceResource.setDescription("这里是契约测试平台的入口，请参照links选择你的操作。");
+        entranceResource.setDescription("Welcome!");
         Link selfLink = linkTo(EntranceController.class).withSelfRel();
         Link providersLink = linkTo(ProvidersController.class).withRel("providers");
         Link missedRecordsLink = linkTo(methodOn(RecordsController.class).loadAll(null, MISSED, null)).withRel("missedRecords");
