@@ -23,9 +23,10 @@
         <if test="isHit !=null">
             AND isHit = #{isHit}
         </if>
+        ORDER BY id DESC LIMIT 20
     </select>
 
     <select id="findById" parameterType="java.lang.Integer" resultType="cn.xubitao.pirate.domain.record.Record">
-        SELECT * FROM record WHERE deleteStatus=0 and id= #{id}
-    </select>
+    SELECT * FROM record WHERE deleteStatus=0 and id= #{id}
+</select>
 </mapper>
