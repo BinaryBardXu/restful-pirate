@@ -1,5 +1,6 @@
 package cn.xubitao.pirate.domain.record;
 
+import cn.xubitao.dolphin.foundation.date.DateStyle;
 import cn.xubitao.dolphin.foundation.date.DateUtil;
 import cn.xubitao.pirate.domain.contract.Contract;
 import cn.xubitao.pirate.domain.contract.Contracts;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -38,8 +40,8 @@ public class Records {
     }
 
     public Record create(final Record record) throws Exception {
-        List<Contract> contractList = contracts.loadByConsumerKey(record.getConsumerKey());
-        record.setCreateTime(DateUtil.getNow());
+        List<Contract> contractList = contracts.loadByName(record.getName());
+        record.setCreateTime(DateUtil.DateToString(new Date(), DateStyle.YYYY_MM_DD_HH_MM_SS));
         boolean isMatched = false;
         for (Contract contract : contractList) {
             if (!matcher.match(contract, record)) continue;
