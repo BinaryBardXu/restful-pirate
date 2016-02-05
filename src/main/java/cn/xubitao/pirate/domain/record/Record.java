@@ -8,7 +8,7 @@ public class Record {
     private String server;
     private String request;
     private String response;
-    private String consumerKey;
+    private String name;
     private Integer contractId;
     private Integer isHit;
     private Integer deleteStatus;
@@ -46,12 +46,12 @@ public class Record {
         this.response = response;
     }
 
-    public String getConsumerKey() {
-        return consumerKey;
+    public String getName() {
+        return name;
     }
 
-    public void setConsumerKey(String consumerKey) {
-        this.consumerKey = consumerKey;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Integer getDeleteStatus() {
