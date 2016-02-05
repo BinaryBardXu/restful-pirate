@@ -10,7 +10,7 @@ pirate技术上采用spring-hateoas\spring-boot,数据层面采用Mybatis+mysql.
 
    pirate中的众多依赖都在dolphin，所以请务必先下载dolphin，并install到本地；
 
-2、配置pirate.properities中的jdbc信息,默认的数据库配置可直接使用,但请勿破坏表结构；
+2、配置pirate.properities中的jdbc信息,默认的数据库配置可直接使用,但请勿破坏表结构；如果使用自己的MySQL数据库，`/src/main/resources/cn/xubitao/pirate/init_db.sql`中创建表的SQL语句；
 
 3、可以在IDE中从Application类的main方法中直接启动，也可以通过`mvn package`打成jar包后运行；
 
