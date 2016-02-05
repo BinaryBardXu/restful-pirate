@@ -8,7 +8,7 @@ pirate技术上采用spring-hateoas\spring-boot,数据层面采用Mybatis+mysql.
 ##安装方法
 1、下载[dolphin](https://github.com/xubitao/dolphin).
 
-   pirate中的众多依赖都在dolphin，所以请务必先下载dolphin，并install到本地；
+   pirate中的众多依赖都在dolphin中，所以请务必先下载dolphin，并install到本地；
 
 2、配置pirate.properities中的jdbc信息,默认的数据库配置可直接使用,但请勿破坏表结构；如果使用自己的MySQL数据库，`/src/main/resources/cn/xubitao/pirate/init_db.sql`中有创建表所需的SQL语句；
 
